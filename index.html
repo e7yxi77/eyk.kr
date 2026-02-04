@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EY. K - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-bg: #fafaf9;
+            --color-text: #1a1a1a;
+            --color-text-secondary: #666666;
+            --color-accent: #2d2d2d;
+            --color-border: #e5e5e5;
+            --color-card: #ffffff;
+            --color-timeline: #3b82f6;
+            --font-serif: 'Crimson Pro', serif;
+            --font-sans: 'Work Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--color-bg);
+            color: var(--color-text);
+            font-family: var(--font-sans);
+            font-size: 15px;
+            line-height: 1.7;
+            font-weight: 400;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Terminal Section */
+        .terminal-section {
+            background: #1a1a1a;
+            border-radius: 8px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .terminal-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .terminal-button.red {
+            background: #ff5f56;
+        }
+
+        .terminal-button.yellow {
+            background: #ffbd2e;
+        }
+
+        .terminal-button.green {
+            background: #27c93f;
+        }
+
+        .terminal-title {
+            margin-left: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #888;
+        }
+
+        .terminal-content {
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #ffffff;
+            line-height: 1.8;
+            white-space: pre-wrap;
+        }
+
+        .terminal-line {
+            opacity: 0;
+        }
+
+        .terminal-line.visible {
+            opacity: 1;
+            animation: fadeIn 0.2s ease forwards;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: #ffffff;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes blink {
+            0%, 50% {
+                opacity: 1;
+            }
+            51%, 100% {
+                opacity: 0;
+            }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+
+        header {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .header-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 56px;
+            font-weight: 500;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+            color: var(--color-accent);
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: var(--color-text-secondary);
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            margin-bottom: 50px;
+        }
+
+        .meta {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            padding: 40px 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .meta-item {
+            text-align: center;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .meta-value {
+            font-size: 16px;
+            color: var(--color-text);
+            font-weight: 400;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .section-card {
+            background: var(--color-card);
+            padding: 50px 45px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .section-full {
+            grid-column: 1 / -1;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            color: var(--color-accent);
+            letter-spacing: -0.01em;
+        }
+
+        .list {
+            list-style: none;
+        }
+
+        .list-item {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .list-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .list-item:first-child {
+            padding-top: 0;
+        }
+
+        .item-title {
+            font-size: 15px;
+            margin-bottom: 6px;
+            color: var(--color-text);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .item-title a {
+            color: var(--color-text);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .item-title a:hover {
+            color: var(--color-timeline);
+            border-bottom-color: var(--color-timeline);
+        }
+
+        .item-meta {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            font-weight: 400;
+        }
+
+        .interest-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .interest-item {
+            padding: 16px 20px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            bottom: 12px;
+            width: 2px;
+            background: var(--color-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .timeline-item:first-child {
+            padding-top: 0;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 24px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-timeline);
+            border: 2px solid var(--color-card);
+            box-shadow: 0 0 0 2px var(--color-border);
+        }
+
+        .timeline-date {
+            font-size: 12px;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .timeline-title {
+            font-size: 15px;
+            color: var(--color-text);
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .timeline-desc {
+            font-size: 13px;
+            color: var(--color-text-secondary);
+            margin-top: 4px;
+        }
+
+        .contact-section {
+            background: var(--color-card);
+            padding: 50px 45px;
+            border: 1px solid var(--color-border);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+            margin-bottom: 60px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+        }
+
+        .contact-group h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .contact-item {
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .contact-item a {
+            color: var(--color-text);
+            text-decoration: none;
+            border-bottom: 1px solid var(--color-border);
+            transition: border-color 0.2s ease;
+        }
+
+        .contact-item a:hover {
+            border-bottom-color: var(--color-accent);
+        }
+
+        .mono-address {
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            color: var(--color-text-secondary);
+            word-break: break-all;
+            line-height: 1.7;
+            margin-top: 8px;
+            padding: 12px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+        }
+
+        /* Floating Contact Button */
+        .floating-contact {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--color-card);
+            border: 2px solid var(--color-accent);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .floating-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            background: var(--color-accent);
+        }
+
+        .floating-contact:hover svg {
+            fill: var(--color-card);
+        }
+
+        .floating-contact svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--color-accent);
+            transition: fill 0.3s ease;
+        }
+
+        /* Contact Bubble Popup */
+        .contact-modal {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 320px;
+            background: var(--color-card);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            padding: 28px;
+            opacity: 0;
+            transform: scale(0.9) translateY(10px);
+            transform-origin: bottom right;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 999;
+            border: 1px solid var(--color-border);
+        }
+
+        .contact-modal::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 28px;
+            width: 20px;
+            height: 20px;
+            background: var(--color-card);
+            border-right: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            transform: rotate(45deg);
+        }
+
+        .contact-modal.active {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+            pointer-events: all;
+        }
+
+        .contact-modal h3 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .modal-contact-item {
+            margin-bottom: 16px;
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--color-text);
+            padding: 12px 0;
+        }
+
+        .modal-contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .modal-contact-item strong {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--color-text-secondary);
+        }
+
+        .modal-contact-item a {
+            color: var(--color-accent);
+            text-decoration: none;
+            border-bottom: 1px solid var(--color-border);
+            transition: all 0.2s ease;
+            padding-bottom: 1px;
+        }
+
+        .modal-contact-item a:hover {
+            border-bottom-color: var(--color-accent);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            line-height: 1;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-modal:hover {
+            color: var(--color-accent);
+            transform: rotate(90deg);
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--color-text-secondary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 60px 20px;
+            }
+
+            .terminal-section {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+
+            .terminal-content {
+                font-size: 12px;
+                line-height: 1.6;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .meta {
+                flex-direction: column;
+                gap: 20px;
+                padding: 30px 0;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .section-card {
+                padding: 30px 24px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .interest-list {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .interest-item {
+                padding: 14px 16px;
+                font-size: 13px;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .contact-section {
+                padding: 30px 24px;
+            }
+
+            .timeline {
+                padding-left: 30px;
+            }
+
+            .timeline-item::before {
+                left: -35px;
+            }
+
+            .floating-contact {
+                bottom: 20px;
+                right: 20px;
+                width: 52px;
+                height: 52px;
+            }
+
+            .floating-contact svg {
+                width: 22px;
+                height: 22px;
+            }
+
+            .contact-modal {
+                width: calc(100% - 40px);
+                right: 20px;
+                bottom: 85px;
+            }
+
+            .contact-modal::after {
+                right: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 32px;
+            }
+
+            .container {
+                padding: 40px 16px;
+            }
+
+            .section-card {
+                padding: 24px 20px;
+            }
+
+            .terminal-section {
+                padding: 16px;
+            }
+
+            .terminal-content {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContent">
+        <header>
+            <div class="header-content">
+                <h1>EY. K</h1>
+                <p class="subtitle">SECURITY RESEARCHER</p>
+                
+                <div class="meta">
+                    <div class="meta-item">
+                        <div class="meta-label">AGE</div>
+                        <div class="meta-value">18 (만 16)</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">STATUS</div>
+                        <div class="meta-value">학생</div>
+                    </div>
+                    <div class="meta-item">
+                        <div class="meta-label">LOCATION</div>
+                        <div class="meta-value">Seoul, KR</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Terminal About Me Section -->
+        <div class="terminal-section">
+            <div class="terminal-header">
+                <div class="terminal-buttons">
+                    <div class="terminal-button red"></div>
+                    <div class="terminal-button yellow"></div>
+                    <div class="terminal-button green"></div>
+                </div>
+                <div class="terminal-title">intro.c</div>
+            </div>
+            <div class="terminal-content" id="terminalContent"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="section-card">
+                <h2>Areas of Interest</h2>
+                <div class="interest-list">
+                    <div class="interest-item">Pwnable</div>
+                    <div class="interest-item">Web Hacking</div>
+                    <div class="interest-item">Reversing</div>
+                    <div class="interest-item">Digital Forensics</div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2>Experience</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025년 6월 ~ 8월</div>
+                        <div class="timeline-title">SISV 체험</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025년 12월 ~ 2026년 1월</div>
+                        <div class="timeline-title">고려신용정보 주식회사<br>IT혁신단 인턴십</div>
+                        <div class="timeline-desc">UO</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card section-full">
+                <h2>Research Projects</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024년 9월</div>
+                        <div class="timeline-title">Web Cache Poisoning Research & PoC Project</div>
+                        <div class="timeline-desc">HTTP 캐시 메커니즘 취약점 연구 및 개념 증명 프로젝트</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024년 10월</div>
+                        <div class="timeline-title">Prototype Pollution Exploitation Research</div>
+                        <div class="timeline-desc">JavaScript 프로토타입 오염 취약점 연구 프로젝트</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024년 11월</div>
+                        <div class="timeline-title">GraphQL Security Testing Toolkit Development</div>
+                        <div class="timeline-desc">GraphQL API 보안 테스팅 도구 개발 프로젝트</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2024년 12월</div>
+                        <div class="timeline-title">Linux Privilege Escalation Lab & Technique Catalog</div>
+                        <div class="timeline-desc">리눅스 권한 상승 기법 연구 및 실습 환경 구축</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025년 1월</div>
+                        <div class="timeline-title">SUID/SGID Misconfiguration Exploitation Research</div>
+                        <div class="timeline-desc">SUID/SGID 권한 오설정 익스플로잇 연구 프로젝트</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">2025년 2월</div>
+                        <div class="timeline-title">Docker Escape & Container Breakout Lab</div>
+                        <div class="timeline-desc">컨테이너 탈출 기법 연구 및 실습 랩 구축</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card section-full">
+                <h2>Future Goals</h2>
+                <ul class="list">
+                    <li class="list-item">
+                        <div class="item-title"><a href="https://www.kitribob.kr/" target="_blank" rel="noopener noreferrer">BoB (Best of Best)</a> / <a href="https://whitehatschool.kr/" target="_blank" rel="noopener noreferrer">WHS (White Hat School)</a></div>
+                        <div class="item-meta">차세대 보안리더 양성 프로그램</div>
+                    </li>
+                    <li class="list-item">
+                        <div class="item-title"><a href="https://autoeveritdream.com/" target="_blank" rel="noopener noreferrer">현대오토에버 화이트햇해킹 양성교육</a></div>
+                        <div class="item-meta">고교생 IT 꿈나무 성장지원사업</div>
+                    </li>
+                    <li class="list-item">
+                        <div class="item-title"><a href="https://cce.cstec.kr/" target="_blank" rel="noopener noreferrer">CCE (사이버공격방어대회)</a></div>
+                        <div class="item-meta">국가정보원 주최 사이버보안 경진대회</div>
+                    </li>
+                    <li class="list-item">
+                        <div class="item-title"><a href="https://www.offsec.com/" target="_blank" rel="noopener noreferrer">OSCP</a> / <a href="https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/" target="_blank" rel="noopener noreferrer">CEH</a> 자격증</div>
+                        <div class="item-meta">국제 사이버보안 자격증</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <h2>Contact & Support</h2>
+            <div class="contact-grid">
+                <div class="contact-group">
+                    <h3>Contact</h3>
+                    <div class="contact-item">
+                        Email: <a href="mailto:ey@eyk.kr">ey@eyk.kr</a>
+                    </div>
+                    <div class="contact-item">
+                        Discord: @dogpoobug
+                    </div>
+                </div>
+
+                <div class="contact-group">
+                    <h3>Support</h3>
+                    <div class="contact-item">
+                        우리은행: 201-526091-18-841
+                    </div>
+                    <div class="contact-item">
+                        XMR (Monero):
+                        <div class="mono-address">45XEVDj4ZrkEnyM364QuVwFnYL2MrXABZV7wchQEE3ZYEpnrDmpAp2iavBxWLgQtjnaXjNXox9FGTdYhprHpCV6FMVqSoNM</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 EY. K — All Rights Reserved</p>
+        </footer>
+    </div>
+
+    <!-- Floating Contact Button -->
+    <button class="floating-contact" id="contactBtn" aria-label="연락처 보기">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+    </button>
+
+    <!-- Contact Modal -->
+    <div class="contact-modal" id="contactModal">
+        <button class="close-modal" id="closeModal" aria-label="닫기">&times;</button>
+        <h3>Contact</h3>
+        <div class="modal-contact-item">
+            <strong>Email</strong>
+            <a href="mailto:ey@eyk.kr">ey@eyk.kr</a>
+        </div>
+        <div class="modal-contact-item">
+            <strong>Discord</strong>
+            @dogpoobug
+        </div>
+        <div class="modal-contact-item">
+            <strong>우리은행</strong>
+            201-526091-18-841
+        </div>
+    </div>
+
+    <script>
+        // Terminal Typing Animation
+        const terminalLines = [
+            '#include <stdio.h>',
+            '',
+            'int main(void) {',
+            '    char name[] = "EY. K";',
+            '    char role[] = "Security Researcher";',
+            '    ',
+            '    printf("Name: %s\\n", name);',
+            '    printf("Role: %s\\n", role);',
+            '    printf("Focus: Pwnable | Web Hacking | Reversing\\n");',
+            '    ',
+            '    return 0;',
+            '}'
+        ];
+
+        let currentLine = 0;
+        const terminalContent = document.getElementById('terminalContent');
+
+        function typeTerminalLine() {
+            if (currentLine < terminalLines.length) {
+                const line = document.createElement('div');
+                line.className = 'terminal-line';
+                line.textContent = terminalLines[currentLine];
+                terminalContent.appendChild(line);
+                
+                // Trigger animation
+                setTimeout(() => {
+                    line.classList.add('visible');
+                }, 10);
+                
+                currentLine++;
+                setTimeout(typeTerminalLine, 100);
+            } else {
+                // Add blinking cursor at the end
+                setTimeout(() => {
+                    const cursor = document.createElement('span');
+                    cursor.className = 'typing-cursor';
+                    terminalContent.appendChild(cursor);
+                }, 200);
+            }
+        }
+
+        // Start animation on page load
+        window.addEventListener('load', () => {
+            setTimeout(typeTerminalLine, 300);
+        });
+
+        // Floating Contact Button
+        const contactBtn = document.getElementById('contactBtn');
+        const contactModal = document.getElementById('contactModal');
+        const closeModal = document.getElementById('closeModal');
+
+        contactBtn.addEventListener('click', () => {
+            contactModal.classList.toggle('active');
+        });
+
+        closeModal.addEventListener('click', () => {
+            contactModal.classList.remove('active');
+        });
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!contactModal.contains(e.target) && !contactBtn.contains(e.target)) {
+                contactModal.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
