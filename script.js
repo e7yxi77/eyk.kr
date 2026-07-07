@@ -144,8 +144,8 @@ if (agreeCheck && downloadBtn) {
       e.preventDefault();
       const note = document.querySelector('.download-note');
       if (note) note.textContent = document.documentElement.getAttribute('data-lang') === 'en'
-        ? 'Download link coming soon. Contact: contact@eyk.kr'
-        : '다운로드 링크가 곧 제공됩니다. 문의: contact@eyk.kr';
+        ? 'The download link will be provided soon. Contact: contact@eyk.kr'
+        : '다운로드 링크는 추후 제공될 예정입니다. 문의: contact@eyk.kr';
     }
   });
 }
