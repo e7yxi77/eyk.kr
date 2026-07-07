@@ -1,1020 +1,566 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>김은율 (EYK) | Security Researcher Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>try{var _l=localStorage.getItem('eyk-lang');if(_l){document.documentElement.setAttribute('data-lang',_l);document.documentElement.setAttribute('lang',_l);}}catch(e){}</script>
+<title>김은율 (EYK) | Security Researcher · AI & Automation</title>
+
+<!-- SEO Meta Tags -->
+<meta name="description" content="김은율 (EYK) - 보안 연구원 포트폴리오. 정보보안, AI 빅데이터 분석, 자동화 알고리즘 연구를 하는 서울 기반 보안 연구자입니다. Security Researcher based in Seoul, Korea.">
+<meta name="keywords" content="김은율, EYK, EY K, Eunyul Kim, 보안 연구원, Security Researcher, 정보보안, AI 빅데이터 분석, 자동화 알고리즘, Pwnable, Web Hacking, Reversing, Digital Forensics, 사이버보안, 해킹, 포트폴리오">
+<meta name="author" content="김은율 (EYK)">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://eyk.kr/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="김은율 (EYK) | Security Researcher">
+<meta property="og:description" content="김은율 - 보안 연구원. 정보보안 · AI 빅데이터 분석 · 자동화 알고리즘 연구 포트폴리오.">
+<meta property="og:url" content="https://eyk.kr/">
+<meta property="og:site_name" content="김은율 (EYK)">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://eyk.kr/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="김은율 (EYK) — Security Researcher">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="김은율 (EYK) | Security Researcher">
+<meta name="twitter:description" content="김은율 - 보안 연구원. 정보보안 · AI 빅데이터 분석 · 자동화 알고리즘 연구 포트폴리오.">
+<meta name="twitter:image" content="https://eyk.kr/og-image.png">
+
+<meta name="google-site-verification" content="Dat-tphE5Ut9PIW-htFn4CrCaMDN1N5vlODoNhgdB-E" />
+<meta name="naver-site-verification" content="">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="style.css">
 
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="김은율 (EYK) - 보안 연구원 포트폴리오. Pwnable, Web Hacking, Reversing, Digital Forensics 분야의 보안 연구자입니다. Security Researcher based in Seoul, Korea.">
-    <meta name="keywords" content="김은율, EYK, EY K, 보안 연구원, Security Researcher, Pwnable, Web Hacking, Reversing, Digital Forensics, 사이버보안, 해킹, 포트폴리오">
-    <meta name="author" content="김은율 (EYK)">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://eyk.kr/">
-
-    <!-- Open Graph (Facebook, KakaoTalk, etc.) -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="김은율 (EYK) | Security Researcher">
-    <meta property="og:description" content="김은율 - 보안 연구원. Pwnable, Web Hacking, Reversing, Digital Forensics 분야 보안 연구자 포트폴리오.">
-    <meta property="og:url" content="https://eyk.kr/">
-    <meta property="og:site_name" content="김은율 (EYK)">
-    <meta property="og:locale" content="ko_KR">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="김은율 (EYK) | Security Researcher">
-    <meta name="twitter:description" content="김은율 - 보안 연구원. Pwnable, Web Hacking, Reversing, Digital Forensics 분야 보안 연구자 포트폴리오.">
-
-    <meta name="google-site-verification" content="Dat-tphE5Ut9PIW-htFn4CrCaMDN1N5vlODoNhgdB-E" />
-    <meta name="naver-site-verification" content="">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;500;600&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-	<link rel="icon" href="favicon.png">
-
-
-    <style>
-        :root {
-            --color-bg: #fafaf9;
-            --color-text: #1a1a1a;
-            --color-text-secondary: #666666;
-            --color-accent: #2d2d2d;
-            --color-border: #e5e5e5;
-            --color-card: #ffffff;
-            --color-timeline: #3b82f6;
-            --font-serif: 'Crimson Pro', serif;
-            --font-sans: 'Work Sans', sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background: var(--color-bg);
-            color: var(--color-text);
-            font-family: var(--font-sans);
-            font-size: 15px;
-            line-height: 1.7;
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        /* Terminal Section */
-        .terminal-section {
-            background: #1a1a1a;
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .terminal-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #333;
-        }
-
-        .terminal-buttons {
-            display: flex;
-            gap: 8px;
-        }
-
-        .terminal-button {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .terminal-button.red {
-            background: #ff5f56;
-        }
-
-        .terminal-button.yellow {
-            background: #ffbd2e;
-        }
-
-        .terminal-button.green {
-            background: #27c93f;
-        }
-
-        .terminal-title {
-            margin-left: 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            color: #888;
-        }
-
-        .terminal-content {
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            color: #ffffff;
-            line-height: 1.8;
-            white-space: pre-wrap;
-        }
-
-        .terminal-line {
-            opacity: 0;
-        }
-
-        .terminal-line.visible {
-            opacity: 1;
-            animation: fadeIn 0.2s ease forwards;
-        }
-
-        .typing-cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: #ffffff;
-            margin-left: 2px;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes blink {
-            0%, 50% {
-                opacity: 1;
-            }
-            51%, 100% {
-                opacity: 0;
-            }
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 80px 40px;
-        }
-
-        header {
-            margin-bottom: 80px;
-            text-align: center;
-        }
-
-        .header-content {
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        h1 {
-            font-family: var(--font-serif);
-            font-size: 56px;
-            font-weight: 500;
-            letter-spacing: -0.03em;
-            margin-bottom: 20px;
-            color: var(--color-accent);
-            line-height: 1.1;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            color: var(--color-text-secondary);
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            margin-bottom: 50px;
-        }
-
-        .meta {
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            padding: 40px 0;
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .meta-item {
-            text-align: center;
-        }
-
-        .meta-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-text-secondary);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .meta-value {
-            font-size: 16px;
-            color: var(--color-text);
-            font-weight: 400;
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-
-        .section-card {
-            background: var(--color-card);
-            padding: 50px 45px;
-            border: 1px solid var(--color-border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-        }
-
-        .section-full {
-            grid-column: 1 / -1;
-        }
-
-        h2 {
-            font-family: var(--font-serif);
-            font-size: 28px;
-            font-weight: 500;
-            margin-bottom: 30px;
-            color: var(--color-accent);
-            letter-spacing: -0.01em;
-        }
-
-        .list {
-            list-style: none;
-        }
-
-        .list-item {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .list-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .list-item:first-child {
-            padding-top: 0;
-        }
-
-        .item-title {
-            font-size: 15px;
-            margin-bottom: 6px;
-            color: var(--color-text);
-            font-weight: 500;
-            line-height: 1.5;
-        }
-
-        .item-title a {
-            color: var(--color-text);
-            text-decoration: none;
-            border-bottom: 1px solid transparent;
-            transition: all 0.2s ease;
-        }
-
-        .item-title a:hover {
-            color: var(--color-timeline);
-            border-bottom-color: var(--color-timeline);
-        }
-
-        .item-meta {
-            font-size: 13px;
-            color: var(--color-text-secondary);
-            font-weight: 400;
-        }
-
-        .interest-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-        }
-
-        .interest-item {
-            padding: 16px 20px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--color-text);
-        }
-
-        .tech-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-
-        .tech-category-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--color-text-secondary);
-            margin-bottom: 12px;
-            font-weight: 500;
-        }
-
-        .tech-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tech-pill {
-            padding: 8px 18px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--color-text);
-            font-family: 'Courier New', monospace;
-            transition: all 0.2s ease;
-        }
-
-        .tech-pill:hover {
-            border-color: var(--color-accent);
-            background: var(--color-card);
-        }
-
-        /* Timeline Styles */
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 12px;
-            bottom: 12px;
-            width: 2px;
-            background: var(--color-border);
-        }
-
-        .timeline-item {
-            position: relative;
-            padding: 20px 0;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .timeline-item:last-child {
-            border-bottom: none;
-            padding-bottom: 0;
-        }
-
-        .timeline-item:first-child {
-            padding-top: 0;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -45px;
-            top: 24px;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--color-timeline);
-            border: 2px solid var(--color-card);
-            box-shadow: 0 0 0 2px var(--color-border);
-        }
-
-        .timeline-date {
-            font-size: 12px;
-            color: var(--color-text-secondary);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .timeline-title {
-            font-size: 15px;
-            color: var(--color-text);
-            font-weight: 500;
-            line-height: 1.5;
-        }
-
-        .timeline-desc {
-            font-size: 13px;
-            color: var(--color-text-secondary);
-            margin-top: 4px;
-        }
-
-        .contact-section {
-            background: var(--color-card);
-            padding: 50px 45px;
-            border: 1px solid var(--color-border);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
-            margin-bottom: 60px;
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 50px;
-        }
-
-        .contact-group h3 {
-            font-family: var(--font-serif);
-            font-size: 20px;
-            font-weight: 500;
-            color: var(--color-accent);
-            margin-bottom: 20px;
-        }
-
-        .contact-item {
-            margin-bottom: 16px;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .contact-item a {
-            color: var(--color-text);
-            text-decoration: none;
-            border-bottom: 1px solid var(--color-border);
-            transition: border-color 0.2s ease;
-        }
-
-        .contact-item a:hover {
-            border-bottom-color: var(--color-accent);
-        }
-
-        .mono-address {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: var(--color-text-secondary);
-            word-break: break-all;
-            line-height: 1.7;
-            margin-top: 8px;
-            padding: 12px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
-        }
-
-        /* Floating Contact Button */
-        .floating-contact {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: var(--color-card);
-            border: 2px solid var(--color-accent);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .floating-contact:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-            background: var(--color-accent);
-        }
-
-        .floating-contact:hover svg {
-            fill: var(--color-card);
-        }
-
-        .floating-contact svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--color-accent);
-            transition: fill 0.3s ease;
-        }
-
-        /* Contact Bubble Popup */
-        .contact-modal {
-            position: fixed;
-            bottom: 100px;
-            right: 30px;
-            width: 320px;
-            background: var(--color-card);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-            padding: 28px;
-            opacity: 0;
-            transform: scale(0.9) translateY(10px);
-            transform-origin: bottom right;
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            z-index: 999;
-            border: 1px solid var(--color-border);
-        }
-
-        .contact-modal::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            right: 28px;
-            width: 20px;
-            height: 20px;
-            background: var(--color-card);
-            border-right: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-            transform: rotate(45deg);
-        }
-
-        .contact-modal.active {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-            pointer-events: all;
-        }
-
-        .contact-modal h3 {
-            font-family: var(--font-serif);
-            font-size: 22px;
-            font-weight: 500;
-            color: var(--color-accent);
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .modal-contact-item {
-            margin-bottom: 16px;
-            font-size: 14px;
-            line-height: 1.6;
-            color: var(--color-text);
-            padding: 12px 0;
-        }
-
-        .modal-contact-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .modal-contact-item strong {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 500;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--color-text-secondary);
-        }
-
-        .modal-contact-item a {
-            color: var(--color-accent);
-            text-decoration: none;
-            border-bottom: 1px solid var(--color-border);
-            transition: all 0.2s ease;
-            padding-bottom: 1px;
-        }
-
-        .modal-contact-item a:hover {
-            border-bottom-color: var(--color-accent);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            background: none;
-            border: none;
-            font-size: 24px;
-            color: var(--color-text-secondary);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            line-height: 1;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-modal:hover {
-            color: var(--color-accent);
-            transform: rotate(90deg);
-        }
-
-        footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid var(--color-border);
-            text-align: center;
-            font-size: 13px;
-            color: var(--color-text-secondary);
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 60px 20px;
-            }
-
-            .terminal-section {
-                padding: 20px;
-                margin-bottom: 30px;
-            }
-
-            .terminal-content {
-                font-size: 12px;
-                line-height: 1.6;
-            }
-
-            h1 {
-                font-size: 36px;
-            }
-
-            .subtitle {
-                font-size: 14px;
-            }
-
-            .meta {
-                flex-direction: column;
-                gap: 20px;
-                padding: 30px 0;
-            }
-
-            .main-content {
-                grid-template-columns: 1fr;
-                gap: 24px;
-            }
-
-            .section-card {
-                padding: 30px 24px;
-            }
-
-            h2 {
-                font-size: 24px;
-            }
-
-            .interest-list {
-                grid-template-columns: 1fr;
-                gap: 12px;
-            }
-
-            .interest-item {
-                padding: 14px 16px;
-                font-size: 13px;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .contact-section {
-                padding: 30px 24px;
-            }
-
-            .timeline {
-                padding-left: 30px;
-            }
-
-            .timeline-item::before {
-                left: -35px;
-            }
-
-            .floating-contact {
-                bottom: 20px;
-                right: 20px;
-                width: 52px;
-                height: 52px;
-            }
-
-            .floating-contact svg {
-                width: 22px;
-                height: 22px;
-            }
-
-            .contact-modal {
-                width: calc(100% - 40px);
-                right: 20px;
-                bottom: 85px;
-            }
-
-            .contact-modal::after {
-                right: 24px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 32px;
-            }
-
-            .container {
-                padding: 40px 16px;
-            }
-
-            .section-card {
-                padding: 24px 20px;
-            }
-
-            .terminal-section {
-                padding: 16px;
-            }
-
-            .terminal-content {
-                font-size: 11px;
-            }
-        }
-    </style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "김은율",
-  "alternateName": ["EYK", "EY. K", "Kim Eunyul"],
+  "alternateName": ["EYK", "EY. K", "Eunyul Kim"],
   "url": "https://eyk.kr/",
   "jobTitle": "Security Researcher",
-  "knowsAbout": ["Pwnable", "Web Hacking", "Reversing", "Digital Forensics", "사이버보안"],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Seoul",
-    "addressCountry": "KR"
-  },
-  "sameAs": [
-    "https://github.com/e7yxi77"
-  ]
+  "knowsAbout": ["정보보안", "AI 빅데이터 분석", "자동화 알고리즘 연구", "Pwnable", "Web Hacking", "Reversing", "Digital Forensics"],
+  "address": { "@type": "PostalAddress", "addressLocality": "Seoul", "addressCountry": "KR" },
+  "sameAs": ["https://github.com/e7yxi77"]
 }
 </script>
 </head>
 <body>
-    <div class="container" id="mainContent">
-        <header>
-            <div class="header-content">
-                <h1>김은율 (EYK)</h1>
-                <p class="subtitle">SECURITY RESEARCHER · FULLSTACK DEVELOPER</p>
-                
-                <div class="meta">
-                    <div class="meta-item">
-                        <div class="meta-label">AGE</div>
-                        <div class="meta-value">18 (만 16)</div>
-                    </div>
-                    <div class="meta-item">
-                        <div class="meta-label">STATUS</div>
-                        <div class="meta-value">학생</div>
-                    </div>
-                    <div class="meta-item">
-                        <div class="meta-label">LOCATION</div>
-                        <div class="meta-value">Seoul, KR</div>
-                    </div>
-                </div>
-            </div>
-        </header>
 
-        <!-- Terminal About Me Section -->
-        <div class="terminal-section">
-            <div class="terminal-header">
-                <div class="terminal-buttons">
-                    <div class="terminal-button red"></div>
-                    <div class="terminal-button yellow"></div>
-                    <div class="terminal-button green"></div>
-                </div>
-                <div class="terminal-title">intro.c</div>
-            </div>
-            <div class="terminal-content" id="terminalContent"></div>
-        </div>
+<svg class="grain" width="100%" height="100%" aria-hidden="true" focusable="false">
+  <filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+  <rect width="100%" height="100%" filter="url(#n)"/>
+</svg>
+<div class="atmosphere"></div>
 
-        <div class="main-content">
-            <div class="section-card">
-                <h2>Areas of Interest</h2>
-                <div class="interest-list">
-                    <div class="interest-item">Pwnable</div>
-                    <div class="interest-item">Web Hacking</div>
-                    <div class="interest-item">Reversing</div>
-                    <div class="interest-item">Digital Forensics</div>
-                    <div class="interest-item">Fullstack Dev</div>
-                    <div class="interest-item">AI Utilization</div>
-                </div>
-            </div>
-
-            <div class="section-card">
-                <h2>Experience</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2025년 6월 ~ 8월</div>
-                        <div class="timeline-title">SISV 체험</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2025년 12월 ~ 2026년 1월</div>
-                        <div class="timeline-title">고려신용정보 주식회사<br>IT혁신단 인턴십</div>
-                        <div class="timeline-desc">UO</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-card section-full">
-                <h2>Tech Stack</h2>
-                <div class="tech-stack">
-                    <div class="tech-category">
-                        <div class="tech-category-label">Languages</div>
-                        <div class="tech-pills">
-                            <span class="tech-pill">TypeScript</span>
-                            <span class="tech-pill">JavaScript</span>
-                            <span class="tech-pill">Java</span>
-                            <span class="tech-pill">C</span>
-                            <span class="tech-pill">C++</span>
-                            <span class="tech-pill">Python</span>
-                            <span class="tech-pill">Go</span>
-                            <span class="tech-pill">x86 Assembly</span>
-                        </div>
-                    </div>
-                    <div class="tech-category">
-                        <div class="tech-category-label">Web</div>
-                        <div class="tech-pills">
-                            <span class="tech-pill">HTML5</span>
-                            <span class="tech-pill">CSS3</span>
-                            <span class="tech-pill">React</span>
-                            <span class="tech-pill">Node.js</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-card section-full">
-                <h2>Research Projects</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">2024년 9월</div>
-                        <div class="timeline-title">Web Cache Poisoning Research & PoC Project</div>
-                        <div class="timeline-desc">HTTP 캐시 메커니즘 취약점 연구 및 개념 증명 프로젝트</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2024년 10월</div>
-                        <div class="timeline-title">Prototype Pollution Exploitation Research</div>
-                        <div class="timeline-desc">JavaScript 프로토타입 오염 취약점 연구 프로젝트</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2024년 11월</div>
-                        <div class="timeline-title">GraphQL Security Testing Toolkit Development</div>
-                        <div class="timeline-desc">GraphQL API 보안 테스팅 도구 개발 프로젝트</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2024년 12월</div>
-                        <div class="timeline-title">Linux Privilege Escalation Lab & Technique Catalog</div>
-                        <div class="timeline-desc">리눅스 권한 상승 기법 연구 및 실습 환경 구축</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2025년 1월</div>
-                        <div class="timeline-title">SUID/SGID Misconfiguration Exploitation Research</div>
-                        <div class="timeline-desc">SUID/SGID 권한 오설정 익스플로잇 연구 프로젝트</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">2025년 2월</div>
-                        <div class="timeline-title">Docker Escape & Container Breakout Lab</div>
-                        <div class="timeline-desc">컨테이너 탈출 기법 연구 및 실습 랩 구축</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-card section-full">
-                <h2>Future Goals</h2>
-                <ul class="list">
-                    <li class="list-item">
-                        <div class="item-title"><a href="https://www.kitribob.kr/" target="_blank" rel="noopener noreferrer">BoB (Best of the Best)</a> / <a href="https://whitehatschool.kr/" target="_blank" rel="noopener noreferrer">WHS (White Hat School)</a></div>
-                        <div class="item-meta">차세대 보안리더 양성 프로그램</div>
-                    </li>
-                    <li class="list-item">
-                        <div class="item-title"><a href="https://autoeveritdream.com/" target="_blank" rel="noopener noreferrer">현대오토에버 화이트햇해킹 양성교육</a></div>
-                        <div class="item-meta">고교생 IT 꿈나무 성장지원사업</div>
-                    </li>
-                    <li class="list-item">
-                        <div class="item-title"><a href="https://cce.cstec.kr/" target="_blank" rel="noopener noreferrer">CCE (사이버공격방어대회)</a></div>
-                        <div class="item-meta">국가정보원 주최 사이버보안 경진대회</div>
-                    </li>
-                    <li class="list-item">
-                        <div class="item-title"><a href="https://www.offsec.com/" target="_blank" rel="noopener noreferrer">OSCP</a> / <a href="https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/" target="_blank" rel="noopener noreferrer">CEH</a> 자격증</div>
-                        <div class="item-meta">국제 사이버보안 자격증</div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="contact-section">
-            <h2>Contact & Support</h2>
-            <div class="contact-grid">
-                <div class="contact-group">
-                    <h3>Contact</h3>
-                    <div class="contact-item">
-                        Email: <a href="mailto:contact@eyk.kr">contact@eyk.kr</a>
-                    </div>
-                    <div class="contact-item">
-                        Discord: @dogpoobug
-                    </div>
-                </div>
-
-                <div class="contact-group">
-                    <h3>Support</h3>
-                    <div class="contact-item">
-                        우리은행: 201-526091-18-841
-                    </div>
-                    <div class="contact-item">
-                        XMR (Monero):
-                        <div class="mono-address">45XEVDj4ZrkEnyM364QuVwFnYL2MrXABZV7wchQEE3ZYEpnrDmpAp2iavBxWLgQtjnaXjNXox9FGTdYhprHpCV6FMVqSoNM</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <p>© 2025 김은율 (EYK) — All Rights Reserved</p>
-			<p>Powered by Vercel - Hosting.Kr</p>
-        </footer>
+<!-- Nav -->
+<nav class="top-nav" id="topNav">
+  <a href="#" class="nav-brand">EYK<span>김은율</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#goals">Goals</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switch" role="group" aria-label="Language / 언어 전환">
+      <button class="lang-opt" data-l="ko" type="button">KO</button>
+      <button class="lang-opt" data-l="en" type="button">EN</button>
     </div>
-
-    <!-- Floating Contact Button -->
-    <button class="floating-contact" id="contactBtn" aria-label="연락처 보기">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-        </svg>
+    <a href="#contact" class="nav-cta">Get in Touch</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span class="toggle-bar"></span><span class="toggle-bar"></span>
     </button>
+  </div>
+</nav>
 
-    <!-- Contact Modal -->
-    <div class="contact-modal" id="contactModal">
-        <button class="close-modal" id="closeModal" aria-label="닫기">&times;</button>
-        <h3>Contact</h3>
-        <div class="modal-contact-item">
-            <strong>Email</strong>
-            <a href="mailto:ey@eyk.kr">contact@eyk.kr</a>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-menu-links">
+      <a href="#" class="mobile-menu-link" data-index="01">Home</a>
+      <a href="#about" class="mobile-menu-link" data-index="02">About</a>
+      <a href="#experience" class="mobile-menu-link" data-index="03">Experience</a>
+      <a href="#stack" class="mobile-menu-link" data-index="04">Stack</a>
+      <a href="#tools" class="mobile-menu-link" data-index="05">Tools</a>
+      <a href="#goals" class="mobile-menu-link" data-index="06">Goals</a>
+      <a href="#contact" class="mobile-menu-link" data-index="07">Contact</a>
+    </div>
+    <div class="mobile-menu-footer">
+      <a href="mailto:contact@eyk.kr">Email</a>
+      <a href="https://github.com/e7yxi77" target="_blank" rel="noopener">GitHub</a>
+      <a href="tools.html">Tools</a>
+    </div>
+  </div>
+</div>
+
+<!-- Side Panels -->
+<nav class="side-panel left" aria-label="Scroll indicators">
+  <span class="side-label">Scroll</span>
+  <div class="side-track"><div class="side-track-fill" id="leftTrack"></div></div>
+  <div class="side-dot active"></div><div class="side-dot"></div><div class="side-dot"></div>
+  <div class="side-dot"></div><div class="side-dot"></div><div class="side-dot"></div>
+  <div class="side-readout" id="scrollPct">00</div>
+</nav>
+<nav class="side-panel right" aria-label="Status indicators">
+  <span class="side-label">Status</span>
+  <div class="side-track"><div class="side-track-fill" id="rightTrack"></div></div>
+  <div class="side-dot"></div><div class="side-dot"></div><div class="side-dot active"></div>
+  <div class="side-dot"></div><div class="side-dot"></div><div class="side-dot"></div>
+  <div class="side-readout">EYK</div>
+</nav>
+
+<main class="main">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero" id="hero">
+    <div class="hero-grid"></div>
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      <span>Security Researcher · Seoul, KR</span>
+    </div>
+    <h1>김은율<br><em>Eunyul Kim</em></h1>
+    <p class="hero-sub">
+      <span class="i18n-ko">취약점을 파고들고, 데이터에서 패턴을 읽고, 반복은 코드로 지웁니다.
+      정보보안, AI 활용, 자동화 알고리즘에 빠져 있는 열여덟 고등학생.</span><span class="i18n-en">An eighteen-year-old high school student focused on information security, applied AI, and automation — researching vulnerabilities, identifying patterns in data, and automating repetitive processes through code.</span>
+    </p>
+    <div class="hero-ctas">
+      <a href="#experience" class="btn-primary">View Work</a>
+      <a href="#tools" class="btn-secondary">Security Tools</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="18" data-decimals="0">0</span></div>
+        <div class="metric-label">Years Old</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="8" data-decimals="0">0</span><span>+</span></div>
+        <div class="metric-label">Projects</div>
+      </div>
+      <div class="metric">
+        <div class="metric-value"><span class="counter" data-target="12" data-decimals="0">0</span></div>
+        <div class="metric-label">Technologies</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ABOUT / INTERESTS ═══ -->
+  <section class="section" id="about">
+    <div class="feature reveal">
+      <div class="feature-visual">
+        <img class="viz-img" src="images/security.jpg" alt="정보보안 일러스트레이션" onerror="this.remove()">
+        <svg class="viz" viewBox="0 0 520 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="정보보안" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="s-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#161a21"/><stop offset="1" stop-color="#0c0e12"/></linearGradient>
+            <radialGradient id="s-glow" cx="50%" cy="46%" r="55%"><stop offset="0" stop-color="#7C9CC4" stop-opacity="0.16"/><stop offset="1" stop-color="#7C9CC4" stop-opacity="0"/></radialGradient>
+            <linearGradient id="s-scan" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7C9CC4" stop-opacity="0"/><stop offset="0.5" stop-color="#7C9CC4" stop-opacity="0.55"/><stop offset="1" stop-color="#7C9CC4" stop-opacity="0"/></linearGradient>
+            <pattern id="s-dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#9CA3AF" fill-opacity="0.10"/></pattern>
+          </defs>
+          <rect width="520" height="320" fill="url(#s-bg)"/>
+          <rect width="520" height="320" fill="url(#s-dots)"/>
+          <rect width="520" height="320" fill="url(#s-glow)"/>
+          <g stroke="#B0B8C4" stroke-opacity="0.16" stroke-width="1" fill="none">
+            <path d="M70 70 L180 120 L110 210 M180 120 L260 92"/>
+            <path d="M450 78 L340 120 L410 218 M340 120 L260 92"/>
+            <path d="M110 210 L200 252 M410 218 L320 252"/>
+          </g>
+          <g fill="#B0B8C4" fill-opacity="0.5">
+            <circle cx="70" cy="70" r="2.5"/><circle cx="450" cy="78" r="2.5"/>
+            <circle cx="110" cy="210" r="2.5"/><circle cx="410" cy="218" r="2.5"/>
+            <circle cx="200" cy="252" r="2.2"/><circle cx="320" cy="252" r="2.2"/>
+          </g>
+          <g transform="translate(260,158)">
+            <path d="M0 -74 L60 -50 L60 2 C60 42 34 68 0 82 C-34 68 -60 42 -60 2 L-60 -50 Z" fill="#0F1115" fill-opacity="0.55" stroke="#C9CDD4" stroke-opacity="0.75" stroke-width="1.8"/>
+            <path d="M0 -58 L46 -39 L46 2 C46 34 26 55 0 66 C-26 55 -46 34 -46 2 L-46 -39 Z" fill="none" stroke="#6B7280" stroke-opacity="0.5" stroke-width="1"/>
+            <circle cx="0" cy="-8" r="10" fill="none" stroke="#7C9CC4" stroke-width="2"/>
+            <path d="M0 -2 L0 24" stroke="#7C9CC4" stroke-width="2" stroke-linecap="round"/>
+          </g>
+          <rect x="70" y="158" width="380" height="1.6" fill="url(#s-scan)"/>
+        </svg>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">01</div>
+        <p class="section-tag">Information Security</p>
+        <h2 class="section-title"><span class="i18n-ko">시스템의 <strong>빈틈을 읽는다</strong></span><span class="i18n-en">Understanding <strong>where systems fail</strong></span></h2>
+        <p class="section-body">
+          <span class="i18n-ko">바이너리부터 웹까지, 취약점이 왜 생기는지 원리부터 파고듭니다.
+          공격을 알아야 제대로 막을 수 있다고 믿습니다.</span><span class="i18n-en">From binaries to the web, I study why vulnerabilities arise in the first place. A system cannot be properly defended without first understanding how it breaks.</span>
+        </p>
+        <div class="feature-tags">
+          <span class="feature-tag">Pwnable</span>
+          <span class="feature-tag">Web Hacking</span>
+          <span class="feature-tag">Reversing</span>
+          <span class="feature-tag">Digital Forensics</span>
         </div>
-        <div class="modal-contact-item">
-            <strong>Discord</strong>
-            @dogpoobug
-        </div>
-        <div class="modal-contact-item">
-            <strong>우리은행</strong>
-            201-526091-18-841
-        </div>
+      </div>
     </div>
 
-    <script>
-        // Terminal Typing Animation
-        const terminalLines = [
-            '#include <stdio.h>',
-            '',
-            'int main(void) {',
-            '    char name[] = "김은율 (EYK)";',
-            '    char role[] = "Security Researcher & Fullstack Developer";',
-            '    ',
-            '    printf("Name: %s\\n", name);',
-            '    printf("Role: %s\\n", role);',
-            '    printf("Focus: Pwnable | Web Hacking | Reversing | Fullstack | AI\\n");',
-            '    ',
-            '    return 0;',
-            '}'
-        ];
+    <div class="feature reverse reveal">
+      <div class="feature-visual">
+        <img class="viz-img" src="images/data.jpg" alt="AI 빅데이터 분석 일러스트레이션" onerror="this.remove()">
+        <svg class="viz" viewBox="0 0 520 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="AI 빅데이터 분석" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="d-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#161a21"/><stop offset="1" stop-color="#0c0e12"/></linearGradient>
+            <linearGradient id="d-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7C9CC4" stop-opacity="0.30"/><stop offset="1" stop-color="#7C9CC4" stop-opacity="0"/></linearGradient>
+            <pattern id="d-dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#9CA3AF" fill-opacity="0.10"/></pattern>
+          </defs>
+          <rect width="520" height="320" fill="url(#d-bg)"/>
+          <rect width="520" height="320" fill="url(#d-dots)"/>
+          <g stroke="#9CA3AF" stroke-opacity="0.10" stroke-width="1">
+            <line x1="60" y1="90" x2="470" y2="90"/><line x1="60" y1="145" x2="470" y2="145"/>
+            <line x1="60" y1="200" x2="470" y2="200"/><line x1="60" y1="255" x2="470" y2="255"/>
+          </g>
+          <g stroke="#B0B8C4" stroke-opacity="0.28" stroke-width="1"><line x1="60" y1="60" x2="60" y2="255"/><line x1="60" y1="255" x2="470" y2="255"/></g>
+          <path d="M60 218 L118 192 L178 206 L238 150 L298 168 L358 112 L418 132 L462 92 L462 255 L60 255 Z" fill="url(#d-area)"/>
+          <path d="M60 218 L118 192 L178 206 L238 150 L298 168 L358 112 L418 132 L462 92" fill="none" stroke="#C9CDD4" stroke-opacity="0.85" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          <g fill="#0F1115" stroke="#B0B8C4" stroke-opacity="0.7" stroke-width="1.5">
+            <circle cx="118" cy="192" r="3"/><circle cx="238" cy="150" r="3"/><circle cx="358" cy="112" r="3"/>
+          </g>
+          <circle cx="462" cy="92" r="5" fill="#7C9CC4"/>
+          <circle cx="462" cy="92" r="11" fill="none" stroke="#7C9CC4" stroke-opacity="0.4" stroke-width="1.5"/>
+          <g fill="#9CA3AF" fill-opacity="0.35"><circle cx="150" cy="120" r="2"/><circle cx="205" cy="98" r="2"/><circle cx="300" cy="126" r="2"/><circle cx="335" cy="92" r="2"/><circle cx="405" cy="108" r="2"/></g>
+        </svg>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">02</div>
+        <p class="section-tag">AI &amp; Big-Data Analysis</p>
+        <h2 class="section-title"><span class="i18n-ko">데이터에서 <strong>신호를 찾는다</strong></span><span class="i18n-en">Extracting <strong>signal from data</strong></span></h2>
+        <p class="section-body">
+          <span class="i18n-ko">쌓인 데이터를 정제하고 모델로 읽어, 사람 눈에는 잘 안 보이는 패턴과 이상 신호를 짚어냅니다.
+          분석이 실제 결정으로 이어지도록 파이프라인까지 직접 짭니다.</span><span class="i18n-en">I refine raw data and apply models to surface the patterns and anomalies that are easily overlooked, and I build the pipelines myself so that analysis translates into decisions.</span>
+        </p>
+        <div class="feature-tags">
+          <span class="feature-tag">Data Pipeline</span>
+          <span class="feature-tag">Pattern Detection</span>
+          <span class="feature-tag">Model Analysis</span>
+        </div>
+      </div>
+    </div>
 
-        let currentLine = 0;
-        const terminalContent = document.getElementById('terminalContent');
+    <div class="feature reveal">
+      <div class="feature-visual">
+        <svg class="viz" viewBox="0 0 520 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="자동화 알고리즘" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="a-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#161a21"/><stop offset="1" stop-color="#0c0e12"/></linearGradient>
+            <pattern id="a-dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#9CA3AF" fill-opacity="0.10"/></pattern>
+          </defs>
+          <rect width="520" height="320" fill="url(#a-bg)"/>
+          <rect width="520" height="320" fill="url(#a-dots)"/>
+          <g stroke="#B0B8C4" stroke-opacity="0.35" stroke-width="1.5" fill="none" stroke-linecap="round">
+            <path d="M138 104 H224"/><path d="M296 104 H382"/>
+            <path d="M214 97 L224 104 L214 111"/><path d="M372 97 L382 104 L372 111"/>
+          </g>
+          <g fill="#0F1115" stroke="#C9CDD4" stroke-opacity="0.6" stroke-width="1.5">
+            <circle cx="110" cy="104" r="22"/><circle cx="410" cy="104" r="22"/>
+          </g>
+          <circle cx="260" cy="104" r="28" fill="#0F1115" stroke="#C9CDD4" stroke-opacity="0.7" stroke-width="1.6"/>
+          <g stroke="#9CA3AF" stroke-opacity="0.75" stroke-width="1.4" fill="none" stroke-linecap="round">
+            <circle cx="260" cy="104" r="10"/>
+            <line x1="260" y1="88" x2="260" y2="82"/><line x1="260" y1="126" x2="260" y2="120"/>
+            <line x1="244" y1="104" x2="238" y2="104"/><line x1="282" y1="104" x2="276" y2="104"/>
+            <line x1="248.7" y1="92.7" x2="244.5" y2="88.5"/><line x1="275.5" y1="119.5" x2="271.3" y2="115.3"/>
+            <line x1="271.3" y1="92.7" x2="275.5" y2="88.5"/><line x1="244.5" y1="119.5" x2="248.7" y2="115.3"/>
+          </g>
+          <circle cx="110" cy="104" r="5" fill="#9CA3AF" fill-opacity="0.6"/>
+          <circle cx="410" cy="104" r="6" fill="#7C9CC4"/>
+          <circle cx="410" cy="104" r="22" fill="none" stroke="#7C9CC4" stroke-opacity="0.5" stroke-width="1.5"/>
+          <g>
+            <line x1="96" y1="232" x2="96" y2="268" stroke="#B0B8C4" stroke-opacity="0.4" stroke-width="1.2"/>
+            <rect x="91" y="240" width="10" height="22" fill="#0F1115" stroke="#B0B8C4" stroke-opacity="0.55" stroke-width="1.2"/>
+            <line x1="152" y1="220" x2="152" y2="256" stroke="#B0B8C4" stroke-opacity="0.4" stroke-width="1.2"/>
+            <rect x="147" y="226" width="10" height="22" fill="#0F1115" stroke="#B0B8C4" stroke-opacity="0.55" stroke-width="1.2"/>
+            <line x1="208" y1="224" x2="208" y2="262" stroke="#B0B8C4" stroke-opacity="0.4" stroke-width="1.2"/>
+            <rect x="203" y="232" width="10" height="24" fill="#0F1115" stroke="#B0B8C4" stroke-opacity="0.55" stroke-width="1.2"/>
+            <line x1="264" y1="202" x2="264" y2="244" stroke="#B0B8C4" stroke-opacity="0.4" stroke-width="1.2"/>
+            <rect x="259" y="210" width="10" height="26" fill="#0F1115" stroke="#B0B8C4" stroke-opacity="0.55" stroke-width="1.2"/>
+            <line x1="320" y1="214" x2="320" y2="250" stroke="#B0B8C4" stroke-opacity="0.4" stroke-width="1.2"/>
+            <rect x="315" y="220" width="10" height="20" fill="#0F1115" stroke="#B0B8C4" stroke-opacity="0.55" stroke-width="1.2"/>
+            <line x1="376" y1="190" x2="376" y2="230" stroke="#B0B8C4" stroke-opacity="0.4" stroke-width="1.2"/>
+            <rect x="371" y="198" width="10" height="24" fill="#0F1115" stroke="#B0B8C4" stroke-opacity="0.55" stroke-width="1.2"/>
+            <line x1="432" y1="178" x2="432" y2="218" stroke="#7C9CC4" stroke-opacity="0.6" stroke-width="1.2"/>
+            <rect x="427" y="186" width="10" height="24" fill="#7C9CC4" fill-opacity="0.85"/>
+          </g>
+        </svg>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">03</div>
+        <p class="section-tag">Automation Algorithms</p>
+        <h2 class="section-title"><span class="i18n-ko">반복을 <strong>알고리즘으로 바꾼다</strong></span><span class="i18n-en">Turning repetition <strong>into algorithms</strong></span></h2>
+        <p class="section-body">
+          <span class="i18n-ko">규칙이 있으면 자동화할 구석이 있습니다. 매매 전략부터 운영 워크플로까지,
+          사람이 반복하던 판단을 알고리즘에 맡겨 더 빠르고 일관되게 돌립니다.</span><span class="i18n-en">Wherever there is a rule, there is room for automation. From trading strategies to operational workflows, I delegate repetitive decisions to algorithms, making them faster and more consistent.</span>
+        </p>
+        <div class="feature-tags">
+          <span class="feature-tag">Trading Algorithms</span>
+          <span class="feature-tag">Workflow Automation</span>
+          <span class="feature-tag">Backtesting</span>
+        </div>
+      </div>
+    </div>
 
-        function typeTerminalLine() {
-            if (currentLine < terminalLines.length) {
-                const line = document.createElement('div');
-                line.className = 'terminal-line';
-                line.textContent = terminalLines[currentLine];
-                terminalContent.appendChild(line);
-                
-                // Trigger animation
-                setTimeout(() => {
-                    line.classList.add('visible');
-                }, 10);
-                
-                currentLine++;
-                setTimeout(typeTerminalLine, 100);
-            } else {
-                // Add blinking cursor at the end
-                setTimeout(() => {
-                    const cursor = document.createElement('span');
-                    cursor.className = 'typing-cursor';
-                    terminalContent.appendChild(cursor);
-                }, 200);
-            }
-        }
+    <div class="feature reverse reveal">
+      <div class="feature-visual">
+        <img class="viz-img" src="images/ai-network.jpg" alt="AI 활용 네트워크 이미지" onerror="this.remove()">
+        <svg class="viz" viewBox="0 0 520 320" preserveAspectRatio="xMidYMid slice" role="img" aria-label="AI 활용" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ai-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#161a21"/><stop offset="1" stop-color="#0c0e12"/></linearGradient>
+            <radialGradient id="ai-glow" cx="75%" cy="40%" r="45%"><stop offset="0" stop-color="#7C9CC4" stop-opacity="0.16"/><stop offset="1" stop-color="#7C9CC4" stop-opacity="0"/></radialGradient>
+            <pattern id="ai-dots" width="26" height="26" patternUnits="userSpaceOnUse"><circle cx="1.3" cy="1.3" r="1.3" fill="#9CA3AF" fill-opacity="0.10"/></pattern>
+          </defs>
+          <rect width="520" height="320" fill="url(#ai-bg)"/>
+          <rect width="520" height="320" fill="url(#ai-dots)"/>
+          <rect width="520" height="320" fill="url(#ai-glow)"/>
+          <path d="M110 92 L250 74 M110 92 L250 128 M110 92 L250 182 M110 92 L250 236 M110 150 L250 74 M110 150 L250 128 M110 150 L250 182 M110 150 L250 236 M110 208 L250 74 M110 208 L250 128 M110 208 L250 182 M110 208 L250 236 M250 74 L392 128 M250 74 L392 190 M250 128 L392 128 M250 128 L392 190 M250 182 L392 128 M250 182 L392 190 M250 236 L392 128 M250 236 L392 190" stroke="#B0B8C4" stroke-opacity="0.14" stroke-width="1" fill="none"/>
+          <g fill="#0F1115" stroke="#C9CDD4" stroke-opacity="0.55" stroke-width="1.3">
+            <circle cx="110" cy="92" r="7"/><circle cx="110" cy="150" r="7"/><circle cx="110" cy="208" r="7"/>
+            <circle cx="250" cy="74" r="7"/><circle cx="250" cy="128" r="7"/><circle cx="250" cy="182" r="7"/><circle cx="250" cy="236" r="7"/>
+            <circle cx="392" cy="190" r="7"/>
+          </g>
+          <circle cx="392" cy="128" r="8" fill="#7C9CC4"/>
+          <circle cx="392" cy="128" r="15" fill="none" stroke="#7C9CC4" stroke-opacity="0.5" stroke-width="1.5"/>
+          <g stroke-linecap="round">
+            <line x1="60" y1="272" x2="210" y2="272" stroke="#9CA3AF" stroke-opacity="0.25" stroke-width="2"/>
+            <circle cx="150" cy="272" r="6" fill="#0F1115" stroke="#C9CDD4" stroke-opacity="0.6" stroke-width="1.4"/>
+            <line x1="60" y1="296" x2="210" y2="296" stroke="#9CA3AF" stroke-opacity="0.25" stroke-width="2"/>
+            <circle cx="110" cy="296" r="6" fill="#7C9CC4"/>
+          </g>
+        </svg>
+      </div>
+      <div class="feature-content">
+        <div class="feature-number">04</div>
+        <p class="section-tag">AI Utilization</p>
+        <h2 class="section-title"><span class="i18n-ko">AI를 <strong>제대로 활용한다</strong></span><span class="i18n-en">Putting AI <strong>into practice</strong></span></h2>
+        <p class="section-body">
+          <span class="i18n-ko">새로운 모델이 나오면 곧바로 써 보고, 필요하면 파인튜닝까지 직접 합니다.
+          빅데이터 분석부터 일상 작업까지 AI를 적극적으로 끌어들여, 앞으로 필요한 활용 능력을 미리 쌓아 둡니다.</span><span class="i18n-en">I evaluate new models as they are released and fine-tune my own when necessary. From large-scale analysis to everyday tasks, I apply AI actively, building the proficiency I expect to rely on in the future.</span>
+        </p>
+        <div class="feature-tags">
+          <span class="feature-tag">Big-Data</span>
+          <span class="feature-tag">Fine-tuning</span>
+          <span class="feature-tag">LLM Tooling</span>
+          <span class="feature-tag">AI Workflow</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // Start animation on page load
-        window.addEventListener('load', () => {
-            setTimeout(typeTerminalLine, 300);
-        });
+  <div class="silk-divider reveal"></div>
 
-        // Floating Contact Button
-        const contactBtn = document.getElementById('contactBtn');
-        const contactModal = document.getElementById('contactModal');
-        const closeModal = document.getElementById('closeModal');
+  <!-- ═══ EXPERIENCE & PROJECTS ═══ -->
+  <section class="section section-center" id="experience">
+    <p class="section-tag reveal">Experience &amp; Projects</p>
+    <h2 class="section-title reveal reveal-d1"><span class="i18n-ko">경험 &amp; <strong>프로젝트</strong></span><span class="i18n-en">Experience &amp; <strong>Projects</strong></span></h2>
+    <p class="section-body reveal reveal-d2"><span class="i18n-ko">인턴십과 체험 활동, 그리고 직접 이끌어 온 연구·개발 프로젝트입니다.</span><span class="i18n-en">Internships and hands-on programs, together with research and development projects I have led independently.</span></p>
 
-        contactBtn.addEventListener('click', () => {
-            contactModal.classList.toggle('active');
-        });
+    <div class="timeline reveal reveal-d2" style="text-align:left; max-width:720px; margin-left:auto; margin-right:auto;">
+      <div class="tl-item current">
+        <div class="tl-date">2026.04 — <span class="i18n-ko">현재</span><span class="i18n-en">Present</span> <span class="tl-badge">Project</span></div>
+        <div class="tl-title"><span class="i18n-ko">주식 자동매매 봇 · 종가베팅 특화 알고리즘 (Kr Swing)</span><span class="i18n-en">Automated Trading Bot · Closing-Price Swing Algorithm (Kr Swing)</span></div>
+        <div class="tl-desc"><span class="i18n-ko">국내 주식 시장을 겨냥한 자동매매 봇을 연구·개발합니다. 종가베팅(스윙) 전략에 맞춘 신호 생성과 리스크 관리 알고리즘을 설계하고, 백테스팅으로 검증합니다.</span><span class="i18n-en">Research and development of an automated trading bot for the Korean stock market. I design the signal-generation and risk-management logic around a closing-price swing strategy and validate it through backtesting.</span></div>
+      </div>
+      <div class="tl-item current">
+        <div class="tl-date">2026.03 — <span class="i18n-ko">현재</span><span class="i18n-en">Present</span> <span class="tl-badge">Project</span></div>
+        <div class="tl-title"><span class="i18n-ko">Noeva — 학교 대시보드 개발 (school.eyk.kr)</span><span class="i18n-en">Noeva — School Dashboard (school.eyk.kr)</span></div>
+        <div class="tl-desc"><span class="i18n-ko">학교 구성원 모두가 쓰는 통합 대시보드를 만들고 있습니다.</span><span class="i18n-en">Developing a unified dashboard for the entire school community.</span></div>
+        <span class="tl-note"><span class="i18n-ko">학교 공식 승인 검토 중</span><span class="i18n-en">Pending official school approval</span></span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025.12 — 2026.01 <span class="tl-badge">Experience</span></div>
+        <div class="tl-title"><span class="i18n-ko">고려신용정보 주식회사 · IT혁신단 인턴십</span><span class="i18n-en">Koryo Credit Information Co., Ltd. · IT Innovation Team Internship</span></div>
+        <div class="tl-desc"><span class="i18n-ko">IT혁신단에서 인턴으로 일했습니다.</span><span class="i18n-en">Completed an internship with the IT Innovation Team.</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">2025.06 — 2025.08 <span class="tl-badge">Experience</span></div>
+        <div class="tl-title"><span class="i18n-ko">SISV 체험</span><span class="i18n-en">SISV Program</span></div>
+        <div class="tl-desc"><span class="i18n-ko">보안 체험 프로그램에 참여했습니다.</span><span class="i18n-en">Participated in a hands-on security program.</span></div>
+      </div>
+    </div>
 
-        closeModal.addEventListener('click', () => {
-            contactModal.classList.remove('active');
-        });
+    <!-- Research subsection -->
+    <p class="section-tag reveal" style="margin-top:96px;">Security Research</p>
+    <h2 class="section-title reveal reveal-d1"><span class="i18n-ko">보안 <strong>연구 기록</strong></span><span class="i18n-en">Security <strong>Research Log</strong></span></h2>
 
-        // Close modal when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!contactModal.contains(e.target) && !contactBtn.contains(e.target)) {
-                contactModal.classList.remove('active');
-            }
-        });
-    </script>
+    <div class="research-grid">
+      <div class="research-card reveal reveal-d1">
+        <div class="r-date">2024.09</div>
+        <div class="r-title">Web Cache Poisoning Research &amp; PoC</div>
+        <div class="r-desc"><span class="i18n-ko">HTTP 캐시 메커니즘 취약점 연구 및 개념 증명 프로젝트.</span><span class="i18n-en">HTTP cache-mechanism vulnerabilities — research and proof of concept.</span></div>
+      </div>
+      <div class="research-card reveal reveal-d2">
+        <div class="r-date">2024.10</div>
+        <div class="r-title">Prototype Pollution Exploitation Research</div>
+        <div class="r-desc"><span class="i18n-ko">JavaScript 프로토타입 오염 취약점 연구 프로젝트.</span><span class="i18n-en">Research into JavaScript prototype pollution vulnerabilities.</span></div>
+      </div>
+      <div class="research-card reveal reveal-d3">
+        <div class="r-date">2024.11</div>
+        <div class="r-title">GraphQL Security Testing Toolkit</div>
+        <div class="r-desc"><span class="i18n-ko">GraphQL API 보안 테스팅 도구 개발 프로젝트.</span><span class="i18n-en">Development of a security testing tool for GraphQL APIs.</span></div>
+      </div>
+      <div class="research-card reveal reveal-d1">
+        <div class="r-date">2024.12</div>
+        <div class="r-title">Linux Privilege Escalation Lab</div>
+        <div class="r-desc"><span class="i18n-ko">리눅스 권한 상승 기법 연구 및 실습 환경 구축.</span><span class="i18n-en">Linux privilege escalation — techniques and a practice environment.</span></div>
+      </div>
+      <div class="research-card reveal reveal-d2">
+        <div class="r-date">2025.01</div>
+        <div class="r-title">SUID/SGID Misconfiguration Research</div>
+        <div class="r-desc"><span class="i18n-ko">SUID/SGID 권한 오설정 익스플로잇 연구 프로젝트.</span><span class="i18n-en">Exploitation of misconfigured SUID/SGID permissions.</span></div>
+      </div>
+      <div class="research-card reveal reveal-d3">
+        <div class="r-date">2025.02</div>
+        <div class="r-title">Docker Escape &amp; Container Breakout Lab</div>
+        <div class="r-desc"><span class="i18n-ko">컨테이너 탈출 기법 연구 및 실습 랩 구축.</span><span class="i18n-en">Container escape techniques, with a hands-on lab environment.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TECH STACK ═══ -->
+  <section class="section section-center" id="stack">
+    <p class="section-tag reveal">Tech Stack</p>
+    <h2 class="section-title reveal reveal-d1"><span class="i18n-ko"><strong>언어</strong></span><span class="i18n-en"><strong>Languages</strong></span></h2>
+
+    <div class="stack-wrap reveal reveal-d2">
+      <div class="stack-group">
+        <div class="stack-label">Languages</div>
+        <div class="stack-pills">
+          <span class="stack-pill">TypeScript</span>
+          <span class="stack-pill">JavaScript</span>
+          <span class="stack-pill">Java</span>
+          <span class="stack-pill">C</span>
+          <span class="stack-pill">C++</span>
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">Go</span>
+          <span class="stack-pill">x86 Assembly</span>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-label">Web</div>
+        <div class="stack-pills">
+          <span class="stack-pill">HTML5</span>
+          <span class="stack-pill">CSS3</span>
+          <span class="stack-pill">React</span>
+          <span class="stack-pill">Node.js</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ TOOLS ═══ -->
+  <section class="section section-center" id="tools">
+    <p class="section-tag reveal">Security Tools</p>
+    <h2 class="section-title reveal reveal-d1"><span class="i18n-ko">모의해킹 <strong>툴킷</strong></span><span class="i18n-en">Penetration Testing <strong>Toolkit</strong></span></h2>
+    <p class="section-body reveal reveal-d2"><span class="i18n-ko">파트너와 함께 만든 모의해킹 툴입니다. 교육·연구 목적으로만 공개합니다.</span><span class="i18n-en">A penetration testing tool developed with a partner. Released for educational and research purposes only.</span></p>
+
+    <div class="tools-card reveal reveal-d2">
+      <div class="tools-card-eyebrow"><span class="dot"></span>Educational · Research Only</div>
+      <h3><span class="i18n-ko">모의해킹 <strong>툴킷</strong></span><span class="i18n-en">Penetration Testing <strong>Toolkit</strong></span></h3>
+      <p>
+        <span class="i18n-ko">보안의 기초 원리와 모의해킹을 익히려고 파트너와 함께 만든 도구입니다.
+        본인이 소유했거나 서면으로 허가받은 시스템에서, 학습·연구 목적으로만 사용하세요.
+        다운로드하려면 이용약관에 동의해야 합니다. 자세한 내용은 아래에서 확인하세요.</span><span class="i18n-en">A tool developed with a partner to study the fundamentals of security and penetration testing. It may be used only on systems you own or have written authorization to test, strictly for learning and research. Agreement to the terms is required before downloading. Full details are provided below.</span>
+      </p>
+      <a href="tools.html" class="btn-primary"><span class="i18n-ko">자세히 보기 &amp; 다운로드</span><span class="i18n-en">View Details &amp; Download</span></a>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ FUTURE GOALS ═══ -->
+  <section class="section section-center" id="goals">
+    <p class="section-tag reveal">Future Goals</p>
+    <h2 class="section-title reveal reveal-d1"><span class="i18n-ko">앞으로의 <strong>목표</strong></span><span class="i18n-en">Future <strong>Goals</strong></span></h2>
+
+    <div class="research-grid reveal reveal-d2">
+      <div class="research-card">
+        <div class="r-date">Program</div>
+        <div class="r-title"><a href="https://www.kitribob.kr/" target="_blank" rel="noopener noreferrer">BoB</a> / <a href="https://whitehatschool.kr/" target="_blank" rel="noopener noreferrer">WHS</a></div>
+        <div class="r-desc"><span class="i18n-ko">차세대 보안리더 양성 프로그램 (Best of the Best / White Hat School).</span><span class="i18n-en">Next-generation security leader programs (Best of the Best / White Hat School).</span></div>
+      </div>
+      <div class="research-card">
+        <div class="r-date">Education</div>
+        <div class="r-title"><a href="https://autoeveritdream.com/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">현대오토에버 화이트햇해킹 양성교육</span><span class="i18n-en">Hyundai AutoEver White-Hat Hacking Program</span></a></div>
+        <div class="r-desc"><span class="i18n-ko">고교생 IT 꿈나무 성장지원사업.</span><span class="i18n-en">IT talent development program for high-school students.</span></div>
+      </div>
+      <div class="research-card">
+        <div class="r-date">Competition</div>
+        <div class="r-title"><a href="https://cce.cstec.kr/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">CCE 사이버공격방어대회</span><span class="i18n-en">CCE (Cyber Conflict Exercise)</span></a></div>
+        <div class="r-desc"><span class="i18n-ko">국가정보원 주최 사이버보안 경진대회.</span><span class="i18n-en">National Intelligence Service cybersecurity competition.</span></div>
+      </div>
+      <div class="research-card">
+        <div class="r-date">Certification</div>
+        <div class="r-title"><a href="https://www.offsec.com/" target="_blank" rel="noopener noreferrer">OSCP</a> / <a href="https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/" target="_blank" rel="noopener noreferrer">CEH</a></div>
+        <div class="r-desc"><span class="i18n-ko">국제 사이버보안 자격증.</span><span class="i18n-en">International cybersecurity certifications.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="silk-divider reveal"></div>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section class="section section-center" id="contact">
+    <p class="section-tag reveal">Contact &amp; Support</p>
+    <h2 class="section-title reveal reveal-d1"><span class="i18n-ko">연락 &amp; <strong>후원</strong></span><span class="i18n-en">Contact &amp; <strong>Support</strong></span></h2>
+
+    <div class="contact-grid reveal reveal-d2">
+      <div class="contact-panel">
+        <h3>Contact</h3>
+        <div class="contact-row">
+          <div class="c-label">Email</div>
+          <div class="c-value"><a href="mailto:contact@eyk.kr">contact@eyk.kr</a></div>
+        </div>
+        <div class="contact-row">
+          <div class="c-label">Discord</div>
+          <div class="c-value">@dogpoobug</div>
+        </div>
+        <div class="contact-row">
+          <div class="c-label">GitHub</div>
+          <div class="c-value"><a href="https://github.com/e7yxi77" target="_blank" rel="noopener noreferrer">github.com/e7yxi77</a></div>
+        </div>
+      </div>
+      <div class="contact-panel">
+        <h3>Support</h3>
+        <div class="contact-row">
+          <div class="c-label"><span class="i18n-ko">우리은행</span><span class="i18n-en">Woori Bank</span></div>
+          <div class="c-value">201-526091-18-841</div>
+        </div>
+        <div class="contact-row">
+          <div class="c-label">XMR (Monero)</div>
+          <div class="mono-addr">45XEVDj4ZrkEnyM364QuVwFnYL2MrXABZV7wchQEE3ZYEpnrDmpAp2iavBxWLgQtjnaXjNXox9FGTdYhprHpCV6FMVqSoNM</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <section class="footer-cta" id="cta">
+    <div class="footer-bar reveal" style="margin-top:0;">
+      <div class="footer-brand"><span class="i18n-ko">김은율 (EYK) — 2026</span><span class="i18n-en">Eunyul Kim (EYK) — 2026</span></div>
+      <div class="footer-links">
+        <a href="mailto:contact@eyk.kr">Email</a>
+        <a href="tools.html">Tools</a>
+        <a href="https://github.com/e7yxi77" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <span class="footer-credit"><span class="i18n-ko">© 2026 김은율 · All Rights Reserved</span><span class="i18n-en">© 2026 Eunyul Kim · All Rights Reserved</span></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>
