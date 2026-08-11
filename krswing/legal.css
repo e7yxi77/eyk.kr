@@ -1,0 +1,302 @@
+/* ═══════════════════════════════════════════════════════════════
+   KRSWING Summarizer — legal documents
+   Self-contained. Shares the eyk.kr palette so these pages read as
+   part of the site without depending on the portfolio's scroll and
+   reveal machinery, which these documents do not need.
+   ═══════════════════════════════════════════════════════════════ */
+
+:root {
+  --base-deep:     #0F1115;
+  --base-mid:      #161A20;
+  --base-soft:     #1C2128;
+  --slate-warm:    #6B7280;
+  --slate-light:   #9CA3AF;
+  --graphite:      #2A2E35;
+  --graphite-soft: #3D424A;
+  --ivory:         #E5E7EB;
+  --ivory-muted:   #C9CDD4;
+  --silver:        #B0B8C4;
+  --accent:        #7C9CC4;
+  --panel-bg:      rgba(22, 26, 32, 0.55);
+  --panel-border:  rgba(156, 163, 175, 0.08);
+  --hairline:      rgba(156, 163, 175, 0.13);
+  --silk:          cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
+body {
+  margin: 0;
+  background: var(--base-deep);
+  color: var(--ivory-muted);
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+               'Apple SD Gothic Neo', 'Pretendard', 'Malgun Gothic', sans-serif;
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.85;
+  letter-spacing: -0.003em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Atmosphere ─ a single cool wash, well below the content */
+.grain {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  opacity: 0.028; mix-blend-mode: overlay;
+}
+.atmosphere {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(900px 620px at 78% -8%,  rgba(124, 156, 196, 0.09), transparent 62%),
+    radial-gradient(760px 520px at 4%  102%, rgba(124, 156, 196, 0.05), transparent 60%);
+}
+
+/* ─────────────────────────── Nav ─────────────────────────── */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 20px;
+  padding: 17px clamp(20px, 5vw, 56px);
+  background: rgba(15, 17, 21, 0.72);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.nav-brand {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  font-size: 15px; font-weight: 600; letter-spacing: 0.12em;
+  color: var(--ivory); text-decoration: none;
+  transition: opacity 0.4s var(--silk);
+}
+.nav-brand span {
+  font-size: 10.5px; font-weight: 300; letter-spacing: 0.05em;
+  color: var(--slate-warm);
+}
+.nav-brand:hover { opacity: 0.72; }
+
+.nav-right { display: flex; align-items: center; gap: 12px; }
+
+.nav-back {
+  font-size: 11px; font-weight: 400; letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--slate-light); text-decoration: none;
+  padding: 8px 15px;
+  border: 1px solid var(--hairline); border-radius: 2px;
+  transition: color 0.4s var(--silk), border-color 0.4s var(--silk);
+  white-space: nowrap;
+}
+.nav-back:hover { color: var(--ivory); border-color: var(--graphite-soft); }
+
+.lang-switch {
+  display: inline-flex; align-items: center;
+  border: 1px solid var(--hairline); border-radius: 2px;
+  overflow: hidden;
+}
+.lang-opt {
+  appearance: none; background: none; border: 0;
+  padding: 7px 13px;
+  font: inherit; font-size: 10.5px; font-weight: 500; letter-spacing: 0.11em;
+  color: var(--slate-warm); cursor: pointer;
+  transition: color 0.4s var(--silk), background 0.4s var(--silk);
+}
+.lang-opt:hover { color: var(--ivory); }
+.lang-opt:focus-visible { outline: 2px solid var(--silver); outline-offset: -2px; }
+html[data-lang="ko"] .lang-opt[data-l="ko"],
+html[data-lang="en"] .lang-opt[data-l="en"] {
+  color: var(--base-deep); background: var(--ivory-muted);
+}
+
+/* The bilingual mechanism used across eyk.kr */
+html[data-lang="ko"] .i18n-en { display: none; }
+html[data-lang="en"] .i18n-ko { display: none; }
+
+/* ─────────────────────────── Document ─────────────────────────── */
+.doc {
+  position: relative; z-index: 1;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 132px clamp(20px, 5vw, 40px) 96px;
+}
+
+.doc__eyebrow {
+  display: block;
+  font-size: 10px; font-weight: 500;
+  letter-spacing: 0.24em; text-transform: uppercase;
+  color: var(--slate-warm);
+  margin-bottom: 18px;
+}
+/* Uppercase and wide tracking are Latin devices; Korean needs neither. */
+html[data-lang="ko"] .doc__eyebrow { letter-spacing: 0.06em; text-transform: none; }
+
+h1 {
+  margin: 0 0 14px;
+  font-size: clamp(30px, 5.4vw, 44px);
+  font-weight: 300; line-height: 1.16; letter-spacing: -0.022em;
+  color: var(--ivory);
+}
+h1 strong { font-weight: 600; }
+
+.updated {
+  margin: 0 0 40px;
+  font-size: 12.5px; color: var(--slate-warm); letter-spacing: 0.02em;
+}
+
+.lede {
+  margin: 0 0 52px;
+  padding: 26px 30px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-left: 2px solid var(--graphite-soft);
+  border-radius: 2px;
+}
+.lede p { margin: 0; font-size: 15px; color: var(--ivory-muted); }
+.lede strong { color: var(--ivory); font-weight: 600; }
+
+h2 {
+  margin: 54px 0 16px;
+  padding-top: 26px;
+  border-top: 1px solid var(--hairline);
+  font-size: 17.5px; font-weight: 600; line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: var(--ivory);
+}
+h2:first-of-type { margin-top: 0; }
+
+p { margin: 0 0 16px; }
+strong { color: var(--ivory); font-weight: 600; }
+
+a {
+  color: var(--silver);
+  text-decoration: none;
+  border-bottom: 1px solid var(--graphite-soft);
+  transition: color 0.4s var(--silk), border-color 0.4s var(--silk);
+}
+a:hover { color: var(--ivory); border-bottom-color: var(--silver); }
+
+ul { margin: 0 0 18px; padding-left: 0; list-style: none; }
+li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 22px;
+}
+li::before {
+  content: ''; position: absolute;
+  left: 3px; top: 0.82em;
+  width: 5px; height: 5px;
+  background: var(--graphite-soft);
+  transform: rotate(45deg);
+}
+
+code {
+  font-family: 'SF Mono', 'JetBrains Mono', Consolas, monospace;
+  font-size: 0.855em;
+  padding: 2px 6px;
+  background: var(--base-soft);
+  border: 1px solid var(--panel-border);
+  border-radius: 2px;
+  color: var(--silver);
+  white-space: nowrap;
+}
+
+/* Tables scroll inside themselves; the page never scrolls sideways. */
+.tablewrap {
+  margin: 0 0 22px;
+  overflow-x: auto;
+  border: 1px solid var(--hairline);
+  border-radius: 2px;
+}
+table {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+th, td {
+  padding: 13px 16px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--hairline);
+}
+th {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--slate-warm);
+  background: rgba(28, 33, 40, 0.5);
+  white-space: nowrap;
+}
+html[data-lang="ko"] th { letter-spacing: 0.03em; text-transform: none; font-size: 11.5px; }
+tr:last-child td { border-bottom: 0; }
+td { color: var(--ivory-muted); line-height: 1.7; }
+
+/* ─────────────────────────── Footer ─────────────────────────── */
+.doc__foot {
+  margin: 64px 0 0;
+  padding-top: 26px;
+  border-top: 1px solid var(--hairline);
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: 14px;
+  font-size: 12px; color: var(--slate-warm);
+}
+.doc__foot nav { display: flex; flex-wrap: wrap; gap: 20px; }
+.doc__foot a { border-bottom: 0; color: var(--slate-light); }
+.doc__foot a:hover { color: var(--ivory); }
+
+/* ─────────────────────────── Hub ─────────────────────────── */
+.hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(248px, 1fr));
+  gap: 16px;
+  margin: 40px 0 0;
+}
+.hub-card {
+  display: block;
+  padding: 28px 26px 26px;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: border-color 0.5s var(--silk), transform 0.5s var(--silk),
+              background 0.5s var(--silk);
+}
+.hub-card:hover {
+  border-color: var(--graphite-soft);
+  background: rgba(28, 33, 40, 0.6);
+  transform: translateY(-2px);
+}
+.hub-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px; font-weight: 500; color: var(--ivory);
+}
+.hub-card p { margin: 0; font-size: 13.5px; color: var(--slate-light); line-height: 1.65; }
+.hub-card__mark {
+  display: block; width: 7px; height: 7px;
+  margin-bottom: 18px;
+  background: var(--graphite-soft);
+  transform: rotate(45deg);
+  transition: background 0.5s var(--silk);
+}
+.hub-card:hover .hub-card__mark { background: var(--accent); }
+
+@media (max-width: 600px) {
+  body { font-size: 15px; }
+  .doc { padding-top: 120px; }
+  .lede { padding: 22px 20px; }
+  .nav-back { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
