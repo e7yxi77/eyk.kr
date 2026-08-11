@@ -116,7 +116,12 @@
   not by this one. The extension requests permission to reach a provider's servers only at the
   moment you connect it, and never requests the others.</p>
   <p>Captions are read from YouTube using your existing YouTube session, the same way the video
-  page itself loads them. No YouTube credentials are read, copied, or stored.</p>
+  page itself loads them. For YouTube to accept that request, the extension reads the
+  <code>SAPISID</code> cookie your browser already holds for youtube.com and derives from it the
+  same signed header YouTube's own player sends. <strong>That derived value goes only back to
+  youtube.com — the site that set the cookie.</strong> The cookie itself is never stored, never
+  sent anywhere else, and never exposed to the extension's own pages. If you are signed out, the
+  anonymous path is used instead.</p>
 
   <h2>3. What is never collected</h2>
   <ul>
@@ -237,7 +242,11 @@
   적용됩니다. 이 확장 프로그램은 사용자가 특정 제공자를 연결하는 시점에만 그 제공자에 대한
   접속 권한을 요청하며, 연결하지 않은 제공자의 권한은 요청하지 않습니다.</p>
   <p>자막은 사용자의 기존 YouTube 세션을 이용해 읽어옵니다. 이는 영상 페이지 자체가 자막을
-  불러오는 방식과 동일합니다. YouTube 계정 정보를 읽거나 복사하거나 저장하지 않습니다.</p>
+  불러오는 방식과 동일합니다. YouTube가 이 요청을 수락하도록, 브라우저가 youtube.com에 대해
+  이미 보유하고 있는 <code>SAPISID</code> 쿠키를 읽어 YouTube 자체 플레이어가 보내는 것과
+  동일한 서명 헤더를 생성합니다. <strong>생성된 값은 해당 쿠키를 설정한 youtube.com으로만
+  전송됩니다.</strong> 쿠키 자체는 저장되지 않고, 다른 곳으로 전송되지 않으며, 확장 프로그램의
+  다른 화면에 노출되지 않습니다. 로그아웃 상태에서는 익명 경로를 사용합니다.</p>
 
   <h2>3. 수집하지 않는 정보</h2>
   <ul>
