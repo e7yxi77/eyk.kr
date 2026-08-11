@@ -74,7 +74,8 @@
       <td>Until changed, or uninstall</td>
     </tr>
     <tr>
-      <td>Saved summaries — the generated text, the source title, and any timestamps cited</td>
+      <td>Saved summaries — the generated text, the source title, the page address or video ID
+      that identifies it, and the time it was saved</td>
       <td>So reopening the same video or article does not spend another request</td>
       <td>Up to 200; the oldest are dropped past that</td>
     </tr>
@@ -86,8 +87,9 @@
   extension removes all of it.</p>
 
   <h2>2. What leaves your device, and where it goes</h2>
-  <p>When you press Summarize, and only then, the extension sends <strong>the source text and
-  its title</strong> to the provider you configured, authenticated with your credential:</p>
+  <p>When you press Summarize, and only then, the extension sends <strong>the source text, its
+  title, and the page address</strong> to the provider you configured, authenticated with your
+  credential:</p>
   <ul>
     <li>the video's caption text, on a YouTube watch page; or</li>
     <li>the article text extracted from the page, on any other site.</li>
@@ -120,8 +122,11 @@
   <ul>
     <li>No data of any kind is sent to the developer. There is no server to send it to.</li>
     <li>No analytics, telemetry, crash reporting, advertising, or fingerprinting.</li>
-    <li><strong>No browsing history.</strong> On sites other than YouTube nothing runs until you
-    click the toolbar button, and then only on the single tab you clicked from.</li>
+    <li><strong>No passive browsing log.</strong> On sites other than YouTube nothing runs until
+    you click the toolbar button, and then only on the single tab you clicked from. Your history,
+    your other tabs, and pages you did not ask it to summarize are never read. What is kept is the
+    address of each page you <em>did</em> summarize: it identifies that summary in the local cache,
+    and it is included in the request to your provider so the model knows the source.</li>
     <li>No remote code, no remote fonts, no third-party scripts. Everything the extension runs
     ships inside it.</li>
     <li>Your credential is never logged, never placed in a URL, and never transmitted anywhere
@@ -191,7 +196,8 @@
       <td>변경하거나 제거할 때까지</td>
     </tr>
     <tr>
-      <td>저장된 요약 — 생성된 본문, 원본 제목, 인용된 시점</td>
+      <td>저장된 요약 — 생성된 본문, 원본 제목, 원본을 식별하는 페이지 주소 또는 영상 ID,
+      저장 시각</td>
       <td>같은 영상·문서를 다시 열 때 요청을 반복하지 않기 위함</td>
       <td>최대 200건, 초과 시 오래된 항목부터 삭제</td>
     </tr>
@@ -203,8 +209,8 @@
   삭제됩니다.</p>
 
   <h2>2. 외부로 전송되는 정보와 전송 대상</h2>
-  <p>요약 버튼을 누르는 시점에만, 그리고 그때에 한하여 <strong>원본 텍스트와 제목</strong>이
-  사용자가 설정한 제공자에게 사용자의 인증 정보와 함께 전송됩니다.</p>
+  <p>요약 버튼을 누르는 시점에만, 그리고 그때에 한하여 <strong>원본 텍스트와 제목, 페이지
+  주소</strong>가 사용자가 설정한 제공자에게 사용자의 인증 정보와 함께 전송됩니다.</p>
   <ul>
     <li>YouTube 영상 페이지에서는 해당 영상의 자막 텍스트</li>
     <li>그 외 사이트에서는 해당 페이지에서 추출한 본문 텍스트</li>
@@ -237,9 +243,11 @@
   <ul>
     <li>개발자에게 전송되는 데이터는 없습니다. 전송받을 서버 자체가 없습니다.</li>
     <li>분석, 텔레메트리, 오류 보고, 광고, 핑거프린팅을 일절 수행하지 않습니다.</li>
-    <li><strong>인터넷 사용 기록을 수집하지 않습니다.</strong> YouTube 외의 사이트에서는
-    도구 모음 아이콘을 누르기 전까지 아무것도 실행되지 않으며, 누른 이후에도 해당 탭에서만
-    동작합니다.</li>
+    <li><strong>브라우징을 상시 기록하지 않습니다.</strong> YouTube 외의 사이트에서는 도구
+    모음 아이콘을 누르기 전까지 아무것도 실행되지 않으며, 누른 이후에도 해당 탭에서만
+    동작합니다. 방문 기록, 다른 탭, 요약을 요청하지 않은 페이지는 읽지 않습니다. 다만 이용자가
+    직접 요약한 페이지의 주소는 로컬 캐시에서 해당 요약을 식별하는 값으로 저장되며, 모델이
+    출처를 알 수 있도록 제공자에게 보내는 요청에도 포함됩니다.</li>
     <li>원격 코드, 원격 폰트, 서드파티 스크립트를 사용하지 않습니다. 실행되는 모든 코드는
     확장 프로그램에 포함되어 있습니다.</li>
     <li>인증 정보는 기록되지 않으며, URL에 포함되지 않고, 연결한 제공자에 대한 인증 헤더
