@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>STYLE 11 5d Bento Mosaic — E&amp;J Labs 디자인 예시</title>
+<meta name="description" content="E&amp;J Labs 웹디자인 스타일 11번 5d Bento Mosaic 예시 페이지입니다. 실제 서비스가 아닌 디자인 템플릿입니다.">
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#0F1012">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--s:#0F1012;--i:#F5F5F7;--a:#C9F24A;--ac:#111111;--m06:rgba(245,245,247,0.06);--m08:rgba(245,245,247,0.08);--m10:rgba(245,245,247,0.10);--m18:rgba(245,245,247,0.18);--m20:rgba(245,245,247,0.20);--m25:rgba(245,245,247,0.25);--m30:rgba(245,245,247,0.30);--m40:rgba(245,245,247,0.40);--m50:rgba(245,245,247,0.50);--m60:rgba(245,245,247,0.60);--m70:rgba(245,245,247,0.70);--sm20:rgba(15,16,18,0.20);--sm30:rgba(15,16,18,0.30);--sm50:rgba(15,16,18,0.50);--sm70:rgba(15,16,18,0.70);}
+:root{--disp:'Pretendard Variable','Apple SD Gothic Neo','Noto Sans KR',system-ui,-apple-system,sans-serif;--body:'Pretendard Variable','Apple SD Gothic Neo','Noto Sans KR',system-ui,-apple-system,sans-serif;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scrollbar-width:thin}
+html::-webkit-scrollbar{width:10px;height:10px}
+html::-webkit-scrollbar-thumb{background:var(--m30);border-radius:10px}
+html::-webkit-scrollbar-track{background:transparent}
+body{margin:0;background:var(--s);color:var(--i);font-family:var(--body);
+ font-size:16px;line-height:1.75;letter-spacing:-.01em;word-break:keep-all;overflow-wrap:break-word;
+ overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-family:var(--disp);line-height:1.14;letter-spacing:-.035em;font-weight:900}
+p{margin:0}
+.w{width:100%;max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,44px)}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+.sec{padding:clamp(56px,9vw,108px) 0}
+.h1{font-size:clamp(34px,7.4vw,74px);line-height:1.08}
+.h2{font-size:clamp(26px,4.6vw,44px);line-height:1.16}
+.h3{font-size:clamp(19px,2.2vw,23px);line-height:1.35}
+.kick{font-family:var(--mono);font-size:clamp(10.5px,1.3vw,12px);letter-spacing:.22em;color:var(--a)}
+.lead{max-width:32em;font-size:clamp(15px,1.7vw,17.5px);line-height:1.9;color:var(--m70)}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 26px;
+ font-family:var(--body);font-size:15px;font-weight:700;letter-spacing:-.01em;cursor:pointer;
+ background:var(--a);color:var(--ac);border:1.5px solid var(--a);transition:opacity .18s,transform .1s}
+.btn:hover{opacity:.86}.btn:active{transform:translateY(1px)}
+.btn.o{background:transparent;color:var(--i);border-color:var(--m30)}
+.btn.o:hover{opacity:1;border-color:var(--i)}
+@media (max-width:400px){.btn{flex:1 1 100%}}
+
+/* 상단 바 + 템플릿 고지 */
+.tbar{position:sticky;top:0;z-index:999;display:flex;align-items:center;gap:12px;
+ padding:9px max(14px,env(safe-area-inset-left)) 9px max(14px,env(safe-area-inset-right));
+ background:#14130F;color:#F4F1EA;font-family:var(--mono);font-size:11px;letter-spacing:.1em}
+.tbar a{display:inline-flex;align-items:center;min-height:38px;padding:0 12px;white-space:nowrap}
+.tbar .back{margin-right:auto;font-weight:700}
+.tbar .who{opacity:.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tbar .go{background:var(--a);color:var(--ac);font-weight:700;letter-spacing:.06em}
+@media (max-width:700px){.tbar .who{display:none}}
+.notice{display:flex;align-items:flex-start;gap:9px;padding:10px max(14px,env(safe-area-inset-left));
+ background:#FFF4CE;color:#5C4708;border-bottom:1px solid #E8D48A;
+ font-family:var(--body);font-size:12.5px;line-height:1.6;letter-spacing:-.01em}
+.notice b{flex:none;font-weight:700}
+html.embed .tbar,html.embed .notice{display:none}
+
+/* 헤더 */
+.nav{display:flex;align-items:center;gap:clamp(14px,2.4vw,28px);
+ padding:clamp(16px,2.4vw,22px) 0;font-size:14px;font-weight:500}
+.nav .logo{display:flex;align-items:center;gap:9px;font-family:var(--disp);
+ font-weight:900;font-size:17px;letter-spacing:-.03em;margin-right:auto}
+.nav .logo i{display:grid;place-items:center;width:29px;height:29px;background:var(--a);color:var(--ac);
+ font-family:var(--mono);font-size:10.5px;font-style:normal;font-weight:700;letter-spacing:0}
+.nav .lk{display:none;color:var(--m70)}
+.nav .go{display:inline-flex;align-items:center;min-height:42px;padding:0 17px;
+ background:var(--i);color:var(--s);font-size:13.5px;font-weight:700}
+@media (min-width:760px){.nav .lk{display:inline}}
+
+/* 수치 */
+.figs{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(10px,3vw,30px)}
+.fig b{display:block;font-family:var(--disp);font-size:clamp(30px,6.6vw,62px);
+ font-weight:900;line-height:1;letter-spacing:-.045em}
+.fig span{display:block;margin-top:9px;font-size:12.5px;color:var(--m60);line-height:1.5}
+
+/* 차이점 */
+.fts{display:grid;grid-template-columns:1fr;gap:clamp(18px,2.6vw,30px)}
+.ft .n{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--a);font-weight:700}
+.ft h3{margin:11px 0 9px}
+.ft p{font-size:14.5px;line-height:1.85;color:var(--m70)}
+@media (min-width:760px){.fts{grid-template-columns:repeat(3,1fr)}}
+
+/* 작업물 */
+.wks{display:grid;grid-template-columns:1fr;gap:clamp(16px,2.4vw,26px)}
+.wk img{width:100%;height:clamp(150px,20vw,190px);object-fit:cover;object-position:top;background:var(--m10)}
+.wk .t{display:flex;align-items:baseline;gap:9px;margin-top:14px}
+.wk .t .n{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--a);font-weight:700}
+.wk h3{font-size:clamp(16px,1.8vw,18px);line-height:1.4;letter-spacing:-.025em}
+.wk p{margin-top:6px;font-size:12.5px;color:var(--m60)}
+@media (min-width:720px){.wks{grid-template-columns:repeat(3,1fr)}}
+
+/* 문의 */
+.end{background:var(--i);color:var(--s)}
+.end .h2{color:var(--s)}
+.end .lead{color:var(--sm70)}
+.end .btn.o{color:var(--s);border-color:var(--sm30)}
+.end .btn.o:hover{border-color:var(--s)}
+.end .info{display:grid;grid-template-columns:1fr;gap:11px;margin-top:clamp(30px,4vw,46px);
+ padding-top:24px;border-top:1px solid var(--sm20);font-size:13.5px}
+.end .info div{display:flex;gap:12px}
+.end .info b{flex:0 0 62px;font-family:var(--mono);font-size:10px;letter-spacing:.14em;
+ color:var(--sm50);font-weight:500;padding-top:4px}
+@media (min-width:700px){.end .info{grid-template-columns:repeat(2,1fr);gap:12px 36px}}
+
+/* 푸터 */
+.foot{background:var(--i);color:var(--s);padding:0 0 calc(28px + env(safe-area-inset-bottom))}
+.foot .in{display:flex;flex-wrap:wrap;gap:9px 20px;align-items:center;padding-top:22px;
+ border-top:1px solid var(--sm20);font-size:12px;color:var(--sm50)}
+.foot .sp{margin-left:auto}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+
+.hero{padding:clamp(40px,6vw,80px) 0}
+.bt{display:grid;grid-template-columns:1fr;gap:12px}
+.bt>div{padding:clamp(24px,3.4vw,36px);background:var(--m06);border-radius:18px}
+.bt .main{background:var(--i);color:var(--s);grid-column:1/-1}
+.bt .main .kick{color:var(--a)}
+.bt .main .h1{font-size:clamp(32px,6.2vw,60px);margin-top:16px}
+.bt .main .lead{color:var(--sm70);margin-top:20px}
+.bt .main .btns{margin-top:28px}
+.bt .main .btn.o{color:var(--s);border-color:var(--sm30)}
+.bt .acc{background:var(--a);color:var(--ac)}
+.bt b{display:block;font-family:var(--disp);font-size:clamp(28px,4vw,42px);font-weight:900;line-height:1;letter-spacing:-.04em}
+.bt span{display:block;margin-top:9px;font-size:12.5px;color:var(--m60)}
+.bt .acc span{color:var(--ac);opacity:.8}
+@media (min-width:760px){.bt{grid-template-columns:repeat(3,1fr)}}
+
+</style>
+</head>
+<body>
+<script>if(window.self!==window.top)document.documentElement.className='embed';</script>
+
+<nav class="tbar">
+  <a class="back" href="../main.html">&larr; 템플릿 목록</a>
+  <span class="who">STYLE 11 · 5d Bento Mosaic</span>
+  <a class="go" href="../quote.html?style=11">이 스타일로 견적 요청</a>
+</nav>
+<p class="notice"><b>디자인 예시(템플릿)입니다.</b>
+ 실제 운영 중인 서비스가 아니며, 아래 메뉴·버튼·링크는 동작하지 않습니다.
+ 실제 제작 시 내용과 기능은 의뢰하신 내용에 맞춰 새로 만듭니다.</p>
+
+<header class="w nav">
+  <a class="logo" href="#"><i>EJ</i> E&amp;J Labs</a>
+  <span class="lk">서비스</span><span class="lk">작업물</span><span class="lk">비용</span>
+  <a class="go" href="../quote.html?style=11">견적 요청</a>
+</header>
+
+
+<section class="hero"><div class="w"><div class="bt">
+ <div class="main"><p class="kick">WEB DESIGN · BRAND EXPERIENCE · MULTILINGUAL</p><h1 class="h1">브랜드의 첫인상을<br>설계합니다</h1>
+  <p class="lead">브랜드의 목적과 사용자의 흐름을 함께 살펴봅니다. 보기 좋은 화면을 넘어, 정보를 쉽고 자연스럽게 이해할 수 있는 웹사이트를 설계합니다.</p><div class="btns"><a class="btn" href="#end">견적 요청하기</a><a class="btn o" href="#work">스타일 보기</a></div></div>
+ <div><b>28</b><span>디자인 스타일</span></div>
+ <div class="acc"><b>20만 원~</b><span>기본 비용</span></div>
+ <div><b>KR / EN</b><span>한·영 구성</span></div>
+</div></div></section>
+
+<section class="sec" id="why"><div class="w">
+ <p class="kick">차이</p>
+ <h2 class="h2" style="margin-top:14px">브랜드 경험을<br>어떻게 설계할까요</h2>
+ <div class="fts" style="margin-top:clamp(30px,4.4vw,48px)"><div class="ft"><div class="n">01</div><h3 class="h3">브랜드를 이해합니다</h3><p>프로젝트의 목적과 핵심 메시지를 바탕으로 디자인 방향을 제안합니다.</p></div><div class="ft"><div class="n">02</div><h3 class="h3">정보의 흐름을 설계합니다</h3><p>정보의 우선순위와 가독성, 사용자의 동선을 고려해 화면을 구성합니다.</p></div><div class="ft"><div class="n">03</div><h3 class="h3">언어와 시장을 고려합니다</h3><p>한·영 다국어 웹사이트와 해외 타깃 페이지의 콘텐츠 구성이 가능합니다.</p></div></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="w"><div class="figs"><div class="fig"><b>28</b><span>디자인 스타일</span></div><div class="fig"><b>KR / EN</b><span>한·영 구성</span></div><div class="fig"><b>20만 원~</b><span>기본 비용</span></div></div></div></section>
+
+<section class="sec" id="work" style="padding-top:0"><div class="w">
+ <p class="kick">서비스</p>
+ <h2 class="h2" style="margin-top:14px">브랜드에 맞춘 웹디자인</h2>
+ <div class="wks" style="margin-top:clamp(26px,3.6vw,40px)"><a class="wk" href="#work"><img src="../assets/d6812e03.webp" alt="KRSWING 실시간 대시보드" loading="lazy" width="640" height="400"><div class="t"><span class="n">01</span><h3>KRSWING 실시간 대시보드</h3></div><p>트레이딩 · 신규 디자인 · 6주</p></a><a class="wk" href="#work"><img src="../assets/7b54e133.webp" alt="정보보안 연구자 포트폴리오" loading="lazy" width="640" height="400"><div class="t"><span class="n">02</span><h3>정보보안 연구자 포트폴리오</h3></div><p>포트폴리오 · 원페이지 · 10일</p></a><a class="wk" href="#work"><img src="../assets/5135d0af.webp" alt="반려동물 이동 서비스 랜딩" loading="lazy" width="640" height="400"><div class="t"><span class="n">03</span><h3>반려동물 이동 서비스 랜딩</h3></div><p>반려동물 · 랜딩 · 3주</p></a></div>
+</div></section>
+
+<section class="sec end" id="end"><div class="w">
+ <h2 class="h2">지금 어떤 상태이신지만<br>알려주세요</h2>
+ <p class="lead" style="margin-top:22px">프로젝트의 목적과 현재 상황을 알려주시면, 브랜드에 맞는 디자인 방향을 제안해 드립니다.</p>
+ <div class="btns" style="margin-top:32px">
+  <a class="btn" href="../quote.html?style=11">견적 요청하기</a>
+  <a class="btn o" href="../main.html">다른 스타일 살펴보기</a>
+ </div>
+ <div class="info">
+  <div><b>담당</b><span>윤준혁 / 김은율</span></div>
+  <div><b>연락처</b><span>010-5925-2184</span></div>
+  <div><b>이메일</b><span>contact@eyk.kr</span></div>
+  <div><b>경로</b><span>숨고 · 웹 · 카카오톡 · 크몽</span></div>
+ </div>
+</div></section>
+
+<footer class="foot"><div class="w in">
+ <span>E&amp;J Labs · 브랜드를 설계하는 웹디자인 스튜디오</span>
+ <span class="sp mono" style="font-size:10px">STYLE 11 — 5d Bento Mosaic</span>
+</div></footer>
+
+
+<script>
+(function(){
+  /* 예시용 요소는 실제로 동작하지 않음을 알림 */
+  var msg = '이 페이지는 디자인 예시(템플릿)입니다.\n실제 메뉴는 동작하지 않습니다.';
+  document.addEventListener('click', function(e){
+    var el = e.target.closest('.lk, .wk');
+    if(el){ e.preventDefault(); alert(msg); }
+  });
+})();
+</script>
+</body>
+</html>

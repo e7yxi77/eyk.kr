@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>웹디자인 서비스 견적 요청</title>
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)">
+<meta name="theme-color" content="#111111" media="(prefers-color-scheme:dark)">
+<link rel="icon" href="data:,">
+
+<style>
+:root{
+  --bg:#ffffff; --text:#111111; --text-2:#444444; --text-3:#767676;
+  --line:#dddddd; --line-2:#bbbbbb; --th:#f4f4f4; --box:#fafafa;
+  --err:#c0392b;
+}
+@media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+  --bg:#111111; --text:#ededed; --text-2:#bcbcbc; --text-3:#909090;
+  --line:#333333; --line-2:#4a4a4a; --th:#1c1c1c; --box:#191919;
+  --err:#ff7b6b;
+}}
+:root[data-theme="dark"]{
+  --bg:#111111; --text:#ededed; --text-2:#bcbcbc; --text-3:#909090;
+  --line:#333333; --line-2:#4a4a4a; --th:#1c1c1c; --box:#191919;
+  --err:#ff7b6b;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; text-size-adjust:100%; scrollbar-gutter:stable}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Apple SD Gothic Neo","Pretendard","Noto Sans KR","Malgun Gothic",
+              system-ui,-apple-system,sans-serif;
+  font-size:15px; line-height:1.75; word-break:keep-all; overflow-wrap:break-word;
+}
+
+.wrap{
+  max-width:920px; margin:0 auto;
+  padding:36px max(20px, env(safe-area-inset-right)) 0 max(20px, env(safe-area-inset-left));
+}
+
+h1{margin:0; font-size:21px; font-weight:700; line-height:1.45; letter-spacing:-.01em}
+.intro{margin:14px 0 0; color:var(--text-2); font-size:14.5px; line-height:1.8}
+.rule{margin:26px 0 0; border:0; border-top:2px solid var(--text); height:0}
+
+h2{
+  margin:0; font-size:17px; font-weight:700; line-height:1.5; letter-spacing:-.01em;
+  padding-bottom:9px; border-bottom:1px solid var(--line-2);
+}
+h3{margin:24px 0 0; font-size:15px; font-weight:700; line-height:1.6}
+p{margin:12px 0 0; color:var(--text-2)}
+b{color:var(--text); font-weight:700}
+a{color:var(--text)}
+
+/* ── 진행 단계 ───────────────────────────── */
+.steps{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:6px;
+  margin:22px 0 0; padding:0; list-style:none;
+}
+.steps li{
+  position:relative; padding-top:9px; border-top:2px solid var(--line);
+  color:var(--text-3); font-size:12px; line-height:1.5;
+  transition:color .4s ease;
+}
+.steps li::after{
+  content:""; position:absolute; left:0; top:-2px; height:2px; width:100%;
+  background:var(--text); transform:scaleX(0); transform-origin:left center;
+  transition:transform .5s cubic-bezier(.22,.7,.25,1), background-color .4s ease;
+}
+.steps li .n{display:block; font-weight:700; font-size:11px; letter-spacing:.04em}
+.steps li.on{color:var(--text)}
+.steps li.on::after{transform:scaleX(1)}
+.steps li.done{color:var(--text-2)}
+.steps li.done::after{transform:scaleX(1); background:var(--line-2)}
+
+/* ── 스텝 ────────────────────────────────── */
+.step{display:none; margin:34px 0 0}
+.step.on{display:block}
+
+/* 화면 전환 — 자식 요소가 순차적으로 등장 */
+@keyframes stepFwd{ from{opacity:0; transform:translate3d(22px,6px,0)} to{opacity:1; transform:none} }
+@keyframes stepBack{ from{opacity:0; transform:translate3d(-22px,6px,0)} to{opacity:1; transform:none} }
+.step.on > *{animation:stepFwd .5s cubic-bezier(.22,.72,.25,1) both}
+.step.on.back > *{animation-name:stepBack}
+.step.on > *:nth-child(1){animation-delay:0s}
+.step.on > *:nth-child(2){animation-delay:.045s}
+.step.on > *:nth-child(3){animation-delay:.09s}
+.step.on > *:nth-child(4){animation-delay:.135s}
+.step.on > *:nth-child(5){animation-delay:.18s}
+.step.on > *:nth-child(6){animation-delay:.225s}
+.step.on > *:nth-child(7){animation-delay:.27s}
+.step.on > *:nth-child(8){animation-delay:.315s}
+.step.on > *:nth-child(n+9){animation-delay:.36s}
+
+/* 요약 항목 순차 등장 */
+@keyframes rowIn{ from{opacity:0; transform:translate3d(0,8px,0)} to{opacity:1; transform:none} }
+.sum dl{animation:rowIn .45s cubic-bezier(.22,.72,.25,1) both}
+.sum dl:nth-child(1){animation-delay:.14s}
+.sum dl:nth-child(2){animation-delay:.19s}
+.sum dl:nth-child(3){animation-delay:.24s}
+.sum dl:nth-child(4){animation-delay:.29s}
+.sum dl:nth-child(5){animation-delay:.34s}
+.sum dl:nth-child(6){animation-delay:.39s}
+.sum dl:nth-child(7){animation-delay:.44s}
+.sum dl:nth-child(8){animation-delay:.49s}
+.sum dl:nth-child(9){animation-delay:.54s}
+.sum dl:nth-child(10){animation-delay:.59s}
+.sum dl:nth-child(n+11){animation-delay:.64s}
+.lead{margin:14px 0 0; color:var(--text-2); font-size:14.5px}
+
+/* ── 입력 ────────────────────────────────── */
+.field{margin:28px 0 0}
+.field > .lab{display:block; font-size:14px; font-weight:700; color:var(--text)}
+.req{color:var(--err); font-weight:700; margin-left:3px}
+.opt{color:var(--text-3); font-weight:400; font-size:12.5px; margin-left:6px}
+.hint{margin:5px 0 0; font-size:12.5px; color:var(--text-3); line-height:1.65}
+.msg{display:none; margin:6px 0 0; font-size:12.5px; color:var(--err)}
+.field.err .msg{display:block}
+.field.err input,.field.err textarea{border-color:var(--err)}
+.field.err .stepper{border-color:var(--err)}
+.field.err .agree{border-color:var(--err)}
+.field.err .pad{border-color:var(--err)}
+
+input[type=text],input[type=tel],textarea{
+  display:block; width:100%; margin-top:9px; padding:12px 13px;
+  font:inherit; font-size:16px; line-height:1.6; color:var(--text);
+  background:var(--bg); border:1px solid var(--line-2); border-radius:0;
+  outline:none; -webkit-appearance:none; appearance:none;
+}
+input::placeholder,textarea::placeholder{color:var(--text-3)}
+input[type=text],input[type=tel],textarea{transition:border-color .2s ease}
+input:focus,textarea:focus{border-color:var(--text)}
+textarea{min-height:132px; resize:vertical}
+.row2{display:grid; grid-template-columns:1fr; gap:0; margin-top:28px}
+.row2 > .field{margin-top:0}
+.row2 > .field + .field{margin-top:28px}
+@media (min-width:640px){
+  .row2{grid-template-columns:1fr 1fr;
+   column-gap:clamp(18px,2.8vw,30px); row-gap:28px; align-items:start}
+  .row2 > .field + .field{margin-top:0}
+}
+.row2 .field{margin-top:0}
+.count{margin:5px 0 0; font-size:12px; color:var(--text-3); text-align:right}
+
+/* ── 칩 ──────────────────────────────────── */
+.mlab{margin:16px 0 0; font-size:12px; font-weight:700; letter-spacing:.04em; color:var(--text-3)}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:8px}
+.chip{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:42px; min-width:44px;
+  padding:9px 14px; font:inherit; font-size:13.5px; line-height:1.4; cursor:pointer;
+  background:transparent; color:var(--text-3);
+  border:1px solid var(--line-2); border-radius:0;
+  transition:color .14s, border-color .14s;
+}
+.chip:hover{color:var(--text-2); border-color:var(--text-3)}
+.chip[aria-pressed=true]{
+  color:var(--text); font-weight:700; border-color:var(--text);
+  box-shadow:inset 0 0 0 1px var(--text);
+}
+
+/* ── 수량 스테퍼 ─────────────────────────── */
+.ctrlrow{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:10px}
+.ctrlrow .chips{margin-top:0}
+.stepper{display:inline-flex; align-items:stretch; height:46px; border:1px solid var(--line-2)}
+.stepper button{
+  width:44px; flex:none; font:inherit; font-size:18px; line-height:1; cursor:pointer;
+  background:transparent; color:var(--text-3); border:0; transition:color .14s;
+}
+.stepper button:hover{color:var(--text)}
+.stepper .val{
+  display:flex; align-items:center; gap:2px; padding:0 12px 0 4px;
+  border-left:1px solid var(--line); border-right:1px solid var(--line);
+}
+.stepper input{
+  margin:0; padding:0; width:46px; text-align:center; border:0; background:transparent;
+  color:var(--text); font-size:16px; font-weight:700;
+}
+.stepper input:focus{border:0}
+.stepper .unit{font-size:13px; color:var(--text-3)}
+
+/* ── 약관 동의 ───────────────────────────── */
+/* 채움과 이중 테두리를 걷어내고 얇은 선으로 통일 */
+.terms{
+  margin-top:12px; padding:16px 0; max-height:200px; overflow:auto;
+  background:none; border:0; border-top:1px solid var(--line-2); border-bottom:1px solid var(--line);
+  font-size:13px; line-height:1.8; color:var(--text-2); -webkit-overflow-scrolling:touch;
+}
+.terms table{width:100%; border-collapse:collapse; font-size:12.5px; margin-top:10px}
+.terms th,.terms td{border:0; border-bottom:1px solid var(--line); padding:7px 10px 7px 0;
+  text-align:left; color:var(--text-2)}
+.terms th{background:none; color:var(--text); font-weight:700; white-space:nowrap;
+  border-bottom:1px solid var(--line-2)}
+.terms td.p{font-weight:700; color:var(--text); white-space:nowrap; text-align:right; padding-right:0}
+.terms tr:last-child td{border-bottom:0}
+.terms p:first-child{margin-top:0}
+
+.warn{
+  margin:16px 0 0; padding:0 0 0 14px; background:none; border:0;
+  border-left:2px solid var(--text); font-size:13px; line-height:1.85; color:var(--text-2);
+}
+.warn b{display:block; margin-bottom:5px; font-size:13px; color:var(--text)}
+.warn a{font-weight:700; text-underline-offset:3px}
+
+/* 동의 항목 — 박스 4개 → 구분선으로 나뉜 목록 하나 */
+.agrees{margin-top:18px; border-top:1px solid var(--line-2)}
+.agree{
+  display:flex; gap:12px; align-items:flex-start; margin:0; padding:15px 2px;
+  background:none; border:0; border-bottom:1px solid var(--line); cursor:pointer;
+  transition:color .18s ease;
+}
+.agree:last-child{border-bottom:1px solid var(--line-2)}
+.agree input{margin:1px 0 0; width:19px; height:19px; flex:none; accent-color:var(--text)}
+.agree .at{font-size:14px; font-weight:700; color:var(--text); line-height:1.6}
+.agree .ad{display:block; margin-top:4px; font-size:12.5px; font-weight:400;
+  color:var(--text-3); line-height:1.7}
+.agree.all{background:none; padding-bottom:16px}
+.agree:hover .at{opacity:.72}
+.agree.checked .ad{color:var(--text-2)}
+.field.err .agrees{border-color:var(--err)}
+
+/* 선택 옵션 (나중에 전달) */
+.later{display:flex;gap:12px;align-items:flex-start;margin-top:14px;padding:14px 2px 0;
+ background:none;border:0;border-top:1px solid var(--line);cursor:pointer;
+ transition:color .18s ease}
+.later:hover .lt{opacity:.72}
+.later.checked .ld{color:var(--text-2)}
+.later input{margin:2px 0 0;width:19px;height:19px;flex:none;accent-color:var(--text)}
+.later .lt{font-size:14px;font-weight:700;color:var(--text);line-height:1.6}
+.later .ld{display:block;margin-top:4px;font-size:12.5px;font-weight:400;
+ color:var(--text-3);line-height:1.7}
+.field.off textarea{opacity:.45;pointer-events:none}
+.field.off .count{opacity:.45}
+
+/* ── 서명 ────────────────────────────────── */
+.pad{position:relative; margin-top:11px; background:#fff; border:1px solid var(--line-2); transition:border-color .22s ease}
+.pad:hover{border-color:var(--text-3)}
+.pad .ph{transition:opacity .3s ease}
+.pad.inked .ph{opacity:0}
+.pad canvas{display:block; width:100%; height:190px; touch-action:none; cursor:crosshair}
+.pad .base{position:absolute; left:22px; right:22px; bottom:42px; border-top:1px dashed #cccccc; pointer-events:none}
+.pad .ph{position:absolute; left:0; right:0; bottom:14px; text-align:center; font-size:12.5px; color:#a0a0a0; pointer-events:none}
+.padbar{display:flex; justify-content:space-between; align-items:center; gap:10px; margin-top:8px}
+.padbar .tip{font-size:12.5px; color:var(--text-3)}
+.mini{min-height:38px; padding:9px 13px; font:inherit; font-size:12.5px; cursor:pointer; background:var(--bg); color:var(--text-2); border:1px solid var(--line-2); transition:color .18s ease, border-color .18s ease}
+.mini:hover{color:var(--text); border-color:var(--text-3)}
+.mini:active{transform:translateY(1px)}
+
+/* ── 요약 ────────────────────────────────── */
+.sum{margin:16px 0 0; border-top:1px solid var(--line-2)}
+.sum dl{display:grid; grid-template-columns:112px 1fr; margin:0; border-bottom:1px solid var(--line)}
+@media (min-width:820px){
+  .sum{display:grid; grid-template-columns:1fr 1fr; column-gap:clamp(20px,3vw,36px)}
+  .sum dl:last-child{grid-column:1/-1}
+}
+.sum dt{padding:11px 0; font-size:13.5px; font-weight:700; color:var(--text)}
+.sum dd{margin:0; padding:11px 0 11px 12px; font-size:14px; color:var(--text-2); white-space:pre-wrap}
+.sum .sig{padding:8px 0 8px 12px}
+.sum .sig img{display:block; max-width:190px; height:auto; background:#fff; padding:4px; border:1px solid var(--line)}
+.note{margin:16px 0 0; padding:13px 14px; background:var(--box); border:1px solid var(--line); font-size:12.5px; line-height:1.75; color:var(--text-2)}
+.note b{display:block; margin-bottom:3px}
+
+/* ── 하단 버튼 ───────────────────────────── */
+.navbar{
+  position:sticky; bottom:0; z-index:5;
+  display:flex; gap:9px; margin-top:38px;
+  padding:14px 0 calc(16px + env(safe-area-inset-bottom));
+  background:var(--bg); border-top:1px solid var(--line);
+}
+.btn{
+  flex:1; padding:15px 18px; font:inherit; font-size:15.5px; font-weight:700; cursor:pointer;
+  background:var(--text); color:var(--bg); border:1px solid var(--text); border-radius:0;
+  transition:opacity .18s ease, transform .12s ease, color .18s ease, border-color .18s ease;
+}
+.btn:hover{opacity:.86}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{flex:none; min-width:104px; background:transparent; color:var(--text-2); border-color:var(--line-2)}
+.btn.ghost:hover{opacity:1; color:var(--text); border-color:var(--text-3)}
+.btn[hidden]{display:none}
+.sub{display:flex; gap:9px; margin-top:11px}
+.sub .btn{font-size:14px; padding:13px 14px; background:transparent; color:var(--text); border-color:var(--line-2)}
+
+.foot{
+  max-width:920px; margin:0 auto;
+  padding:20px max(20px,env(safe-area-inset-right)) 46px max(20px,env(safe-area-inset-left));
+  color:var(--text-3); font-size:12.5px; border-top:1px solid var(--line);
+}
+
+@media (min-width:600px){
+  body{font-size:16px}
+  .wrap{padding:56px 32px 0}
+  h1{font-size:26px}
+  h2{font-size:19px}
+  h3{font-size:16px}
+  .intro{font-size:15.5px}
+  .steps li{font-size:13px}
+  .foot{padding:22px 32px 60px}
+}
+@media (max-width:439px){ .row2{grid-template-columns:1fr; gap:22px} .row2 .field + .field{margin-top:0} }
+@media (max-width:400px){
+  .steps{gap:4px}
+  .steps li{font-size:11px; line-height:1.45}
+  .steps li .n{font-size:10px; letter-spacing:.02em}
+  .sum dl{grid-template-columns:86px 1fr}
+  .sum dd{padding-left:10px}
+  .agree{padding:12px}
+  #toast{left:16px; right:16px; transform:translateY(10px); text-align:center}
+  #toast.on{transform:translateY(0)}
+}
+
+/* ══ 인쇄용 견적서 (A4) ═══════════════════ */
+#doc{display:none}
+@media print{
+  @page{size:A4; margin:16mm 15mm 14mm}
+  :root{color-scheme:light}
+  *,*::before,*::after{
+    -webkit-print-color-adjust:exact !important;   /* 표 헤더 음영이 인쇄에서 사라지는 문제 */
+    print-color-adjust:exact !important;
+  }
+  html,body{background:#fff !important; color:#000 !important; font-size:10.5pt}
+  .wrap,.navbar,.foot,#toast{display:none !important}
+  #doc{display:block !important; color:#000; font-size:10.5pt; line-height:1.7}
+}
+#doc *{color:#000}
+#doc .dhead{border-bottom:2.5pt solid #000; padding-bottom:8pt}
+#doc .dtitle{margin:0; font-size:20pt; font-weight:700; letter-spacing:.24em; text-align:center; line-height:1.3}
+#doc .dsub{margin:6pt 0 0; font-size:9pt; letter-spacing:.02em; text-align:center; color:#333}
+#doc .dmeta{display:flex; justify-content:space-between; margin-top:9pt; font-size:8.6pt; color:#333}
+#doc h4{margin:15pt 0 5pt; font-size:11pt; font-weight:700; padding-bottom:3pt; border-bottom:1pt solid #000; page-break-after:avoid; break-after:avoid}
+#doc table{width:100%; border-collapse:collapse; font-size:9.6pt; page-break-inside:avoid; break-inside:avoid}
+#doc th,#doc td{border:.75pt solid #6d6d6d; padding:6pt 7pt; text-align:left; vertical-align:top; line-height:1.6}
+#doc th{width:24%; background:#f0f0f0; font-weight:700; white-space:nowrap}
+#doc td.wrap-pre{white-space:pre-wrap}
+#doc .dstate{margin:10pt 0 0; padding:9pt 10pt; border:.75pt solid #6d6d6d; background:#fafafa; font-size:9.4pt; line-height:1.75}
+#doc .dsign{margin-top:14pt; page-break-inside:avoid}
+#doc .dsign .dline{display:flex; justify-content:flex-end; align-items:flex-end; gap:14pt; margin-top:10pt}
+#doc .dsign .dname{font-size:10.5pt}
+#doc .dsign .dname b{font-size:12pt; letter-spacing:.1em}
+#doc .dsign .dimg{width:130pt; text-align:center; border-bottom:.75pt solid #000; padding-bottom:2pt}
+#doc .dsign .dimg img{display:block; width:100%; height:auto; max-height:60pt; object-fit:contain}
+#doc .ddate{margin-top:12pt; text-align:center; font-size:10pt; letter-spacing:.04em}
+#doc .dfoot{margin-top:16pt; padding-top:6pt; border-top:.75pt solid #000; font-size:8pt; color:#333; display:flex; justify-content:space-between}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important; animation-delay:0s !important;
+    transition-duration:.01ms !important; scroll-behavior:auto !important;
+  }
+}
+
+#toast{
+  position:fixed; left:50%; bottom:88px; transform:translate(-50%,10px);
+  padding:11px 18px; background:#111; color:#fff; font-size:13.5px; border-radius:2px;
+  opacity:0; pointer-events:none; transition:opacity .2s, transform .2s; z-index:50;
+}
+#toast.on{opacity:1; transform:translate(-50%,0)}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <h1>웹디자인 서비스 견적 요청</h1>
+  <p class="intro">아래 절차에 따라 요청 정보를 작성해 주시면 견적 요청서가 자동으로 생성됩니다. 작성 완료 후 PDF 형식으로 저장하실 수 있습니다.</p>
+
+  <ol class="steps" id="steps">
+    <li class="on"><span class="n">STEP 01</span>기본 정보</li>
+    <li><span class="n">STEP 02</span>작업 요청</li>
+    <li><span class="n">STEP 03</span>약관 · 서명</li>
+    <li><span class="n">STEP 04</span>내용 확인 · 발급</li>
+  </ol>
+  <hr class="rule">
+
+  <!-- ── STEP 1 ───────────────────────── -->
+  <section class="step on" data-step="1">
+    <h2>기본 정보</h2>
+    <p class="lead">정확한 견적 산정과 원활한 상담을 위해 기본 정보를 입력해 주시기 바랍니다. 입력하신 정보는 견적 상담 및 요청서 발급 목적에 한하여 이용됩니다.</p>
+
+    <div class="row2">
+    <div class="field" id="f-name">
+      <span class="lab">성명<span class="req">*</span></span>
+      <input type="text" id="i-name" placeholder="홍길동" autocomplete="name" maxlength="30">
+      <p class="msg">성명을 입력해 주시기 바랍니다.</p>
+    </div>
+
+    <div class="field" id="f-phone">
+      <span class="lab">연락처<span class="req">*</span></span>
+      <input type="tel" id="i-phone" placeholder="010-1234-5678" inputmode="numeric" autocomplete="tel" maxlength="13">
+      <p class="hint">숫자만 입력하시면 하이픈(-)이 자동으로 적용됩니다.</p>
+      <p class="msg">연락처를 정확하게 입력해 주시기 바랍니다.</p>
+    </div>
+    </div>
+
+    <div class="row2">
+    <div class="field" id="f-birth">
+      <span class="lab">생년월일<span class="req">*</span></span>
+      <input type="text" id="i-birth" placeholder="1990-01-01" inputmode="numeric" maxlength="10">
+      <p class="hint">계약 당사자 확인을 위한 정보입니다. 8자리 숫자로 입력해 주시기 바랍니다. (예: 19900101)</p>
+      <p class="msg">생년월일을 올바르게 입력해 주시기 바랍니다.</p>
+    </div>
+
+    <div class="field" id="f-email">
+      <span class="lab">이메일<span class="opt">선택</span></span>
+      <input type="text" id="i-email" placeholder="example@email.com" inputmode="email" autocomplete="email" maxlength="60">
+      <p class="hint">견적 요청서 사본 및 디자인 시안 전달을 위해 이용됩니다.</p>
+      <p class="msg">이메일 주소 형식을 확인해 주시기 바랍니다.</p>
+    </div>
+    </div>
+  </section>
+
+  <!-- ── STEP 2 ───────────────────────── -->
+  <section class="step" data-step="2">
+    <h2>작업 요청 사항</h2>
+    <p class="lead">희망하시는 디자인 방향과 작업 범위를 기재해 주시기 바랍니다. 상세한 내용일수록 더욱 정확한 견적과 일정을 안내해 드릴 수 있습니다.</p>
+
+    <div class="row2">
+    <div class="field" id="f-style">
+      <span class="lab">희망 디자인 스타일 번호<span class="opt">선택</span></span>
+      <p class="hint"><a href="main.html" target="_blank" rel="noopener">디자인 스타일 28종</a>에서 확인하신 번호를 입력해 주시기 바랍니다. 여러 개를 선택하신 경우 쉼표로 구분해 주세요. (예: 3 또는 1, 4) 정하지 않으셨다면 비워두셔도 됩니다.</p>
+      <input type="text" id="i-styleno" placeholder="예) 3" maxlength="40" autocomplete="off">
+      <p class="msg">스타일 번호를 다시 확인해 주시기 바랍니다.</p>
+    </div>
+    <div class="field" id="f-pages">
+      <span class="lab">예상 페이지 수<span class="req">*</span></span>
+      <p class="hint">메인 페이지를 포함한 전체 화면 수를 입력해 주시기 바랍니다. 정확한 수량이 아니어도 무방합니다.</p>
+      <div class="ctrlrow">
+        <div class="stepper">
+          <button type="button" id="pg-minus" aria-label="개수 줄이기">&#8722;</button>
+          <span class="val">
+            <input type="text" id="i-pages" value="1" inputmode="numeric" maxlength="3" aria-label="페이지 개수">
+            <span class="unit">페이지</span>
+          </span>
+          <button type="button" id="pg-plus" aria-label="개수 늘리기">+</button>
+        </div>
+        <div class="chips" id="pgchips">
+          <button type="button" class="chip" data-pg="1" aria-pressed="false">1</button>
+          <button type="button" class="chip" data-pg="3" aria-pressed="false">3</button>
+          <button type="button" class="chip" data-pg="5" aria-pressed="false">5</button>
+          <button type="button" class="chip" data-pg="10" aria-pressed="false">10</button>
+        </div>
+      </div>
+      <p class="msg">페이지 수는 1 이상으로 입력해 주시기 바랍니다.</p>
+    </div>
+    </div>
+
+    <div class="field" id="f-detail">
+      <span class="lab">디자인 상세 요청 사항<span class="opt">선택</span></span>
+      <textarea id="i-detail" maxlength="1000" placeholder="예) 병원 홈페이지 제작을 의뢰합니다. 밝고 정돈된 분위기를 희망하며, 메인 화면에는 진료 안내와 예약 버튼이 명확히 노출되면 좋겠습니다. 참고 사이트는 ○○○입니다."></textarea>
+      <p class="count"><span id="c-detail">0</span> / 1,000자</p>
+      <label class="later" id="later-box">
+        <input type="checkbox" id="i-later">
+        <span class="lt">나중에 따로 전달하겠습니다
+          <span class="ld">지금 정리가 어려우시면 체크해 주세요. 견적 요청서에 ‘추후 별도 전달 예정’으로 기재되며, 상담 단계에서 다시 여쭙겠습니다.</span>
+        </span>
+      </label>
+    </div>
+
+
+    <div class="field" id="f-period">
+      <span class="lab">희망 진행 기간<span class="req">*</span></span>
+      <p class="hint">희망 작업 시작일과 완료일을 입력해 주시기 바랍니다.</p>
+      <p class="mlab">빠른 선택</p>
+      <div class="chips" id="dchips">
+        <button type="button" class="chip" data-days="7" aria-pressed="false">1주 이내</button>
+        <button type="button" class="chip" data-days="14" aria-pressed="false">2주 이내</button>
+        <button type="button" class="chip" data-days="21" aria-pressed="false">3주 이내</button>
+        <button type="button" class="chip" data-days="30" aria-pressed="false">1개월 이내</button>
+      </div>
+      <div class="row2" style="margin-top:16px">
+        <div class="field">
+          <span class="lab" style="font-size:13px">시작 희망일</span>
+          <input type="text" id="i-start" placeholder="2026-09-01" inputmode="numeric" maxlength="10">
+        </div>
+        <div class="field">
+          <span class="lab" style="font-size:13px">완료 희망일</span>
+          <input type="text" id="i-end" placeholder="2026-09-15" inputmode="numeric" maxlength="10">
+        </div>
+      </div>
+      <p class="msg">날짜를 올바르게 입력해 주시기 바랍니다. (완료일은 시작일 이후여야 합니다)</p>
+    </div>
+  </section>
+
+  <!-- ── STEP 3 ───────────────────────── -->
+  <section class="step" data-step="3">
+    <h2>약관 동의 및 전자서명</h2>
+    <p class="lead">아래 내용을 충분히 확인하신 후 동의해 주시기 바랍니다. 전자서명은 견적 요청서 하단에 기재되며, 상호 확인을 위한 기록으로 보관됩니다.</p>
+
+    <h3>이용약관 · 환불 규정 요약</h3>
+    <div class="terms">
+      <p><b>작업 절차</b> — 상담 및 견적 확정 → 결제 및 자료 전달 → 시안 제작 → 피드백 및 수정 → 최종 납품 및 구매 확정의 순서로 진행됩니다.</p>
+      <p><b>수정 횟수</b> — 기본 수정은 <b>2회</b> 제공되며, 세부 계약 조건에 따라 달라질 수 있습니다. 전체 레이아웃 재구성, 디자인 콘셉트 변경 또는 협의되지 않은 페이지 추가에는 별도 비용이 발생할 수 있습니다.</p>
+      <p><b>대금 지급</b> — 계약 금액의 30%를 착수금으로 선납하며, 잔금 70%는 최종 검수 및 제작 완료 시 지급합니다.</p>
+      <p><b>환불 규정</b></p>
+      <table>
+        <tr><th>진행 단계</th><th>환불 비율</th></tr>
+        <tr><td>결제 후 작업 착수 전</td><td class="p">100% 환불</td></tr>
+        <tr><td>작업 착수 및 기획 단계</td><td class="p">70% 환불</td></tr>
+        <tr><td>1차 시안 전달 후</td><td class="p">50% 환불</td></tr>
+        <tr><td>2차 수정 진행 후</td><td class="p">20% 환불</td></tr>
+        <tr><td>최종 시안 완료 및 파일 전달 후</td><td class="p">환불 불가</td></tr>
+      </table>
+      <p>단순 변심으로 계약을 중단하는 경우, 이미 진행된 작업에 해당하는 비용을 제외한 금액이 환불됩니다. 자료 또는 피드백 제공이 지연되어 14일 이상 연락이 두절될 경우 계약은 자동 종료되며 환불이 제한됩니다. 고객 귀책 사유로 계약이 해지되는 경우 예약금(선납금)은 반환되지 않습니다.</p>
+      <p><b>오류 수정 보증</b> — 계약 종료일로부터 24시간 이내 발생한 오류 또는 버그에 한하여 무상 수정을 지원합니다.</p>
+      <p style="margin-top:10px"><a href="index.html" target="_blank" rel="noopener">▸ 이용약관 전문 확인하기 (새 창)</a></p>
+    </div>
+
+    <div class="warn">
+      <b>※ 이용약관 전문 확인 안내</b>
+      본 안내는 주요 내용을 요약한 것으로, 계약의 효력과 세부 기준은 <a href="index.html" target="_blank" rel="noopener">이용약관 전문</a>에 따릅니다.
+      동의하시기 전에 이용약관 전문을 충분히 검토해 주시기 바랍니다. 전문을 확인하지 않아 발생할 수 있는 사항에 대한 책임은 이용자에게 있을 수 있습니다.
+    </div>
+
+    <div class="field" id="f-agree" style="margin-top:16px">
+      <div class="agrees">
+      <label class="agree all" id="agree-all-box">
+        <input type="checkbox" id="a-all">
+        <span class="at">전체 동의<span class="ad">아래 필수 항목 전체에 동의합니다.</span></span>
+      </label>
+      <label class="agree" data-agree>
+        <input type="checkbox" id="a-terms">
+        <span class="at">[필수] 웹디자인 서비스 이용약관 동의<span class="ad">작업 절차, 작업 범위, 수정 기준, 저작권 및 계약 종료 조건을 포함합니다. 이용약관 전문 미확인으로 발생하는 불이익은 본인에게 있음을 확인합니다.</span></span>
+      </label>
+      <label class="agree" data-agree>
+        <input type="checkbox" id="a-refund">
+        <span class="at">[필수] 취소 및 환불 규정 동의<span class="ad">진행 단계별 환불 비율과 예약금 반환 제한 조항을 확인하였으며, 미확인에 따른 책임은 본인에게 있음을 확인합니다.</span></span>
+      </label>
+      <label class="agree" data-agree>
+        <input type="checkbox" id="a-privacy">
+        <span class="at">[필수] 개인정보 수집 · 이용 동의<span class="ad">수집 항목: 성명, 연락처, 생년월일, 이메일(선택) / 이용 목적: 견적 상담 및 계약 이행 / 보유 기간: 계약 종료 후 1년</span></span>
+      </label>
+      </div>
+      <p class="msg">필수 항목 전체에 동의해야 다음 단계로 진행할 수 있습니다.</p>
+    </div>
+
+    <div class="field" id="f-sign">
+      <span class="lab">전자서명<span class="req">*</span></span>
+      <p class="hint">아래 영역에 마우스 또는 손가락으로 서명해 주시기 바랍니다. 서명 이미지는 발급되는 견적 요청서 하단에 기재됩니다.</p>
+      <div class="pad" id="pad">
+        <canvas id="canvas"></canvas>
+        <span class="base"></span>
+        <span class="ph">이곳에 서명해 주시기 바랍니다</span>
+      </div>
+      <div class="padbar">
+        <span class="tip">서명을 다시 작성하실 수 있습니다.</span>
+        <button type="button" class="mini" id="sign-clear">서명 다시 작성</button>
+      </div>
+      <p class="msg">전자서명을 입력해 주시기 바랍니다.</p>
+    </div>
+  </section>
+
+  <!-- ── STEP 4 ───────────────────────── -->
+  <section class="step" data-step="4">
+    <h2>작성 내용 확인</h2>
+    <p class="lead">아래 내용으로 견적 요청서가 발급됩니다. 수정이 필요하신 경우 <b>이전</b> 버튼을 선택하여 변경해 주시기 바랍니다.</p>
+    <div class="sum" id="summary"></div>
+
+    <div class="note">
+      <b>PDF 저장 방법</b>
+      아래 <b>견적서 PDF 다운로드</b> 버튼을 선택하면 인쇄 창이 열립니다. 대상(프린터) 항목에서 <b>‘PDF로 저장’</b>을 선택하시면 A4 규격의 파일로 저장됩니다. (iPhone·iPad: 공유 → ‘PDF로 저장’)
+    </div>
+    <div class="note">
+      <b>안내</b>
+      본 견적 요청서는 요청 내용 확인을 위한 문서이며, 최종 견적 금액과 세부 일정은 상담을 통해 확정됩니다. 저장한 PDF 파일을 숨고 채팅으로 전달해 주시면 검토 후 신속히 회신드리겠습니다.
+    </div>
+
+    <div class="sub">
+      <button type="button" class="btn" id="btn-copy">내용 복사</button>
+      <button type="button" class="btn" id="btn-reset">새로 작성</button>
+    </div>
+  </section>
+
+  <div class="navbar">
+    <button type="button" class="btn ghost" id="btn-prev" hidden>이전</button>
+    <button type="button" class="btn" id="btn-next">다음 단계로</button>
+    <button type="button" class="btn" id="btn-pdf" hidden>견적서 PDF 다운로드</button>
+  </div>
+</div>
+
+<p class="foot">E&amp;J Labs · 웹디자인 서비스 견적 요청 · 숨고 매칭 고객 전용 &nbsp;|&nbsp; 작성 중인 내용은 이 브라우저에 임시 저장되며 외부로 전송되지 않습니다.</p>
+
+<!-- ══ 인쇄용 견적서 본문 ══ -->
+<div id="doc" aria-hidden="true"></div>
+<div id="toast"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ═══════════════════════════════════════════════
+   공급자(디자이너) 정보 — 실제 정보로 교체하세요
+   ═══════════════════════════════════════════════ */
+var PROVIDER = {
+  company : 'E&J Labs',
+  owner   : '윤준혁 / 김은율',
+  contact : '010-5925-2184',
+  email   : 'contact@eyk.kr',
+  channel : '숨고(Soomgo) · 웹 · 카카오톡 · 크몽'
+};
+function pv(v){ return (v && String(v).trim()) ? String(v).trim() : '—'; }
+
+/* ═══════════════════════════════════════════════ */
+
+var KEY = 'wd-quote-draft-v2';
+var $  = function(s){ return document.querySelector(s); };
+var $$ = function(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); };
+
+var state = {
+  step:1, name:'', phone:'', birth:'', email:'',
+  styleNo:'', detail:'', later:false, pages:1, start:'', end:'',
+  agree:{terms:false, refund:false, privacy:false},
+  sign:'', signedAt:'', docNo:''
+};
+
+/* ── 저장 / 복원 ───────────────────────── */
+var saveTid = null;
+function saveNow(){
+  saveTid = null;
+  try{
+    localStorage.setItem(KEY, JSON.stringify(state));
+  }catch(e){
+    /* 용량 초과 — 서명 이미지를 제외하고 최소한의 내용이라도 보관 */
+    try{
+      var lite = {}; for(var k in state){ lite[k] = state[k]; }
+      lite.sign = '';
+      localStorage.setItem(KEY, JSON.stringify(lite));
+    }catch(e2){}
+  }
+}
+/* 서명 PNG는 수백 KB라 입력 때마다 직렬화하면 타이핑이 밀린다 */
+function save(){
+  if(saveTid) return;
+  saveTid = setTimeout(saveNow, 350);
+}
+window.addEventListener('pagehide', function(){ if(saveTid){ clearTimeout(saveTid); saveNow(); } });
+document.addEventListener('visibilitychange', function(){
+  if(document.visibilityState === 'hidden' && saveTid){ clearTimeout(saveTid); saveNow(); }
+});
+function load(){
+  try{
+    var raw = localStorage.getItem(KEY);
+    if(!raw) return;
+    var d = JSON.parse(raw);
+    if(d && typeof d === 'object'){
+      for(var k in state){ if(d[k] !== undefined) state[k] = d[k]; }
+      if(!state.agree) state.agree = {terms:false, refund:false, privacy:false};
+    }
+  }catch(e){}
+}
+
+/* ── 유틸 ──────────────────────────────── */
+function digits(v){ return (v||'').replace(/[^0-9]/g,''); }
+
+function fmtPhone(v){
+  var d = digits(v).slice(0,11);
+  if(d.indexOf('02') === 0){                      /* 서울 지역번호는 2자리 */
+    if(d.length < 3)  return d;
+    if(d.length < 7)  return d.slice(0,2) + '-' + d.slice(2);
+    if(d.length <= 9) return d.slice(0,2) + '-' + d.slice(2,5) + '-' + d.slice(5);
+    return d.slice(0,2) + '-' + d.slice(2,6) + '-' + d.slice(6,10);
+  }
+  if(d.length < 4) return d;
+  if(d.length < 8) return d.slice(0,3) + '-' + d.slice(3);
+  if(d.length === 10) return d.slice(0,3) + '-' + d.slice(3,6) + '-' + d.slice(6);
+  return d.slice(0,3) + '-' + d.slice(3,7) + '-' + d.slice(7);
+}
+function fmtDate(v){
+  var d = digits(v).slice(0,8);
+  if(d.length < 5) return d;
+  if(d.length < 7) return d.slice(0,4) + '-' + d.slice(4);
+  return d.slice(0,4) + '-' + d.slice(4,6) + '-' + d.slice(6);
+}
+function validDate(s, minYear){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(s)) return false;
+  var y = +s.slice(0,4), m = +s.slice(5,7), dd = +s.slice(8,10);
+  if(y < (minYear||1900) || y > 2200 || m < 1 || m > 12 || dd < 1) return false;
+  var t = new Date(y, m-1, dd);
+  return t.getFullYear() === y && t.getMonth() === m-1 && t.getDate() === dd;
+}
+function toDate(s){ return new Date(+s.slice(0,4), +s.slice(5,7)-1, +s.slice(8,10)); }
+function pad2(n){ return (n<10?'0':'') + n; }
+function ymd(d){ return d.getFullYear() + '-' + pad2(d.getMonth()+1) + '-' + pad2(d.getDate()); }
+
+var WEEK = ['일','월','화','수','목','금','토'];
+function korDate(s){
+  if(!validDate(s)) return s || '—';
+  var d = toDate(s);
+  return d.getFullYear() + '년 ' + (d.getMonth()+1) + '월 ' + d.getDate() + '일 (' + WEEK[d.getDay()] + ')';
+}
+function korStamp(iso){
+  if(!iso) return '—';
+  var d = new Date(iso);
+  if(isNaN(d.getTime())) return '—';
+  return d.getFullYear() + '년 ' + (d.getMonth()+1) + '월 ' + d.getDate() + '일 (' + WEEK[d.getDay()] + ') '
+       + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+function esc(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function toast(msg){
+  var t = $('#toast');
+  t.textContent = msg; t.classList.add('on');
+  clearTimeout(t._tid);
+  t._tid = setTimeout(function(){ t.classList.remove('on'); }, 2000);
+}
+function setErr(id, on, msg){
+  var f = $(id);
+  if(!f) return;
+  f.classList.toggle('err', !!on);
+  var m = f.querySelector('.msg');
+  if(m && msg) m.textContent = msg;
+  Array.prototype.forEach.call(f.querySelectorAll('input,textarea'), function(el){
+    if(on) el.setAttribute('aria-invalid','true'); else el.removeAttribute('aria-invalid');
+  });
+}
+
+function detailText(){
+  if(state.later) return '추후 별도 전달 예정';
+  return state.detail.trim() || '—';
+}
+function styleText(){
+  var v = (state.styleNo || '').trim();
+  if(!v) return '';
+  if(/^[0-9]+$/.test(v)) return v + '번';
+  return v;
+}
+
+/* ── 서명 패드 ─────────────────────────── */
+var cv = $('#canvas'), ctx = cv.getContext('2d'), drawing = false, inked = false, dirty = false;
+
+function setupCanvas(keep){
+  var prev = (keep && inked) ? cv.toDataURL('image/png') : null;
+  var w = cv.offsetWidth, h = cv.offsetHeight;      /* transform 영향을 받지 않는 레이아웃 크기 */
+  if(!w || !h) return;
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);   /* 3배는 PNG 용량만 키우고 화질 차이는 없음 */
+  cv.width  = Math.max(1, Math.round(w * dpr));
+  cv.height = Math.max(1, Math.round(h * dpr));
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0,0,w,h);
+  ctx.lineWidth = 2.4; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.strokeStyle = '#111111';
+  if(prev){
+    var img = new Image();
+    img.onload = function(){ ctx.drawImage(img, 0, 0, w, h); };
+    img.src = prev;
+  }
+}
+function pos(e){
+  var r = cv.getBoundingClientRect();
+  return { x:e.clientX - r.left, y:e.clientY - r.top };
+}
+cv.addEventListener('pointerdown', function(e){
+  e.preventDefault();
+  drawing = true;
+  try{ cv.setPointerCapture(e.pointerId); }catch(err){}
+  var p = pos(e);
+  ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p.x + 0.01, p.y); ctx.stroke();
+  inked = true; dirty = true;
+  $('#pad').classList.add('inked');
+  setErr('#f-sign', false);
+});
+cv.addEventListener('pointermove', function(e){
+  if(!drawing) return;
+  e.preventDefault();
+  var p = pos(e);
+  ctx.lineTo(p.x, p.y); ctx.stroke();
+});
+function endStroke(){
+  if(!drawing) return;
+  drawing = false;
+  if(dirty){ state.sign = cv.toDataURL('image/png'); dirty = false; save(); }
+}
+/* pointerleave 는 캔버스 가장자리를 스칠 때마다 획을 끊는다 —
+   포인터 캡처를 쓰므로 window 에서 종료만 감지하면 충분 */
+window.addEventListener('pointerup', endStroke);
+window.addEventListener('pointercancel', endStroke);
+$('#sign-clear').addEventListener('click', function(){
+  setupCanvas(false);
+  inked = false; state.sign = ''; state.signedAt = '';
+  $('#pad').classList.remove('inked');
+  save();
+});
+function restoreSign(){
+  if(!state.sign) return;
+  var img = new Image();
+  img.onload = function(){
+    if(!cv.offsetWidth) return;
+    ctx.drawImage(img, 0, 0, cv.offsetWidth, cv.offsetHeight);
+    inked = true;
+    $('#pad').classList.add('inked');
+  };
+  img.src = state.sign;
+}
+var rz;
+window.addEventListener('resize', function(){
+  clearTimeout(rz);
+  rz = setTimeout(function(){ setupCanvas(true); }, 200);
+});
+
+/* ── 입력 바인딩 ───────────────────────── */
+function bind(sel, key, formatter, field){
+  var el = $(sel);
+  el.addEventListener('input', function(){
+    if(formatter){
+      var c = formatter(el.value);
+      if(c !== el.value) el.value = c;
+    }
+    state[key] = el.value;
+    setErr(field, false);
+    save();
+  });
+}
+bind('#i-name','name',null,'#f-name');
+bind('#i-phone','phone',fmtPhone,'#f-phone');
+bind('#i-birth','birth',fmtDate,'#f-birth');
+bind('#i-email','email',null,'#f-email');
+bind('#i-styleno','styleNo',null,'#f-style');
+bind('#i-start','start',fmtDate,'#f-period');
+bind('#i-end','end',fmtDate,'#f-period');
+
+$('#i-later').addEventListener('change', function(){
+  state.later = this.checked;
+  syncLater(); save();
+});
+function syncLater(){
+  var on = !!state.later;
+  $('#i-later').checked = on;
+  $('#later-box').classList.toggle('checked', on);
+  $('#f-detail').classList.toggle('off', on);
+  $('#i-detail').disabled = on;
+}
+$('#i-detail').addEventListener('input', function(){
+  state.detail = this.value;
+  $('#c-detail').textContent = this.value.length;
+  save();
+});
+/* 페이지 개수 */
+function setPages(n){
+  n = Math.max(1, Math.min(999, n || 1));
+  state.pages = n;
+  $('#i-pages').value = n;
+  $$('#pgchips .chip').forEach(function(c){
+    c.setAttribute('aria-pressed', +c.dataset.pg === n ? 'true' : 'false');
+  });
+  setErr('#f-pages', false);
+  save();
+}
+$('#pg-minus').addEventListener('click', function(){ setPages(state.pages - 1); });
+$('#pg-plus').addEventListener('click',  function(){ setPages(state.pages + 1); });
+$('#i-pages').addEventListener('input', function(){
+  this.value = digits(this.value).slice(0,3);
+  state.pages = +this.value || 0;
+  $$('#pgchips .chip').forEach(function(c){
+    c.setAttribute('aria-pressed', +c.dataset.pg === state.pages ? 'true':'false');
+  });
+  save();
+});
+$('#i-pages').addEventListener('blur', function(){ setPages(+this.value); });
+$('#pgchips').addEventListener('click', function(e){
+  var c = e.target.closest('.chip'); if(!c) return;
+  setPages(+c.dataset.pg);
+});
+
+/* 기간 칩 */
+$('#dchips').addEventListener('click', function(e){
+  var c = e.target.closest('.chip'); if(!c) return;
+  var days = +c.dataset.days;
+  var s = validDate(state.start) ? toDate(state.start) : new Date();
+  var en = new Date(s.getFullYear(), s.getMonth(), s.getDate() + days);
+  state.start = ymd(s); state.end = ymd(en);
+  $('#i-start').value = state.start; $('#i-end').value = state.end;
+  $$('#dchips .chip').forEach(function(x){
+    x.setAttribute('aria-pressed', x === c ? 'true' : 'false');
+  });
+  setErr('#f-period', false);
+  save();
+});
+
+/* 약관 동의 */
+function syncAgree(){
+  $('#a-terms').checked   = state.agree.terms;
+  $('#a-refund').checked  = state.agree.refund;
+  $('#a-privacy').checked = state.agree.privacy;
+  var all = state.agree.terms && state.agree.refund && state.agree.privacy;
+  $('#a-all').checked = all;
+  $('#agree-all-box').classList.toggle('checked', all);
+  $$('[data-agree]').forEach(function(l){
+    l.classList.toggle('checked', l.querySelector('input').checked);
+  });
+}
+[['#a-terms','terms'],['#a-refund','refund'],['#a-privacy','privacy']].forEach(function(p){
+  $(p[0]).addEventListener('change', function(){
+    state.agree[p[1]] = this.checked;
+    syncAgree(); setErr('#f-agree', false); save();
+  });
+});
+$('#a-all').addEventListener('change', function(){
+  var v = this.checked;
+  state.agree = {terms:v, refund:v, privacy:v};
+  syncAgree(); setErr('#f-agree', false); save();
+});
+
+/* ── 검증 ──────────────────────────────── */
+function validate(step){
+  var ok = true, first = null;
+  function fail(id){ setErr(id, true); if(!first) first = $(id); ok = false; }
+
+  if(step === 1){
+    if(state.name.trim().length < 2) fail('#f-name'); else setErr('#f-name', false);
+    if(digits(state.phone).length < 9) fail('#f-phone'); else setErr('#f-phone', false);
+    var y = +String(state.birth).slice(0,4);
+    if(!validDate(state.birth, 1900) || y > new Date().getFullYear()) fail('#f-birth'); else setErr('#f-birth', false);
+    var em = state.email.trim();
+    if(em && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) fail('#f-email'); else setErr('#f-email', false);
+  }
+
+  if(step === 2){
+    setErr('#f-style', false);   /* 스타일 번호·상세 요청 모두 선택 항목 */
+    if(!state.pages || state.pages < 1) fail('#f-pages'); else setErr('#f-pages', false);
+
+    var ds = validDate(state.start, 2000), de = validDate(state.end, 2000);
+    if(!ds || !de || toDate(state.end) < toDate(state.start)) fail('#f-period'); else setErr('#f-period', false);
+  }
+
+  if(step === 3){
+    if(!(state.agree.terms && state.agree.refund && state.agree.privacy)) fail('#f-agree'); else setErr('#f-agree', false);
+    if(!state.sign) fail('#f-sign'); else setErr('#f-sign', false);
+  }
+
+  if(!ok && first) first.scrollIntoView({behavior:'smooth', block:'center'});
+  return ok;
+}
+
+/* ── 스텝 이동 ─────────────────────────── */
+function go(n){
+  var back = n < state.step;
+  state.step = n;
+  $$('.step').forEach(function(sec){
+    var on = (+sec.dataset.step === n);
+    sec.classList.toggle('back', on && back);
+    if(on){ sec.classList.remove('on'); void sec.offsetWidth; }  /* 애니메이션 재생 강제 */
+    sec.classList.toggle('on', on);
+  });
+  $$('#steps li').forEach(function(li, i){
+    li.classList.toggle('on', i+1 === n);
+    li.classList.toggle('done', i+1 < n);
+  });
+  $('#btn-prev').hidden = (n === 1);
+  $('#btn-next').hidden = (n === 4);
+  $('#btn-pdf').hidden  = (n !== 4);
+  $('#btn-next').textContent = (n === 3) ? '동의 후 견적 요청서 확인' : '다음 단계로';
+  if(n === 3) setTimeout(function(){
+    setupCanvas(true);                                  /* offsetWidth 기준 — 전환 중에도 안전 */
+    if(!inked && state.sign) restoreSign();             /* 저장된 서명 복원 */
+  }, 30);
+  if(n === 4) buildSummary();
+  window.scrollTo({top:0, behavior:'smooth'});
+  save();
+}
+$('#btn-prev').addEventListener('click', function(){ if(state.step > 1) go(state.step - 1); });
+$('#btn-next').addEventListener('click', function(){
+  if(!validate(state.step)) return;
+  if(state.step === 3 && !state.signedAt) state.signedAt = new Date().toISOString();
+  if(state.step < 4) go(state.step + 1);
+});
+
+/* ── 문서번호 ──────────────────────────── */
+function makeDocNo(){
+  var d = new Date();
+  var seed = (digits(state.phone).slice(-4) || '0000');
+  var h = 0, s = state.name + state.birth;
+  for(var i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) % 1000; }
+  return 'WD-' + d.getFullYear() + pad2(d.getMonth()+1) + pad2(d.getDate()) + '-' + seed + pad2(Math.floor(h/10)%100);
+}
+
+/* ── 요약 ──────────────────────────────── */
+function periodText(){
+  if(!state.start || !state.end) return '—';
+  var days = Math.round((toDate(state.end) - toDate(state.start)) / 86400000) + 1;
+  return korDate(state.start) + ' ~ ' + korDate(state.end) + '  (총 ' + days + '일)';
+}
+function rows(){
+  return [
+    ['성명',      state.name],
+    ['연락처',    state.phone],
+    ['생년월일',  state.birth],
+    ['이메일',    state.email.trim() || '—'],
+    ['디자인 스타일 번호', styleText() || '미정 (상담 시 협의)'],
+    ['상세 요청 사항', detailText()],
+    ['페이지 수', state.pages + ' 페이지'],
+    ['희망 기간', periodText()],
+    ['약관 동의', '이용약관 · 환불 규정 · 개인정보 수집·이용 (전체 동의)\n※ 이용약관 전문 미확인에 따른 책임이 본인에게 있음을 확인'],
+    ['동의 일시', korStamp(state.signedAt)]
+  ];
+}
+function buildSummary(){
+  if(!state.docNo) state.docNo = makeDocNo();
+  var html = '<dl><dt>문서번호</dt><dd>' + esc(state.docNo) + '</dd></dl>';
+  html += rows().map(function(r){
+    return '<dl><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></dl>';
+  }).join('');
+  html += '<dl><dt>전자서명</dt><dd class="sig">'
+       + (state.sign ? '<img src="' + state.sign + '" alt="전자서명">' : '—')
+       + '</dd></dl>';
+  $('#summary').innerHTML = html;
+  buildDoc();
+  save();
+}
+
+/* ── 인쇄용 견적서 ─────────────────────── */
+function buildDoc(){
+  var issued = korStamp(new Date().toISOString());
+  var d = new Date(state.signedAt || Date.now());
+  var signKor = d.getFullYear() + '년 ' + (d.getMonth()+1) + '월 ' + d.getDate() + '일';
+
+  var html = ''
+  + '<div class="dhead">'
+  +   '<h2 class="dtitle">견 적 서</h2>'
+  +   '<p class="dsub">웹디자인 서비스 견적 요청 및 계약 조건 확인서</p>'
+  + '</div>'
+  + '<div class="dmeta"><span>문서번호 : ' + esc(state.docNo) + '</span><span>발행일시 : ' + esc(issued) + '</span></div>'
+
+  + '<h4>1. 공급자 (수신)</h4>'
+  + '<table>'
+  +   '<tr><th>상호</th><td>' + esc(pv(PROVIDER.company)) + '</td><th>담당자</th><td>' + esc(pv(PROVIDER.owner)) + '</td></tr>'
+  +   '<tr><th>연락처</th><td>' + esc(pv(PROVIDER.contact)) + '</td><th>이메일</th><td>' + esc(pv(PROVIDER.email)) + '</td></tr>'
+  +   '<tr><th>거래 경로</th><td colspan="3">' + esc(pv(PROVIDER.channel)) + '</td></tr>'
+  + '</table>'
+
+  + '<h4>2. 의뢰인 (발신)</h4>'
+  + '<table>'
+  +   '<tr><th>성명</th><td>' + esc(state.name) + '</td><th>생년월일</th><td>' + esc(state.birth) + '</td></tr>'
+  +   '<tr><th>연락처</th><td>' + esc(state.phone) + '</td><th>이메일</th><td>' + esc(state.email.trim() || '—') + '</td></tr>'
+  + '</table>'
+
+  + '<h4>3. 작업 요청 내역</h4>'
+  + '<table>'
+  +   '<tr><th>디자인 스타일</th><td colspan="3">' + esc(styleText() || '미정 (상담 시 협의)') + '</td></tr>'
+  +   '<tr><th>상세 요청 사항</th><td colspan="3" class="wrap-pre">' + esc(detailText()) + '</td></tr>'
+  +   '<tr><th>작업 분량</th><td>총 ' + esc(state.pages) + ' 페이지</td><th>희망 기간</th><td>' + esc(periodText()) + '</td></tr>'
+  +   '<tr><th>견적 금액</th><td colspan="3">상담 후 확정 (작업 범위 및 분량에 따라 별도 협의)</td></tr>'
+  +   '<tr><th>대금 지급</th><td colspan="3">착수금 30% 선납 / 잔금 70% 최종 검수 및 제작 완료 시 지급</td></tr>'
+  +   '<tr><th>수정 횟수</th><td colspan="3">기본 2회 제공 (초과 시 별도 비용 발생)</td></tr>'
+  + '</table>'
+
+  + '<h4>4. 약관 동의 확인</h4>'
+  + '<table>'
+  +   '<tr><th>이용약관</th><td>동의함 (☑)</td><th>환불 규정</th><td>동의함 (☑)</td></tr>'
+  +   '<tr><th>개인정보 수집 · 이용</th><td>동의함 (☑)</td><th>동의 일시</th><td>' + esc(korStamp(state.signedAt)) + '</td></tr>'
+  + '</table>'
+  + '<div class="dstate">'
+  +   '본인은 「웹디자인 서비스 이용약관 및 작업 가이드라인」에 따른 작업 절차, 작업 범위 및 수정 기준, 취소 및 환불 규정, 저작권 및 포트폴리오 권리, 계약 종료 조건에 관한 전문을 열람하고 그 내용을 확인하였으며, 이에 동의하여 위와 같이 견적을 요청합니다. 또한 약관 요약 안내는 이해를 돕기 위한 발췌본이며 계약의 효력은 이용약관 전문을 기준으로 함을 인지합니다. <b>이용약관 전문을 확인하지 않은 상태에서 동의함으로써 발생하는 불이익과 책임은 본인에게 있음</b>을 확인합니다. 본 문서는 전자적 방식으로 작성 및 서명되었으며, 견적 요청 내용과 약관 동의 사실을 상호 확인하기 위한 자료로 보관됩니다. 최종 견적 금액 및 세부 일정은 상담을 통해 확정됩니다.'
+  + '</div>'
+
+  + '<div class="dsign">'
+  +   '<div class="ddate">' + esc(signKor) + '</div>'
+  +   '<div class="dline">'
+  +     '<span class="dname">의뢰인 &nbsp; <b>' + esc(state.name) + '</b> &nbsp; (서명)</span>'
+  +     '<span class="dimg">' + (state.sign ? '<img src="' + state.sign + '" alt="서명">' : '&nbsp;') + '</span>'
+  +   '</div>'
+  +   '<div class="dline" style="margin-top:6pt"><span class="dname" style="font-size:8.6pt">계약(서명) 일시 : ' + esc(korStamp(state.signedAt)) + '</span></div>'
+  + '</div>'
+
+  + '<div class="dfoot"><span>' + esc(pv(PROVIDER.company)) + ' · 웹디자인 서비스 견적서</span><span>' + esc(state.docNo) + '</span></div>';
+
+  $('#doc').innerHTML = html;
+}
+
+$('#btn-pdf').addEventListener('click', function(){
+  buildSummary();
+  var t = document.title;
+  document.title = '견적서_' + (state.name || '고객') + '_' + (state.docNo || '');
+  setTimeout(function(){
+    window.print();
+    setTimeout(function(){ document.title = t; }, 800);
+  }, 60);
+});
+
+/* ── 보조 버튼 ─────────────────────────── */
+$('#btn-copy').addEventListener('click', function(){
+  var txt = '[웹디자인 서비스 견적 요청서]\n문서번호: ' + state.docNo + '\n'
+          + rows().map(function(r){ return r[0] + ': ' + r[1]; }).join('\n');
+  function done(){ toast('견적 요청 내용이 복사되었습니다.'); }
+  if(navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(done, fallback);
+  } else fallback();
+  function fallback(){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){ toast('복사에 실패했습니다. 다시 시도해 주시기 바랍니다.'); }
+    document.body.removeChild(ta);
+  }
+});
+$('#btn-reset').addEventListener('click', function(){
+  if(!confirm('작성하신 내용이 모두 삭제됩니다. 새로 작성하시겠습니까?')) return;
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  location.reload();
+});
+
+/* ── main.html 에서 넘어온 스타일 번호 받기 (?style=7) ── */
+function fromQuery(){
+  try{
+    var m = /[?&]style=(\d{1,2})/.exec(location.search);
+    if(!m) return;
+    var n = parseInt(m[1], 10);
+    if(n >= 1 && n <= 28){ state.styleNo = String(n); save(); }
+  }catch(e){}
+}
+
+/* ── 초기화 ────────────────────────────── */
+function hydrate(){
+  $$('.msg').forEach(function(m){ m.setAttribute('role','status'); m.setAttribute('aria-live','polite'); });
+  $('#i-name').value  = state.name;
+  $('#i-phone').value = state.phone;
+  $('#i-birth').value = state.birth;
+  $('#i-email').value = state.email;
+  $('#i-styleno').value = state.styleNo;
+  $('#i-detail').value = state.detail;
+  $('#c-detail').textContent = (state.detail || '').length;
+  syncLater();
+  $('#i-start').value = state.start;
+  $('#i-end').value   = state.end;
+  setPages(state.pages);
+  syncAgree();
+}
+
+load();
+fromQuery();      /* 쿼리 값이 저장된 초안보다 우선 */
+hydrate();
+setupCanvas(false);
+restoreSign();
+go(state.step && state.step <= 4 ? state.step : 1);
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>E&amp;J Labs — 브랜드를 설계하는 웹디자인 스튜디오</title>
+<meta name="description" content="E&J Labs는 브랜드의 메시지와 사용자 경험을 함께 설계하는 웹디자인 스튜디오입니다. 28종 디자인 스타일을 확인하고 맞춤 견적을 요청하세요.">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#14130F">
+<link rel="icon" href="data:,">
+<meta property="og:title" content="E&amp;J Labs — 브랜드를 설계하는 웹디자인 스튜디오">
+<meta property="og:description" content="브랜드의 메시지와 사용자 경험을 함께 설계합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gothic+A1:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap">
+<style>
+:root{
+  --paper:#FBF8F0; --cream:#EDE9DF; --ink:#14130F; --ink-2:#3A362E;
+  --mute:#7A7263; --line:#DAD4C6; --acc:#C8552C; --lime:#C8FF4D; --sand:#F7F2E7;
+  --edge:clamp(22px,5vw,44px);
+  --disp:'Black Han Sans','Gothic A1',sans-serif;
+  --body:'Gothic A1','Apple SD Gothic Neo','Noto Sans KR',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:#C4BCAA transparent}
+html::-webkit-scrollbar{width:10px;height:10px}
+html::-webkit-scrollbar-thumb{background:#C4BCAA;border-radius:10px}
+html::-webkit-scrollbar-track{background:transparent}
+html{overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:16px;line-height:1.75;word-break:keep-all;overflow-wrap:break-word;
+ overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{margin:0;font-family:var(--disp);font-weight:400;line-height:1.12;letter-spacing:-.03em}
+p{margin:0}
+.wrap{width:100%;max-width:1180px;margin:0 auto;
+ padding-left:max(var(--edge),env(safe-area-inset-left));
+ padding-right:max(var(--edge),env(safe-area-inset-right))}
+.mono{font-family:var(--mono);font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+
+/* ── 헤더 ── */
+.top{position:sticky;top:0;z-index:70;background:rgba(251,248,240,.88);
+ backdrop-filter:saturate(180%) blur(14px);-webkit-backdrop-filter:saturate(180%) blur(14px);
+ border-bottom:1px solid transparent;transition:border-color .25s,background .25s}
+.top.on{border-color:var(--line)}
+.top .in{display:flex;align-items:center;gap:14px;height:62px;
+ padding-left:max(18px,env(safe-area-inset-left));padding-right:max(18px,env(safe-area-inset-right))}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:17px;letter-spacing:-.02em}
+.logo i{display:grid;place-items:center;width:30px;height:30px;background:var(--ink);color:var(--paper);
+ font-family:var(--mono);font-size:11px;font-style:normal;font-weight:700;letter-spacing:0}
+.nav{display:none;margin-left:auto;gap:26px;font-size:14px;font-weight:500}
+.nav a{opacity:.72}.nav a:hover{opacity:1}
+.top .cta{margin-left:auto;display:inline-flex;align-items:center;height:42px;padding:0 18px;
+ background:var(--acc);color:#fff;font-size:13.5px;font-weight:700;white-space:nowrap}
+@media (min-width:860px){.nav{display:flex}.top .cta{margin-left:0}}
+
+/* ── 히어로 ── */
+.hero{position:relative;background:var(--paper);padding:clamp(46px,9vw,104px) 0 clamp(96px,15vw,190px)}
+.hero::after{content:"";position:absolute;left:-1px;right:-1px;bottom:-1px;
+ height:clamp(56px,9vw,120px);background:var(--ink);
+ clip-path:polygon(0 100%,100% 0,100% 101%,0 101%)}
+.hero .eyebrow{font-family:var(--mono);font-size:clamp(10.5px,1.4vw,12px);letter-spacing:.24em;color:var(--acc);margin-bottom:22px}
+.hero h1{font-size:clamp(40px,10.5vw,104px);line-height:1.06;letter-spacing:-.04em}
+.hero p.lead{margin-top:26px;max-width:30em;font-size:clamp(15px,1.9vw,18px);line-height:1.9;color:var(--ink-2)}
+.hero .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(28px,4vw,40px)}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 26px;
+ font-size:15px;font-weight:700;letter-spacing:-.01em;background:var(--acc);color:#fff;
+ border:2px solid var(--acc);transition:opacity .18s,transform .12s}
+.btn:hover{opacity:.88}.btn:active{transform:translateY(1px)}
+.btn.o{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.o:hover{border-color:var(--ink)}
+@media (max-width:420px){.btn{flex:1 1 100%}}
+
+/* ── 수치 ── */
+.figs{background:var(--ink);color:var(--paper);
+ padding:clamp(28px,5vw,54px) 0 clamp(44px,7vw,78px);margin-top:-1px}
+.figs .in{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,3vw,36px);align-items:end}
+.fig b{display:block;font-family:var(--disp);font-size:clamp(30px,6.2vw,58px);
+ line-height:1;letter-spacing:-.045em;white-space:nowrap}
+.fig b em{font-style:normal;color:var(--lime)}
+.fig span{display:block;margin-top:11px;font-size:clamp(11px,1.4vw,13px);
+ color:rgba(251,248,240,.58);line-height:1.5;letter-spacing:0}
+@media (max-width:560px){
+  .fig b{font-size:clamp(19px,5.6vw,27px);white-space:normal}
+  .fig span{margin-top:8px;font-size:11px}
+  .figs .in{gap:10px}
+}
+
+/* ── 서비스 소개 ── */
+.service{padding:clamp(48px,9vw,116px) 0;background:var(--paper)}
+.service .head{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);
+ gap:clamp(20px,3vw,44px);align-items:start}
+.service h2{font-size:clamp(30px,6.5vw,60px)}
+.service h2 em{font-style:normal;color:var(--acc)}
+.service .intro{max-width:30em;padding-top:10px;color:var(--ink-2);font-size:15px;line-height:1.9}
+
+/* 카드 — 채움과 테두리를 걷어내고 얇은 선만 */
+.service .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:0;
+ margin-top:clamp(28px,4.4vw,52px);border-top:2px solid var(--ink)}
+.service .card{padding:18px clamp(18px,2.4vw,32px) clamp(26px,3.2vw,38px) 0;
+ background:none;border:0}
+.service .card+.card{padding-left:clamp(18px,2.4vw,32px);border-left:1px solid var(--line)}
+.service .card:last-child{padding-right:0}
+.service .card b{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--acc)}
+.service .card h3{margin-top:13px;font-family:var(--body);font-size:clamp(17px,1.9vw,19px);
+ font-weight:700;letter-spacing:-.03em;line-height:1.45}
+.service .card p{margin-top:10px;color:var(--ink-2);font-size:13.5px;line-height:1.85}
+
+/* 비용 · 코드 안내 — 상자 대신 한 줄짜리 목록으로 */
+.service .price{margin:0;padding:20px 0;background:none;border:0;
+ border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+ color:var(--ink-2);font-size:14.5px;line-height:1.9}
+.service .price b{color:var(--ink);font-weight:700}
+
+.service .code-note{margin:0;padding:0;background:none;border:0;border-bottom:1px solid var(--line)}
+.service .code-note>summary{display:flex;align-items:center;gap:12px;min-height:58px;
+ padding:0;cursor:pointer;list-style:none;font-family:var(--mono);font-size:10.5px;
+ letter-spacing:.14em;color:var(--acc);transition:color .18s}
+.service .code-note>summary::-webkit-details-marker{display:none}
+.service .code-note>summary::after{content:"";margin-left:auto;flex:none;width:11px;height:11px;
+ background:
+   linear-gradient(var(--ink),var(--ink)) center/11px 1.5px no-repeat,
+   linear-gradient(var(--ink),var(--ink)) center/1.5px 11px no-repeat;
+ opacity:.5;transition:transform .28s cubic-bezier(.22,.72,.25,1),opacity .18s}
+.service .code-note[open]>summary::after{transform:rotate(135deg);opacity:.85}
+.service .code-note>summary:hover{color:var(--ink)}
+.service .code-note>summary:hover::after{opacity:.85}
+.service .code-note p{margin:0;padding:0 0 26px;max-width:64em;
+ font-size:14.5px;line-height:1.9;color:var(--ink-2)}
+.service .code-note strong{color:var(--ink);font-weight:700}
+.service .code-note[open] p{animation:noteIn .3s cubic-bezier(.22,.72,.25,1) both}
+@keyframes noteIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:none}}
+
+@media (max-width:760px){
+  .service .head{grid-template-columns:1fr;gap:14px}
+  /* 세로로 쌓지 않고 가로 스와이프 */
+  .service .cards{display:flex;grid-template-columns:none;gap:20px;border-top:0;
+   overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;
+   scroll-padding-left:max(var(--edge),env(safe-area-inset-left));
+   padding:0 0 2px;margin:clamp(28px,4.4vw,52px) calc(-1 * max(var(--edge),env(safe-area-inset-left))) 0
+    calc(-1 * max(var(--edge),env(safe-area-inset-left)))}
+  .service .cards::before,.service .cards::after{
+   content:"";flex:0 0 max(var(--edge),env(safe-area-inset-left))}
+  .service .cards::-webkit-scrollbar{display:none}
+  .service .card{flex:0 0 72vw;max-width:290px;scroll-snap-align:start;
+   padding:16px 0 22px;border-top:2px solid var(--ink)}
+  .service .card+.card{padding-left:0;border-left:0}
+  .service .price{padding:20px 0;font-size:14px}
+  .service .code-note p{padding-bottom:22px;font-size:14px}
+}
+
+/* ── 갤러리 ── */
+.gal{background:var(--cream);padding:clamp(56px,10vw,116px) 0}
+.gal .head{display:flex;flex-wrap:wrap;align-items:flex-end;gap:16px;margin-bottom:clamp(24px,4vw,40px)}
+.gal h2{font-size:clamp(30px,6.5vw,60px)}
+.gal .sub{max-width:26em;font-size:14.5px;line-height:1.85;color:var(--ink-2)}
+.gal .cnt{margin-left:auto;font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;color:var(--mute)}
+@media (max-width:760px){.gal .cnt{margin-left:0}}
+
+/* 가로 스와이프 */
+.rail{display:flex;gap:clamp(12px,2vw,20px);overflow-x:auto;scroll-snap-type:x mandatory;
+ -webkit-overflow-scrolling:touch;scrollbar-width:none;
+ padding:4px 0 22px;margin:0}
+.rail::before,.rail::after{content:"";flex:0 0 max(var(--edge),env(safe-area-inset-left))}
+.rail{scroll-padding-left:max(var(--edge),env(safe-area-inset-left))}
+.rail-wrap{width:100%;max-width:1180px;margin:0 auto}
+.rail::-webkit-scrollbar{display:none}
+.rail .card{flex:0 0 clamp(230px,72vw,300px);scroll-snap-align:start;display:flex;flex-direction:column;
+ background:var(--paper);border:1px solid var(--line);transition:transform .2s,box-shadow .2s}
+.rail .card:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(20,19,15,.1)}
+.rail .card .shot{position:relative;aspect-ratio:4/3;overflow:hidden;background:var(--s);border-bottom:1px solid var(--line)}
+.rail .card .shot iframe{position:absolute;inset:0;width:1280px;height:960px;border:0;
+ transform-origin:0 0;pointer-events:none;background:var(--s)}
+.rail .card .shot .ph{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;
+ gap:7px;padding:16px;background:var(--s)}
+.rail .card .shot .ph i{display:block;height:11px;width:72%;background:var(--i);border-radius:1px}
+.rail .card .shot .ph i.b{width:48%}
+.rail .card .shot .ph u{display:block;height:4px;width:60%;background:var(--i);opacity:.26;text-decoration:none}
+.rail .card .shot .ph em{display:block;height:15px;width:36%;background:var(--a);margin-top:5px}
+.rail .card .shot .no{position:absolute;top:0;left:0;z-index:2;padding:6px 11px;background:var(--ink);color:var(--paper);
+ font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em}
+.rail .card .meta{padding:15px 16px 17px}
+.rail .card .meta h3{font-family:var(--body);font-weight:700;font-size:17px;letter-spacing:-.02em}
+.rail .card .meta .code{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mute);margin-top:5px}
+.rail .card .meta .type{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--mute);
+ margin-top:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rail .card .meta .sw{display:flex;gap:5px;margin-top:12px}
+.rail .card .meta .sw i{width:16px;height:16px;border:1px solid rgba(0,0,0,.14)}
+.rail .card .meta .open{display:flex;align-items:center;gap:6px;margin-top:14px;padding-top:12px;
+ border-top:1px solid var(--line);font-size:12.5px;font-weight:700;color:var(--acc)}
+
+/* 심플 스크롤 막대 */
+.bar{position:relative;height:3px;background:var(--line);margin:0 0 4px}
+.bar i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);width:20%;
+ transition:transform .1s linear;transform-origin:left;will-change:transform}
+.tools{display:flex;align-items:center;gap:10px;margin-top:18px}
+.tools .hint{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--mute)}
+.arw{margin-left:auto;display:flex;gap:8px}
+.arw button{width:46px;height:46px;display:grid;place-items:center;background:transparent;
+ border:1px solid var(--line);color:var(--ink);font-size:17px;cursor:pointer;transition:border-color .16s,background .16s}
+.arw button:hover{border-color:var(--ink)}
+.arw button:disabled{opacity:.3;cursor:default}
+.arw button:disabled:hover{border-color:var(--line)}
+@media (max-width:600px){.arw{display:none}}
+
+/* ── 문의 ── */
+.contact{background:var(--ink);color:var(--paper);padding:clamp(58px,10vw,120px) 0}
+.contact h2{font-size:clamp(32px,7.5vw,70px);line-height:1.1}
+.contact h2 em{font-style:normal;color:var(--lime)}
+.contact p{margin-top:22px;max-width:28em;font-size:15px;line-height:1.9;opacity:.72}
+.contact .btns{margin-top:34px}
+.contact .btn.o{color:var(--paper);border-color:rgba(251,248,240,.3)}
+.contact .btn.o:hover{border-color:var(--paper)}
+.contact .info{display:grid;grid-template-columns:1fr;gap:12px;margin-top:clamp(34px,5vw,54px);
+ padding-top:26px;border-top:1px solid rgba(251,248,240,.16);font-size:13.5px}
+.contact .info div{display:flex;gap:12px}
+.contact .info b{flex:0 0 74px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;opacity:.5;font-weight:500;padding-top:3px}
+@media (min-width:700px){.contact .info{grid-template-columns:repeat(2,1fr);gap:14px 40px}}
+
+/* ── 푸터 ── */
+.foot{background:var(--ink);color:var(--paper);padding:0 0 calc(30px + env(safe-area-inset-bottom))}
+.foot .in{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;
+ padding-top:24px;border-top:1px solid rgba(251,248,240,.14);font-size:12px;opacity:.55}
+.foot .sp{margin-left:auto}
+.foot a{text-decoration:underline;text-underline-offset:3px}
+
+/* ── 모바일 고정 CTA ── */
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:80;display:flex;gap:8px;
+ padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left));
+ background:rgba(251,248,240,.92);backdrop-filter:blur(12px);
+ -webkit-backdrop-filter:blur(12px);border-top:1px solid var(--line);
+ transform:translateY(110%);transition:transform .3s cubic-bezier(.22,.7,.25,1)}
+.dock.on{transform:none}
+.dock .btn{flex:1;min-height:50px;font-size:14.5px}
+@media (min-width:860px){.dock{display:none}}
+body{padding-bottom:0}
+@media (max-width:859px){body.docked{padding-bottom:76px}}
+
+/* 중복 CTA 정리 — 하단 고정바가 뜨면 헤더 버튼은 감춘다 */
+@media (max-width:859px){
+  .top .cta{transition:opacity .25s,transform .25s}
+  body.docked .top .cta{opacity:0;transform:scale(.94);pointer-events:none}
+  /* 초기 화면에 핵심 내용이 닿도록 여백 슬림화 */
+  .hero{padding-top:clamp(30px,7vw,46px)}
+  .gal,.contact{padding-top:clamp(44px,8vw,72px)}
+  .gal .head{margin-bottom:18px}
+}
+/* 안내 문구는 화살표가 없는 화면에서만 */
+@media (min-width:601px){.tools .hint{display:none}}
+.tools{min-height:46px}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top" id="top">
+  <div class="wrap in">
+    <a class="logo" href="#"><i>EJ</i> E&amp;J Labs</a>
+    <nav class="nav">
+      <a href="#service">서비스</a>
+      <a href="#styles">디자인 스타일</a>
+      <a href="#contact">문의</a>
+      <a href="index.html">이용약관</a>
+    </nav>
+    <a class="cta" href="quote.html">견적 요청하기</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">WEB DESIGN · BRAND EXPERIENCE · MULTILINGUAL</p>
+    <h1>브랜드의 첫인상을<br>설계합니다</h1>
+    <p class="lead">보기 좋은 화면을 넘어, 사용자가 정보를 쉽고 자연스럽게 이해하도록 설계합니다. 브랜드의 분위기와 목적에 맞는 웹사이트를 만듭니다.</p>
+    <div class="btns">
+      <a class="btn" href="quote.html">견적 요청하기</a>
+      <a class="btn o" href="#styles">디자인 스타일 보기</a>
+    </div>
+  </div>
+</section>
+
+<section class="figs">
+  <div class="wrap in">
+    <div class="fig"><b>28</b><span>디자인 스타일</span></div>
+    <div class="fig"><b>KR · EN</b><span>다국어 웹사이트 구성</span></div>
+    <div class="fig"><b><em>20</em>만 원~</b><span>기본 작업 비용</span></div>
+  </div>
+</section>
+
+<section class="service" id="service">
+  <div class="wrap">
+    <div class="head">
+      <h2>브랜드의 이야기를<br>웹으로 <em>명확하게</em></h2>
+      <p class="intro">정보의 우선순위와 사용자의 흐름, 브랜드 고유의 인상을 함께 고려합니다. 기획이 아직 정리되지 않았더라도 프로젝트의 목적부터 차분히 살펴보며 방향을 제안합니다.</p>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <b>01 / WEB DESIGN</b>
+        <h3>브랜드를 보여주는 웹사이트</h3>
+        <p>기업·브랜드 홈페이지, 제품 소개 페이지, 쇼핑몰과 랜딩페이지를 디자인합니다.</p>
+      </article>
+      <article class="card">
+        <b>02 / PERSONAL BRAND</b>
+        <h3>나만의 포트폴리오</h3>
+        <p>개인 홈페이지와 포트폴리오 사이트에 맞춰 경력과 강점이 돋보이는 구조를 설계합니다.</p>
+      </article>
+      <article class="card">
+        <b>03 / GLOBAL EXPERIENCE</b>
+        <h3>언어와 시장을 고려한 구성</h3>
+        <p>한·영 다국어 웹사이트와 해외 타깃 페이지를 제작합니다. 영어 콘텐츠 구성은 물론 독일어·프랑스어 페이지 작업도 가능합니다.</p>
+      </article>
+    </div>
+    <p class="price">작업 비용은 디자인 방향, 난이도, 페이지 수 및 범위에 따라 달라집니다. 기본 작업 비용은 <b>20만 원부터</b>이며, 요청 사항을 충분히 검토한 후 정확한 견적을 안내해 드립니다.</p>
+    <details class="code-note" open>
+      <summary><b>CODE-BASED BUILD</b></summary>
+      <p>도구의 종류가 결과물의 완성도를 결정하지는 않습니다. E&amp;J Labs는 Figma나 아임웹에서 디자인 시안만 제작하는 방식이 아닌, <strong>GitHub와 Vercel을 기반으로 실제 작동하는 웹사이트를 직접 구현</strong>합니다. 코드 기반 제작은 화면의 움직임과 반응형 디테일을 더욱 섬세하게 설계할 수 있습니다. 기본 호스팅은 무료로 제공되며, 별도 구매가 필요한 항목은 원하실 경우에만 선택하는 <strong>커스텀 도메인(웹 주소)</strong>입니다.</p>
+    </details>
+  </div>
+</section>
+
+<section class="gal" id="styles">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <h2>디자인 스타일<br>28종</h2>
+        <p class="sub" style="margin-top:16px">원하시는 분위기에 가까운 스타일 번호를 선택해 주세요. 카드를 누르면 <b>예시 페이지</b>를 확인할 수 있으며, 예시는 디자인 방향을 보여 드리기 위한 템플릿입니다.</p>
+      </div>
+      <span class="cnt" id="cnt">01 / 28</span>
+    </div>
+  </div>
+  <div class="wrap"><div class="bar"><i id="barfill"></i></div></div>
+  <div class="rail-wrap">
+    <div class="rail" id="rail"></div>
+  </div>
+  <div class="wrap">
+    <div class="tools">
+      <span class="hint">← 옆으로 밀어서 전체 보기 →</span>
+      <div class="arw">
+        <button id="prev" aria-label="이전 스타일">←</button>
+        <button id="next" aria-label="다음 스타일">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <h2>좋은 웹사이트의 시작은<br><em>명확한 대화입니다</em></h2>
+    <p>필요한 웹사이트의 목적과 현재 상황을 알려주세요. 디자인 방향부터 콘텐츠 구성, 사용자 흐름까지 브랜드에 맞는 해답을 함께 찾겠습니다.</p>
+    <div class="btns">
+      <a class="btn" href="quote.html">견적 요청서 작성하기</a>
+      <a class="btn o" href="#styles">스타일 다시 보기</a>
+    </div>
+    <div class="info">
+      <div><b>담당</b><span>윤준혁 / 김은율</span></div>
+      <div><b>연락처</b><span><a href="tel:01059252184">010-5925-2184</a></span></div>
+      <div><b>이메일</b><span><a href="mailto:contact@eyk.kr">contact@eyk.kr</a></span></div>
+      <div><b>경로</b><span>숨고 · 웹 · 카카오톡 · 크몽</span></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap in">
+    <span>E&amp;J Labs · 브랜드를 설계하는 웹디자인 스튜디오</span>
+    <span class="sp"><a href="index.html">이용약관 및 환불규정</a></span>
+  </div>
+</footer>
+
+<div class="dock" id="dock">
+  <a class="btn o" href="#styles">스타일 보기</a>
+  <a class="btn" href="quote.html">견적 요청</a>
+</div>
+
+<script>
+(function(){
+'use strict';
+var S = [{"n":1,"c":"7a","t":"Type Poster","f":"GOTHIC A1 + HAHMLET","s":"#EFEDE6","i":"#0C0C0C","a":"#8B0000","u":"templates/01-type-poster.html"},{"n":2,"c":"7b","t":"Receipt","f":"GOTHIC A1 + JETBRAINS MONO","s":"#23211D","i":"#FBF8F0","a":"#A33A1E","u":"templates/02-receipt.html"},{"n":3,"c":"7c","t":"Broadsheet","f":"GOTHIC A1 + SONG MYUNG","s":"#F6F3EC","i":"#151310","a":"#8A2417","u":"templates/03-broadsheet.html"},{"n":4,"c":"7d","t":"Doors","f":"DO HYEON + GOTHIC A1","s":"#0B0B0C","i":"#FFFFFF","a":"#FF4D17","u":"templates/04-doors.html"},{"n":5,"c":"6a","t":"Quote First","f":"JETBRAINS MONO + PRETENDARD","s":"#FBFBFA","i":"#12130F","a":"#3E3E38","u":"templates/05-quote-first.html"},{"n":6,"c":"6b","t":"Schedule","f":"JETBRAINS MONO + PRETENDARD","s":"#101215","i":"#F2F5F8","a":"#63D2A8","u":"templates/06-schedule.html"},{"n":7,"c":"6c","t":"Versus","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#FFFFFF","i":"#0E1116","a":"#B4472C","u":"templates/07-versus.html"},{"n":8,"c":"5a","t":"Thread","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#F4F3EF","i":"#14161A","a":"#1F6F5C","u":"templates/08-thread.html"},{"n":9,"c":"5b","t":"Side Rail","f":"JETBRAINS MONO + PRETENDARD","s":"#FFFFFF","i":"#111214","a":"#6E7A00","u":"templates/09-side-rail.html"},{"n":10,"c":"5c","t":"Index Ledger","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#FCFBF9","i":"#17150F","a":"#B0402C","u":"templates/10-index-ledger.html"},{"n":11,"c":"5d","t":"Bento Mosaic","f":"JETBRAINS MONO + PRETENDARD","s":"#0F1012","i":"#F5F5F7","a":"#C9F24A","u":"templates/11-bento-mosaic.html"},{"n":12,"c":"5e","t":"Skew Bands","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#FFF9F2","i":"#1B1B1F","a":"#C24E14","u":"templates/12-skew-bands.html"},{"n":13,"c":"4a","t":"Acid Grid","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#FFFFFF","i":"#0C0C0C","a":"#5E7A00","u":"templates/13-acid-grid.html"},{"n":14,"c":"4b","t":"Tape & Tag","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#131316","i":"#F1F1F4","a":"#00E5D0","u":"templates/14-tape-tag.html"},{"n":15,"c":"4c","t":"Highlighter Pop","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#FAF7F0","i":"#1B1A22","a":"#7B5CFF","u":"templates/15-highlighter-pop.html"},{"n":16,"c":"4d","t":"Flyer Stack","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#070707","i":"#FFFFFF","a":"#FF2D2D","u":"templates/16-flyer-stack.html"},{"n":17,"c":"3a","t":"Sticker Neon","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#0A0A0A","i":"#FFFFFF","a":"#FF3D8B","u":"templates/17-sticker-neon.html"},{"n":18,"c":"3b","t":"Poster Display","f":"BLACK HAN SANS + IBM PLEX SANS KR","s":"#EDEBE6","i":"#16161A","a":"#D8A21A","u":"templates/18-poster-display.html"},{"n":19,"c":"3c","t":"Kraft Stamp","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#DCCFB8","i":"#2C2418","a":"#8C3B24","u":"templates/19-kraft-stamp.html"},{"n":20,"c":"3d","t":"Split Cobalt","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#F5F5F7","i":"#0E0E14","a":"#1F44FF","u":"templates/20-split-cobalt.html"},{"n":21,"c":"3e","t":"Duotone Arch","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#0E3A3A","i":"#FFFFFF","a":"#FF6B4A","u":"templates/21-duotone-arch.html"},{"n":22,"c":"2a","t":"Night Marquee","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#08090B","i":"#F4F6F8","a":"#C8FF4D","u":"templates/22-night-marquee.html"},{"n":23,"c":"2b","t":"Paper Brutalist","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#F3EADA","i":"#191510","a":"#D14A20","u":"templates/23-paper-brutalist.html"},{"n":24,"c":"2c","t":"Depth Indigo","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#0B0C1A","i":"#FFFFFF","a":"#3CDCC8","u":"templates/24-depth-indigo.html"},{"n":25,"c":"1a","t":"Editorial Ink","f":"JETBRAINS MONO + NOTO SERIF KR","s":"#F7F4EE","i":"#1A1815","a":"#9A7B45","u":"templates/25-editorial-ink.html"},{"n":26,"c":"1b","t":"Precision Dark","f":"IBM PLEX SANS KR + JETBRAINS MONO","s":"#0D0F12","i":"#F2F5F8","a":"#8AB4FF","u":"templates/26-precision-dark.html"},{"n":27,"c":"1c","t":"Quiet Studio","f":"IBM PLEX SANS KR","s":"#FBFAF8","i":"#23261F","a":"#2F5E45","u":"templates/27-quiet-studio.html"},{"n":28,"c":"1d","t":"Bold Signal","f":"SYSTEM SANS","s":"#FFFFFF","i":"#111111","a":"#E8380D","u":"templates/28-bold-signal.html"}];
+var rail = document.getElementById('rail');
+
+/* 카드 생성 — 미리보기는 화면에 들어올 때만 iframe 을 붙인다 */
+S.forEach(function(v){
+  var a = document.createElement('a');
+  a.className = 'card';
+  a.href = v.u;
+  a.setAttribute('aria-label', 'STYLE ' + v.n + ' ' + v.t + ' 예시 페이지 열기');
+  a.innerHTML =
+    '<div class="shot" style="--s:'+v.s+';--i:'+v.i+';--a:'+v.a+'" data-src="'+v.u+'">' +
+      '<span class="no">'+(v.n<10?'0':'')+v.n+'</span>' +
+      '<span class="ph"><i></i><i class="b"></i><u></u><em></em></span>' +
+    '</div>' +
+    '<div class="meta">' +
+      '<h3>'+v.t+'</h3>' +
+      '<div class="code">'+v.c+' · STYLE '+(v.n<10?'0':'')+v.n+'</div>' +
+      '<div class="type">'+v.f+'</div>' +
+      '<div class="sw"><i style="background:'+v.s+'"></i><i style="background:'+v.i+'"></i><i style="background:'+v.a+'"></i></div>' +
+      '<div class="open">예시 페이지 열기 →</div>' +
+    '</div>';
+  rail.appendChild(a);
+});
+
+/* 실제 페이지를 축소해 썸네일로 — 보이는 것만 로드 */
+var W = 1280;
+function mount(shot){
+  if(shot.dataset.done) return;
+  shot.dataset.done = '1';
+  var f = document.createElement('iframe');
+  f.src = shot.dataset.src;
+  f.loading = 'lazy'; f.tabIndex = -1; f.setAttribute('aria-hidden','true');
+  f.setAttribute('scrolling','no'); f.setAttribute('title','');
+  shot.insertBefore(f, shot.firstChild);
+  var fit = function(){
+    var k = shot.clientWidth / W;
+    f.style.transform = 'scale(' + k + ')';
+    f.style.height = Math.round(shot.clientHeight / k) + 'px';
+  };
+  fit();
+  f.addEventListener('load', function(){
+    fit();
+    var ph = shot.querySelector('.ph');
+    if(ph) ph.style.display = 'none';
+  });
+  window.addEventListener('resize', fit);
+}
+if('IntersectionObserver' in window){
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ mount(e.target); io.unobserve(e.target); } });
+  }, {root: rail, rootMargin: '260px'});
+  Array.prototype.forEach.call(rail.querySelectorAll('.shot'), function(s){ io.observe(s); });
+} else {
+  Array.prototype.forEach.call(rail.querySelectorAll('.shot'), mount);
+}
+
+/* 심플 스크롤 막대 + 현재 번호 */
+var fill = document.getElementById('barfill'),
+    cnt  = document.getElementById('cnt'),
+    prev = document.getElementById('prev'),
+    next = document.getElementById('next'), tick;
+function sync(){
+  var max = rail.scrollWidth - rail.clientWidth;
+  var p   = max > 0 ? rail.scrollLeft / max : 0;
+  var vis = rail.clientWidth / rail.scrollWidth;
+  fill.style.width = Math.max(vis * 100, 8) + '%';
+  fill.style.transform = 'translateX(' + (p * (100 / Math.max(vis * 100, 8) * 100 - 100)) + '%)';
+  var card = rail.querySelector('.card');
+  var step = card ? card.offsetWidth + 16 : 300;
+  var i = Math.min(S.length, Math.round(rail.scrollLeft / step) + 1);
+  cnt.textContent = (i < 10 ? '0' : '') + i + ' / ' + S.length;
+  if(prev) prev.disabled = rail.scrollLeft < 4;
+  if(next) next.disabled = rail.scrollLeft > max - 4;
+}
+rail.addEventListener('scroll', function(){
+  if(tick) return;
+  tick = requestAnimationFrame(function(){ tick = null; sync(); });
+}, {passive:true});
+window.addEventListener('resize', sync);
+function move(dir){
+  var card = rail.querySelector('.card');
+  var step = card ? card.offsetWidth + 16 : 300;
+  rail.scrollBy({left: dir * step, behavior:'smooth'});
+}
+if(prev) prev.addEventListener('click', function(){ move(-1); });
+if(next) next.addEventListener('click', function(){ move(1); });
+sync();
+
+/* 모바일에서는 긴 설명을 접어둔다 */
+var note = document.querySelector('.code-note');
+if(note && window.matchMedia('(max-width:760px)').matches) note.removeAttribute('open');
+
+/* 헤더 경계선 · 모바일 고정 CTA */
+var top = document.getElementById('top'), dock = document.getElementById('dock'), hero = document.querySelector('.hero');
+function onScroll(){
+  top.classList.toggle('on', window.scrollY > 8);
+  var show = window.scrollY > (hero ? hero.offsetHeight * .6 : 400);
+  dock.classList.toggle('on', show);
+  document.body.classList.toggle('docked', show);
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+})();
+</script>
+</body>
+</html>
