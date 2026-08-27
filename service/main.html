@@ -61,7 +61,20 @@ p{margin:0}
 .hero::after{content:"";position:absolute;left:-1px;right:-1px;bottom:-1px;
  height:clamp(18px,5vw,64px);background:var(--ink);
  clip-path:polygon(0 100%,100% 0,100% 101%,0 101%)}
-.hero .eyebrow{font-family:var(--mono);font-size:clamp(10.5px,1.4vw,12px);letter-spacing:.24em;color:var(--acc);margin-bottom:22px}
+.hero .eyebrow{font-family:var(--mono);font-size:clamp(10.5px,1.4vw,12px);
+ letter-spacing:.24em;color:var(--acc);margin-bottom:22px}
+.hero .eyebrow .m{display:none}
+@media (max-width:859px){
+  /* 상단 헤더가 없으므로 이 자리에 상호명을 둔다 */
+  .hero .eyebrow{margin-bottom:20px;letter-spacing:normal}
+  .hero .eyebrow .d{display:none}
+  .hero .eyebrow .m{display:inline-flex;align-items:center;gap:9px;
+   font-family:var(--body);font-size:17px;font-weight:900;letter-spacing:-.02em;
+   color:var(--ink);text-transform:none}
+  .hero .eyebrow .m i{display:grid;place-items:center;width:29px;height:29px;flex:none;
+   background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:10.5px;
+   font-style:normal;font-weight:700;letter-spacing:0}
+}
 .hero h1{font-size:clamp(40px,10.5vw,104px);line-height:1.06;letter-spacing:-.04em}
 .hero p.lead{margin-top:26px;max-width:30em;font-size:clamp(15px,1.9vw,18px);line-height:1.9;color:var(--ink-2)}
 .hero .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:clamp(28px,4vw,40px)}
@@ -278,7 +291,10 @@ body{padding-bottom:0}
 
 <section class="hero">
   <div class="wrap">
-    <p class="eyebrow">WEB DESIGN · BRAND EXPERIENCE · MULTILINGUAL</p>
+    <p class="eyebrow">
+      <span class="d">WEB DESIGN · BRAND EXPERIENCE · MULTILINGUAL</span>
+      <span class="m"><i>EJ</i> E&amp;J Labs</span>
+    </p>
     <h1>브랜드의 첫인상을<br>설계합니다</h1>
     <p class="lead">보기 좋은 화면을 넘어, 사용자가 정보를 쉽고 자연스럽게 이해하도록 설계합니다. 브랜드의 분위기와 목적에 맞는 웹사이트를 만듭니다.</p>
     <div class="btns">
