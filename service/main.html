@@ -243,12 +243,11 @@ p{margin:0}
 body{padding-bottom:0}
 @media (max-width:859px){body.docked{padding-bottom:76px}}
 
-/* 중복 CTA 정리 — 하단 고정바가 뜨면 헤더 버튼은 감춘다 */
+/* 모바일에서는 상단 헤더를 쓰지 않는다 — 하단 고정바가 그 역할을 대신함 */
 @media (max-width:859px){
-  .top .cta{transition:opacity .25s,transform .25s}
-  body.docked .top .cta{opacity:0;transform:scale(.94);pointer-events:none}
+  .top{display:none}
   /* 초기 화면에 핵심 내용이 닿도록 여백 슬림화 */
-  .hero{padding-top:clamp(30px,7vw,46px)}
+  .hero{padding-top:clamp(26px,6vw,42px)}
   .gal,.contact{padding-top:clamp(44px,8vw,72px)}
   .gal .head{margin-bottom:18px}
 }
@@ -481,7 +480,8 @@ if(note && window.matchMedia('(max-width:760px)').matches) note.removeAttribute(
 var top = document.getElementById('top'), dock = document.getElementById('dock'), hero = document.querySelector('.hero');
 function onScroll(){
   top.classList.toggle('on', window.scrollY > 8);
-  var show = window.scrollY > (hero ? hero.offsetHeight * .6 : 400);
+  var mob = window.matchMedia('(max-width:859px)').matches;
+  var show = window.scrollY > (mob ? 120 : (hero ? hero.offsetHeight * .6 : 400));
   dock.classList.toggle('on', show);
   document.body.classList.toggle('docked', show);
 }
