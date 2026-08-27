@@ -71,7 +71,12 @@ p{margin:0}
 .btn:hover{opacity:.88}.btn:active{transform:translateY(1px)}
 .btn.o{background:transparent;color:var(--ink);border-color:var(--line)}
 .btn.o:hover{border-color:var(--ink)}
-@media (max-width:420px){.btn{flex:1 1 100%}}
+@media (max-width:480px){
+  .btns{gap:8px;flex-wrap:nowrap}
+  .btn{flex:1 1 0;min-width:0;min-height:50px;
+   padding:0 clamp(8px,2.4vw,18px);font-size:clamp(12.5px,3.4vw,15px);
+   white-space:nowrap;letter-spacing:-.02em}
+}
 
 /* ── 수치 ── */
 .figs{background:var(--ink);color:var(--paper);
