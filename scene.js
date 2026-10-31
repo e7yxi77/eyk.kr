@@ -16,7 +16,7 @@
   const FRAG = `
 precision highp float;
 uniform vec2 R;
-uniform float T,ROT,ARM,FLAT,INK,CHR,BAND;
+uniform float T,ROT,ARM,FLAT,INK,BAND;
 uniform vec2 M;
 uniform vec3 C,FIG,LINE,INKC;
 uniform mat3 HEAD;
@@ -98,23 +98,12 @@ vec4 inkLayer(vec2 fc){
   float asp=R.x/R.y;
   vec2 mp=vec2((M.x*.5+.5)*asp,M.y*.5+.5);
   float md=length(g-mp);
-  float n=fbm(g*2.5+vec2(T*.012,-T*.018));
-  n+=.16*exp(-md*md*16.);
-  float l=abs(fract(n*3.6)-.5);
-  float mainBand=step(l,.095);
-  float softBand=step(abs(l-.3),.04);
-  float d1=step(mod(fc.x,2.),1.)*step(mod(fc.y,2.),1.);
-  float d2=step(mod(fc.x,3.),1.)*step(mod(fc.y,3.),1.);
-  float a=max(mainBand*d1,softBand*d2*.55);
-  float fade=mix(1.,smoothstep(1.02,.2,fc.y/R.y),CHR);
-  a*=INK*fade;
-  vec3 c=INKC;
-  if(CHR>.01){
-    float k=B4(fc+vec2(2.,1.));
-    c=mix(c,vec3(.1,.75,1.)*c.b,step(.72,k)*CHR);
-    c=mix(c,vec3(.55,.35,1.)*c.b,step(k,.14)*CHR);
-  }
-  return vec4(c*a,a);
+  float n=fbm(g*1.5+vec2(T*.01,-T*.014));
+  n+=.12*exp(-md*md*16.);
+  float l=abs(fract(n*2.4)-.5);
+  float a=step(l,.05)*step(mod(fc.x,3.),1.)*step(mod(fc.y,3.),1.);
+  a*=INK*smoothstep(.5,.03,fc.y/R.y);
+  return vec4(INKC*a,a);
 }
 
 void main(){
@@ -160,7 +149,7 @@ void main(){
     float band=exp(-(p.y-by)*(p.y-by)/.016)*BAND;
     float lum=.04+.8*dif*(.35+.65*ao)+.62*rim+band*.85;
     lum*=mod(fc.y,2.)<1.?1.:.74;
-    float r=step(B4(fc+vec2(3.,1.)),lum*.42);
+    float r=step(B4(fc+vec2(3.,1.)),lum*.26);
     float g=step(B4(fc+vec2(1.,2.)),lum*.74);
     float b=step(B4(fc),lum*1.3);
     vec3 dith=vec3(r,g,b)*vec3(.62,.86,1.);
@@ -219,13 +208,13 @@ void main(){
   gl.clearColor(0, 0, 0, 0);
 
   const U = {};
-  ['R', 'T', 'ROT', 'ARM', 'FLAT', 'INK', 'CHR', 'BAND', 'M', 'C', 'FIG', 'LINE', 'INKC', 'HEAD'].forEach(n => { U[n] = gl.getUniformLocation(prog, n); });
+  ['R', 'T', 'ROT', 'ARM', 'FLAT', 'INK', 'BAND', 'M', 'C', 'FIG', 'LINE', 'INKC', 'HEAD'].forEach(n => { U[n] = gl.getUniformLocation(prog, n); });
 
   /* Colour of each page theme. Tweened in time so it flips with the CSS background. */
   const THEMES = {
-    dark:  { flat: 0, fig: [.02, .02, .03], line: [.3, .4, .9],    ink: [.16, .34, 1],   inkA: .55, chr: 1, band: 1 },
-    light: { flat: 1, fig: [1, 1, 1],       line: [.55, .58, .64], ink: [.03, .04, .08], inkA: .8,  chr: 0, band: 0 },
-    blue:  { flat: 1, fig: [.102, .271, 1], line: [.01, .02, .09], ink: [.01, .02, .07], inkA: .95, chr: 0, band: 0 }
+    dark:  { flat: 0, fig: [.02, .02, .03], line: [.3, .4, .9],    ink: [.16, .34, 1],   inkA: .55, band: 1 },
+    light: { flat: 1, fig: [1, 1, 1],       line: [.55, .58, .64], ink: [.03, .04, .08], inkA: .5,  band: 0 },
+    blue:  { flat: 1, fig: [.102, .271, 1], line: [.01, .02, .09], ink: [.01, .02, .07], inkA: .7,  band: 0 }
   };
 
   /* Where the camera sits for each section. x: screen shift · y: look height · d: distance */
@@ -302,9 +291,6 @@ void main(){
     return [cy, sy * sp, -sy * cp, 0, cp, sp, sy, -cy * sp, cy * cp];
   }
 
-  const mini = document.getElementById('miniFig');
-  const miniCtx = mini ? mini.getContext('2d') : null;
-
   let frames = 0, last = 0, acc = 0, n = 0, startT = performance.now(), ready = false;
 
   function draw(now) {
@@ -318,7 +304,6 @@ void main(){
     const th = THEMES[theme], ce = reduced ? 1 : .07;
     col.flat += (th.flat - col.flat) * ce;
     col.inkA += (th.inkA - col.inkA) * ce;
-    col.chr += (th.chr - col.chr) * ce;
     col.band += (th.band - col.band) * ce;
     ['fig', 'line', 'ink'].forEach(k => { for (let i = 0; i < 3; i++) col[k][i] += (th[k][i] - col[k][i]) * ce; });
 
@@ -336,7 +321,6 @@ void main(){
     gl.uniform1f(U.ARM, cam.arm);
     gl.uniform1f(U.FLAT, col.flat);
     gl.uniform1f(U.INK, col.inkA);
-    gl.uniform1f(U.CHR, col.chr);
     gl.uniform1f(U.BAND, col.band);
     gl.uniform3fv(U.FIG, col.fig);
     gl.uniform3fv(U.LINE, col.line);
@@ -344,11 +328,6 @@ void main(){
     gl.uniformMatrix3fv(U.HEAD, false, headMatrix(pitch, yaw));
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 
-    if (miniCtx && frames % 4 === 0 && scrollY < innerHeight) {
-      const sw = canvas.height * .9 * (mini.width / mini.height), sh = canvas.height * .9;
-      miniCtx.clearRect(0, 0, mini.width, mini.height);
-      miniCtx.drawImage(canvas, (canvas.width - sw) / 2, canvas.height * .05, sw, sh, 0, 0, mini.width, mini.height);
-    }
     frames++;
 
     if (!ready) {

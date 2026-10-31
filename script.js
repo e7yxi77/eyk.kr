@@ -59,34 +59,23 @@
   }
 
   // ── Pointer readouts + crosshair ──
-  const xEl = document.getElementById('readX');
-  const yEl = document.getElementById('readY');
   const cross = document.getElementById('cross');
   const fine = matchMedia('(pointer: fine)').matches;
   if (fine && cross) cross.hidden = false;
   addEventListener('pointermove', e => {
     if (e.pointerType === 'touch') return;
-    if (xEl) xEl.textContent = pad3(e.clientX);
-    if (yEl) yEl.textContent = pad3(e.clientY);
     if (cross) {
       cross.classList.add('live');
       cross.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
       cross.classList.toggle('hot', !!e.target.closest('a,button,label,input'));
-      cross.dataset.xy = pad3(e.clientX) + ' / ' + pad3(e.clientY);
     }
   }, { passive: true });
 
-  // ── Scroll progress + parallax ──
-  const pctEl = document.getElementById('scrollPct');
-  const fill = document.getElementById('scrollFill');
+  // ── Parallax ──
   const drift = [...document.querySelectorAll('[data-drift]')];
   let ticking = false;
   function onScroll() {
     ticking = false;
-    const max = document.documentElement.scrollHeight - innerHeight;
-    const p = max > 0 ? Math.min(1, scrollY / max) : 0;
-    if (pctEl) pctEl.textContent = pad3(p * 100);
-    if (fill) fill.style.transform = 'scaleX(' + p + ')';
     if (reduced) return;
     drift.forEach(el => {
       const box = el.parentElement.getBoundingClientRect();

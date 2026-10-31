@@ -22,18 +22,18 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800;900&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="icon" href="favicon.png">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-theme="dark" class="tools-page">
+<body data-theme="dark">
 
 <main class="detail-main">
 
-  <a href="index.html#tools" class="back-link"><span>←</span> Back to Portfolio</a>
+  <a href="index.html#tools" class="back-link"><span>←</span> <span class="i18n-ko">포트폴리오로 돌아가기</span><span class="i18n-en">Back to Portfolio</span></a>
 
   <div class="detail-head">
-    <p class="section-tag">Security Toolkit · Educational Research</p>
+    <p class="section-tag"><span class="i18n-ko">보안 툴킷 · 교육 연구용</span><span class="i18n-en">Security Toolkit · Educational Research</span></p>
     <h1><span class="i18n-ko">보안 학습용 <strong>모의해킹 툴킷</strong></span><span class="i18n-en">Security Education <strong>Penetration Testing Toolkit</strong></span></h1>
     <p>
       <span class="i18n-ko">파트너와 공동 개발한 교육·연구용 보안 도구입니다. 보안 원리와 모의해킹 절차를 책임 있게 학습하고
@@ -52,19 +52,19 @@
 
   <div class="tool-meta">
     <div class="tool-meta-item">
-      <span class="tm-label">Purpose</span>
+      <span class="tm-label"><span class="i18n-ko">목적</span><span class="i18n-en">Purpose</span></span>
       <span class="tm-value"><span class="i18n-ko">교육 · 연구 · 검증</span><span class="i18n-en">Education · Research · Validation</span></span>
     </div>
     <div class="tool-meta-item">
-      <span class="tm-label">License</span>
+      <span class="tm-label"><span class="i18n-ko">라이선스</span><span class="i18n-en">License</span></span>
       <span class="tm-value"><span class="i18n-ko">이용약관 동의 필요</span><span class="i18n-en">Terms acceptance required</span></span>
     </div>
     <div class="tool-meta-item">
-      <span class="tm-label">Developed with</span>
+      <span class="tm-label"><span class="i18n-ko">개발</span><span class="i18n-en">Developed with</span></span>
       <span class="tm-value"><span class="i18n-ko">파트너 공동 개발</span><span class="i18n-en">Co-developed with partners</span></span>
     </div>
     <div class="tool-meta-item">
-      <span class="tm-label">Governing Law</span>
+      <span class="tm-label"><span class="i18n-ko">준거법</span><span class="i18n-en">Governing Law</span></span>
       <span class="tm-value"><span class="i18n-ko">대한민국</span><span class="i18n-en">Republic of Korea</span></span>
     </div>
   </div>
@@ -160,7 +160,7 @@
   <div class="download-wrap">
     <a href="#" id="downloadBtn" class="btn-download" role="button" aria-disabled="true" download>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download
+      <span class="i18n-ko">다운로드</span><span class="i18n-en">Download</span>
     </a>
     <p class="download-note"><span class="i18n-ko">이용약관에 동의한 후 다운로드를 진행할 수 있습니다.</span><span class="i18n-en">You may proceed with the download after agreeing to the Terms of Service.</span></p>
   </div>
@@ -168,8 +168,8 @@
   <div class="footer-bar" style="margin-top:80px;">
     <div class="footer-brand"><span class="i18n-ko">김은율 (EYK) — 2026</span><span class="i18n-en">Eunyul Kim (EYK) — 2026</span></div>
     <div class="footer-links">
-      <a href="index.html">Home</a>
-      <a href="mailto:contact@eyk.kr">Email</a>
+      <a href="index.html"><span class="i18n-ko">처음</span><span class="i18n-en">Home</span></a>
+      <a href="mailto:contact@eyk.kr"><span class="i18n-ko">이메일</span><span class="i18n-en">Email</span></a>
       <span class="footer-credit"><span class="i18n-ko">© 2026 김은율 · All Rights Reserved</span><span class="i18n-en">© 2026 Eunyul Kim · All Rights Reserved</span></span>
     </div>
   </div>
@@ -177,36 +177,35 @@
 </main>
 
 <div class="bar">
+  <a class="bar__brand" href="index.html">EYK</a>
   <nav class="bar__nav" aria-label="Primary">
-    <a href="index.html">INDEX <i>+</i></a>
-    <a href="index.html#about">ABOUT <i>+</i></a>
-    <a href="index.html#work">WORK <i>+</i></a>
-    <a href="index.html#record">RECORD <i>+</i></a>
-    <a href="index.html#stack">STACK <i>+</i></a>
-    <a href="index.html#goals">GOALS <i>+</i></a>
-    <a class="on" href="tools.html">TOOLS <i>+</i></a>
+    <a href="index.html#about"><span class="i18n-ko">소개</span><span class="i18n-en">ABOUT</span></a>
+    <a href="index.html#work"><span class="i18n-ko">프로젝트</span><span class="i18n-en">WORK</span></a>
+    <a href="index.html#record"><span class="i18n-ko">이력</span><span class="i18n-en">RECORD</span></a>
+    <a href="index.html#stack"><span class="i18n-ko">기술</span><span class="i18n-en">STACK</span></a>
+    <a href="index.html#goals"><span class="i18n-ko">목표</span><span class="i18n-en">GOALS</span></a>
+    <a class="on" href="tools.html"><span class="i18n-ko">도구</span><span class="i18n-en">TOOLS</span></a>
   </nav>
-  <button class="bar__menu" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileMenu">MENU <i>+</i></button>
+  <button class="bar__menu" id="navToggle" type="button" aria-expanded="false" aria-controls="mobileMenu"><span class="i18n-ko">메뉴</span><span class="i18n-en">MENU</span></button>
   <div class="bar__right">
     <div class="lang-switch" role="group" aria-label="Language / 언어 전환">
       <button class="lang-opt" data-l="ko" type="button">KO</button>
       <button class="lang-opt" data-l="en" type="button">EN</button>
     </div>
-    <span class="bar__tz">GMT+9</span>
     <span class="bar__clock"><i></i><span data-clock>00:00:00</span></span>
-    <a class="bar__cta" href="index.html#contact">CONTACT <span>+</span></a>
+    <a class="bar__cta" href="index.html#contact"><span class="i18n-ko">문의</span><span class="i18n-en">CONTACT</span></a>
   </div>
 </div>
 
 <div class="menu" id="mobileMenu">
-  <a href="index.html"><b>01</b>INDEX</a>
-  <a href="index.html#about"><b>02</b>ABOUT</a>
-  <a href="index.html#work"><b>03</b>WORK</a>
-  <a href="index.html#record"><b>04</b>RECORD</a>
-  <a href="index.html#stack"><b>05</b>STACK</a>
-  <a href="index.html#goals"><b>06</b>GOALS</a>
-  <a href="tools.html"><b>07</b>TOOLS</a>
-  <a href="index.html#contact"><b>08</b>CONTACT</a>
+  <a href="index.html"><span class="i18n-ko">처음</span><span class="i18n-en">INDEX</span></a>
+  <a href="index.html#about"><span class="i18n-ko">소개</span><span class="i18n-en">ABOUT</span></a>
+  <a href="index.html#work"><span class="i18n-ko">프로젝트</span><span class="i18n-en">WORK</span></a>
+  <a href="index.html#record"><span class="i18n-ko">이력</span><span class="i18n-en">RECORD</span></a>
+  <a href="index.html#stack"><span class="i18n-ko">기술</span><span class="i18n-en">STACK</span></a>
+  <a href="index.html#goals"><span class="i18n-ko">목표</span><span class="i18n-en">GOALS</span></a>
+  <a href="tools.html"><span class="i18n-ko">도구</span><span class="i18n-en">TOOLS</span></a>
+  <a href="index.html#contact"><span class="i18n-ko">문의</span><span class="i18n-en">CONTACT</span></a>
 </div>
 
 <script src="script.js"></script>
