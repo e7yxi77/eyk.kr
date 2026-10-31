@@ -35,8 +35,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Black+Han+Sans&family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<link rel="icon" href="favicon.png">
-<link rel="stylesheet" href="style.css?v=8e90ed41eb">
+<link rel="icon" href="favicon.png?v=ffc291f3f9">
+<link rel="stylesheet" href="style.css?v=3da259cc6e">
 
 <script type="application/ld+json">
 {
@@ -70,15 +70,43 @@
 
   <!-- ═══ 처음 ═══ -->
   <section class="hero" id="hero" data-scene="hero" data-theme="dark">
+    <div class="hud hud--tl front">
+      <div class="mini">
+        <canvas id="miniFig" width="284" height="142" aria-hidden="true"></canvas>
+        <span class="mini__c mini__c--l">X <b id="readX">000</b></span>
+        <span class="mini__c mini__c--r">Y <b id="readY">000</b></span>
+      </div>
+      <div class="hud__pair" aria-hidden="true"><span>// VISITOR DETECTED</span><span>I SEE YOUR CURSOR //</span></div>
+    </div>
+
+    <div class="hud hud--tr front">
+      <div class="hud__tags" aria-hidden="true"><span>// AI</span><span>// BUSINESS</span><span>// AUTOMATION</span></div>
+      <dl class="honors">
+        <div><dt><span class="i18n-ko">THE해커톤 : DREAMERS</span><span class="i18n-en">THE HACKATHON: DREAMERS</span></dt><dd><span class="i18n-ko">1등 우승</span><span class="i18n-en">1ST PLACE</span></dd></div>
+        <div><dt><span class="i18n-ko">눈길</span><span class="i18n-en">NUNGIL</span></dt><dd><span class="i18n-ko">우승 프로젝트</span><span class="i18n-en">WINNING PROJECT</span></dd></div>
+        <div><dt>DSSI DASHBOARD</dt><dd><span class="i18n-ko">정식 출시</span><span class="i18n-en">LAUNCHED</span></dd></div>
+        <div><dt>HANFLOW</dt><dd><span class="i18n-ko">운영 중</span><span class="i18n-en">LIVE</span></dd></div>
+      </dl>
+    </div>
+
+    <div class="hud hud--coordL front" aria-hidden="true"><span>//</span><span>37.5665° N</span></div>
+    <div class="hud hud--coordR front" aria-hidden="true"><span>126.9780° E</span><span>//</span></div>
+
     <h1 class="hero__name" aria-label="김은율 (Eunyul Kim)">
-      <span class="hero__l"><span class="i18n-ko">김은</span><span class="i18n-en" data-decode>EUNYUL</span></span>
-      <span class="hero__r"><span class="i18n-ko">율</span><span class="i18n-en" data-decode>KIM</span></span>
+      <span data-decode>EUNYUL</span>
+      <span data-decode>KIM</span>
     </h1>
 
-    <p class="hero__sub front">
-      <strong class="hero__role"><span class="i18n-ko">AI 비즈니스 창업가 · 이와이렙스 대표</span><span class="i18n-en">AI Business Founder · 이와이렙스</span></strong>
-      <span class="i18n-ko">AI를 활용해 불편한 문제를 찾고, 실제로 쓰이는 서비스와 사업으로 만듭니다.</span><span class="i18n-en">I use AI to find real problems and turn them into services and businesses people actually use.</span>
-    </p>
+    <div class="hud hud--bl front">
+      <span class="brk brk--tl"></span><span class="brk brk--tr"></span><span class="brk brk--bl"></span><span class="brk brk--br"></span>
+      <strong class="hero__role"><span class="i18n-ko">김은율 · AI 비즈니스 창업가 · 이와이렙스 대표</span><span class="i18n-en">Eunyul Kim · AI Business Founder · 이와이렙스</span></strong>
+      <p class="hero__sub"><span class="i18n-ko">AI를 활용해 불편한 문제를 찾고, 실제로 쓰이는 서비스와 사업으로 만듭니다.</span><span class="i18n-en">I use AI to find real problems and turn them into services and businesses people actually use.</span></p>
+    </div>
+
+    <div class="hud hud--br front" aria-hidden="true">
+      <div class="scrollbar"><span id="scrollPct">000</span><span class="scrollbar__t"><i id="scrollFill"></i></span><span>100</span></div>
+      <span class="hud__scroll">SCROLL</span>
+    </div>
   </section>
 
   <!-- ═══ 소개 ═══ -->
@@ -86,185 +114,181 @@
     <div class="blk blk--v back" aria-hidden="true"></div>
     <div class="blk blk--a back" data-drift="-14" aria-hidden="true"></div>
     <div class="blk blk--b back" data-drift="16" aria-hidden="true"></div>
+    <div class="about__num front" aria-hidden="true">0018</div>
+    <div class="corner corner--l front" aria-hidden="true"><span>AI BUSINESS FOUNDER</span><span>AI SERVICES<br>AUTOMATION<br>SECURITY</span></div>
+    <div class="corner corner--r front" aria-hidden="true"><span>AI SERVICES<br>AUTOMATION<br>SECURITY</span><span>AI BUSINESS FOUNDER</span></div>
+    <div class="flip front" aria-hidden="true">
+      <span>BUSINESS<br>PRODUCT<br>AI SERVICE<br>LLM TOOLING</span>
+      <span>AUTOMATION<br>DATA PIPELINE<br>WEB HACKING<br>REVERSING</span>
+    </div>
 
-    <div class="about__grid front">
-      <div class="about__col">
-        <article class="dom rv">
-          <b>01</b>
-          <h2><span class="i18n-ko">AI로 문제를 찾아 사업으로 만듭니다</span><span class="i18n-en">Turning problems into businesses with AI</span></h2>
-          <p><span class="i18n-ko">일상과 현장의 불편한 점에서 출발해 AI를 활용한 서비스를 기획하고, 직접 만들어 사업으로 연결합니다. 이와이렙스를 설립해 아이디어를 실제 서비스로 옮기고 있습니다.</span><span class="i18n-en">Starting from everyday frustrations, I plan AI-powered services, build them myself, and connect them to a business. I founded 이와이렙스 to turn ideas into real services.</span></p>
-        </article>
-        <article class="dom rv">
-          <b>02</b>
-          <h2><span class="i18n-ko">AI를 실질적인 도구로 적용합니다</span><span class="i18n-en">Applying AI as a practical tool</span></h2>
-          <p><span class="i18n-ko">새로운 모델과 도구를 검토하고, 필요한 경우 직접 실험과 파인튜닝을 수행합니다. 데이터에서 패턴과 이상 신호를 찾아 실제 의사결정으로 잇습니다.</span><span class="i18n-en">I evaluate new models and tools, and when needed, run experiments and fine-tuning myself. I find patterns and anomalies in data and connect them to real decisions.</span></p>
-        </article>
-      </div>
-      <div class="about__col">
-        <article class="dom rv">
-          <b>03</b>
-          <h2><span class="i18n-ko">반복 가능한 판단을 알고리즘화합니다</span><span class="i18n-en">Converting repeatable judgment into algorithms</span></h2>
-          <p><span class="i18n-ko">명확한 규칙과 검증 가능한 기준이 있는 과정은 자동화의 대상이 될 수 있습니다. 매매 전략과 운영 워크플로를 구조화하여 더 일관되고 재현 가능한 결과를 만듭니다.</span><span class="i18n-en">Processes with clear rules and verifiable criteria can be automated. I structure trading strategies and operational workflows to produce more consistent, reproducible outcomes.</span></p>
-        </article>
-        <article class="dom rv">
-          <b>04</b>
-          <h2><span class="i18n-ko">보안을 이해하고 서비스를 만듭니다</span><span class="i18n-en">Building with security in mind</span></h2>
-          <p><span class="i18n-ko">바이너리, 웹, 포렌식 영역에서 취약점이 발생하는 구조적 원인을 연구한 경험을 바탕으로, 더 신뢰할 수 있는 서비스를 설계합니다.</span><span class="i18n-en">Having studied the structural causes of vulnerabilities across binaries, web, and forensics, I design services that people can trust.</span></p>
-        </article>
-      </div>
+    <div class="sec-top sec-top--about"></div>
+    <div class="sheet sheet--grid front">
+      <article class="dom rv">
+        <b>01</b>
+        <h2><span class="i18n-ko">AI로 문제를 찾아 사업으로 만듭니다</span><span class="i18n-en">Turning problems into businesses with AI</span></h2>
+        <p><span class="i18n-ko">일상과 현장의 불편한 점에서 출발해 AI를 활용한 서비스를 기획하고, 직접 만들어 사업으로 연결합니다. 이와이렙스를 설립해 아이디어를 실제 서비스로 옮기고 있습니다.</span><span class="i18n-en">Starting from everyday frustrations, I plan AI-powered services, build them myself, and connect them to a business. I founded 이와이렙스 to turn ideas into real services.</span></p>
+      </article>
+      <article class="dom rv">
+        <b>02</b>
+        <h2><span class="i18n-ko">AI를 실질적인 도구로 적용합니다</span><span class="i18n-en">Applying AI as a practical tool</span></h2>
+        <p><span class="i18n-ko">새로운 모델과 도구를 검토하고, 필요한 경우 직접 실험과 파인튜닝을 수행합니다. 데이터에서 패턴과 이상 신호를 찾아 실제 의사결정으로 잇습니다.</span><span class="i18n-en">I evaluate new models and tools, and when needed, run experiments and fine-tuning myself. I find patterns and anomalies in data and connect them to real decisions.</span></p>
+      </article>
+      <article class="dom rv">
+        <b>03</b>
+        <h2><span class="i18n-ko">반복 가능한 판단을 알고리즘화합니다</span><span class="i18n-en">Converting repeatable judgment into algorithms</span></h2>
+        <p><span class="i18n-ko">명확한 규칙과 검증 가능한 기준이 있는 과정은 자동화의 대상이 될 수 있습니다. 매매 전략과 운영 워크플로를 구조화하여 더 일관되고 재현 가능한 결과를 만듭니다.</span><span class="i18n-en">Processes with clear rules and verifiable criteria can be automated. I structure trading strategies and operational workflows to produce more consistent, reproducible outcomes.</span></p>
+      </article>
+      <article class="dom rv">
+        <b>04</b>
+        <h2><span class="i18n-ko">보안을 이해하고 서비스를 만듭니다</span><span class="i18n-en">Building with security in mind</span></h2>
+        <p><span class="i18n-ko">바이너리, 웹, 포렌식 영역에서 취약점이 발생하는 구조적 원인을 연구한 경험을 바탕으로, 더 신뢰할 수 있는 서비스를 설계합니다.</span><span class="i18n-en">Having studied the structural causes of vulnerabilities across binaries, web, and forensics, I design services that people can trust.</span></p>
+      </article>
     </div>
   </section>
 
   <!-- ═══ 프로젝트 ═══ -->
-  <section class="work" id="work" data-scene="work" data-theme="dark">
-    <div class="wrap front">
-      <h2 class="giant"><span class="i18n-ko">프로젝트</span><span class="i18n-en" data-decode>WORK</span></h2>
-
-      <div class="rows">
-        <div class="row row--top rv">
-          <div class="row__main">
-            <strong><a href="https://nungil.the-hackathon-dreamers.axhub.page/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">눈길</span><span class="i18n-en">NUNGIL</span></a></strong>
-            <span><span class="i18n-ko">손을 사용하지 않고, 눈과 목소리만으로 몸이 불편한 사람들을 위한 완전히 새로운 인터넷 브라우징 경험</span><span class="i18n-en">A completely new way to browse the internet for people with physical disabilities, using only the eyes and voice, without hands</span></span>
-            <p class="row__award"><span class="i18n-ko">THE 해커톤: DREAMERS #1등 우승 프로젝트</span><span class="i18n-en">THE Hackathon: DREAMERS #1 winning project</span></p>
-            <p class="row__note"><span class="i18n-ko">이 프로젝트는 OpenAI 및 (주)루드다이나믹스, (주)조코딩에이엑스파트너스의 지원을 받았습니다.</span><span class="i18n-en">This project was supported by OpenAI, Lud Dynamics Inc., and Jocoding AX Partners Inc.</span></p>
-            <ul class="sup">
-              <li><img src="logos/openai.svg?v=2b4a04ddc2" alt="" width="24" height="24"><span>OpenAI</span></li>
-              <li><img src="logos/lud-dynamics.png?v=a99e9376b3" alt="" width="24" height="24"><a href="https://www.lud.works/me" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">(주)루드다이나믹스</span><span class="i18n-en">Lud Dynamics Inc.</span></a></li>
-              <li><img src="logos/jocoding-ax.svg?v=52db5ba6dd" alt="" width="31" height="22"><a href="https://axhub.ai/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">(주)조코딩에이엑스파트너스</span><span class="i18n-en">Jocoding AX Partners Inc.</span></a></li>
-            </ul>
-          </div>
-        </div>
-        <a class="row rv" href="https://about.hanflow.org/" target="_blank" rel="noopener noreferrer">
-          <span class="row__main">
-            <strong class="lnk">HANFLOW <small>한플로우</small></strong>
-            <span><span class="i18n-ko">단타 매매를 위한 통합 대시보드</span><span class="i18n-en">An integrated dashboard for day trading</span></span>
-          </span>
-                  </a>
-        <div class="row rv">
-          <span class="row__main">
-            <strong>HANFLOW <small><span class="i18n-ko">파생</span><span class="i18n-en">DERIVATIVE</span></small></strong>
-            <span><span class="i18n-ko">프로그램 자동매매로 한달 최대 60% 수익 달성</span><span class="i18n-en">Program-driven automated trading, reaching up to a 60% return in a month</span></span>
-          </span>
-        </div>
-        <a class="row rv" href="tools.html">
-          <span class="row__main">
-            <strong class="lnk"><span class="i18n-ko">모의해킹 툴킷</span><span class="i18n-en">PENTEST TOOLKIT</span></strong>
-            <span><span class="i18n-ko">파트너와 공동 개발한 교육·연구용 보안 도구입니다.</span><span class="i18n-en">An educational security tool co-developed with a partner.</span></span>
-          </span>
-                  </a>
-      </div>
-
-      <h3 class="sub-head"><span class="i18n-ko">보안 연구 기록</span><span class="i18n-en">Security Research Log</span></h3>
-      <ol class="log">
-        <li class="rv"><time>2024.09</time><strong><span class="i18n-ko">웹 캐시 포이즈닝 연구 및 PoC</span><span class="i18n-en">Web Cache Poisoning Research &amp; PoC</span></strong></li>
-        <li class="rv"><time>2024.10</time><strong><span class="i18n-ko">프로토타입 오염 취약점 연구</span><span class="i18n-en">Prototype Pollution Exploitation Research</span></strong></li>
-        <li class="rv"><time>2024.11</time><strong><span class="i18n-ko">GraphQL 보안 점검 도구</span><span class="i18n-en">GraphQL Security Testing Toolkit</span></strong></li>
-        <li class="rv"><time>2024.12</time><strong><span class="i18n-ko">리눅스 권한 상승 실습 랩</span><span class="i18n-en">Linux Privilege Escalation Lab</span></strong></li>
-        <li class="rv"><time>2025.01</time><strong><span class="i18n-ko">SUID/SGID 권한 오설정 연구</span><span class="i18n-en">SUID/SGID Misconfiguration Research</span></strong></li>
-        <li class="rv"><time>2025.02</time><strong><span class="i18n-ko">도커 컨테이너 탈출 실습 랩</span><span class="i18n-en">Docker Escape &amp; Container Breakout Lab</span></strong></li>
-      </ol>
+  <section class="sec" id="work" data-scene="work" data-theme="dark">
+    <div class="sec-top">
+      <h2 class="title" style="--t:34vw" data-decode>WORK</h2>
+      <p class="sec-label front"><span class="i18n-ko">프로젝트</span><span class="i18n-en">Projects</span></p>
     </div>
-  </section>
 
-  <!-- ═══ 이력 ═══ -->
-  <section class="record" id="record" data-scene="record" data-theme="light">
-    <div class="blk blk--r back" data-drift="-18" aria-hidden="true"></div>
-    <div class="wrap wrap--right front">
-      <h2 class="giant"><span class="i18n-ko">이력</span><span class="i18n-en" data-decode>RECORD</span></h2>
-      <ul class="rec">
-        <li class="rv rec__top">
-          <div>
-            <strong><a href="https://www.lud.works/events/the-hackathon-dreamers-2026" target="_blank" rel="noopener noreferrer">THE해커톤 : DREAMERS</a></strong>
-            <p><span class="i18n-ko">코딩 + AI 비즈니스 아이디어 + 불편한 점 해소 대회 <b>1등 우승</b> · 우승 프로젝트 눈길</span><span class="i18n-en">Coding, AI business ideas, and solving everyday problems. <b>Won 1st place</b> with Nungil.</span></p>
-          </div>
-          <time>2026.10.31</time>
-        </li>
-        <li class="rv">
-          <div>
-            <strong>DSSI DASHBOARD <small><span class="i18n-ko">(구) NOEVA</span><span class="i18n-en">formerly NOEVA</span></small></strong>
-            <p><span class="i18n-ko">서울독일학교 정식 출시</span><span class="i18n-en">Officially launched at the German School Seoul</span></p>
-          </div>
-        </li>
-        <li class="rv">
-          <div>
-            <strong><span class="i18n-ko">해킹보안전문가 (민간)</span><span class="i18n-en">Hacking Security Specialist (private)</span></strong>
-            <p><span class="i18n-ko">자격증 취득</span><span class="i18n-en">Certification obtained</span></p>
-          </div>
-        </li>
-        <li class="rv">
-          <div>
-            <strong><a href="https://www.bw-ki.de/" target="_blank" rel="noopener noreferrer">BWKI</a></strong>
-            <p><span class="i18n-ko">AI 활용 서비스 개발</span><span class="i18n-en">AI-powered service development</span></p>
-          </div>
-        </li>
-        <li class="rv">
-          <div>
-            <strong><a href="https://koreaci.co.kr/2026/ko/index.php" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">고려신용정보 IT혁신단</span><span class="i18n-en">Koryo Credit Information · IT Innovation Team</span></a></strong>
-            <p><span class="i18n-ko">인턴십</span><span class="i18n-en">Internship</span></p>
-          </div>
-          <time>2025.12 — 2026.01</time>
-        </li>
-        <li class="rv">
-          <div>
-            <strong><span class="i18n-ko">SISV 체험</span><span class="i18n-en">SISV Program</span></strong>
-            <p><span class="i18n-ko">보안 체험 프로그램</span><span class="i18n-en">Hands-on security program</span></p>
-          </div>
-          <time>2025.06 — 2025.08</time>
-        </li>
-      </ul>
+    <div class="sheet front">
+      <div class="feature rv">
+        <time class="feature__date">2026.10.31</time>
+        <strong class="feature__name"><a href="https://nungil.the-hackathon-dreamers.axhub.page/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">눈길</span><span class="i18n-en">NUNGIL</span></a></strong>
+        <p class="feature__desc"><span class="i18n-ko">손을 사용하지 않고, 눈과 목소리만으로 몸이 불편한 사람들을 위한 완전히 새로운 인터넷 브라우징 경험</span><span class="i18n-en">A completely new way to browse the internet for people with physical disabilities, using only the eyes and voice, without hands</span></p>
+        <p class="feature__award"><span class="i18n-ko">THE 해커톤: DREAMERS #1등 우승 프로젝트</span><span class="i18n-en">THE Hackathon: DREAMERS #1 winning project</span></p>
+        <p class="feature__note"><span class="i18n-ko">이 프로젝트는 OpenAI 및 (주)루드다이나믹스, (주)조코딩에이엑스파트너스의 지원을 받았습니다.</span><span class="i18n-en">This project was supported by OpenAI, Lud Dynamics Inc., and Jocoding AX Partners Inc.</span></p>
+        <ul class="sup">
+          <li><img src="logos/openai.svg?v=2b4a04ddc2" alt="" width="24" height="24"><span>OpenAI</span></li>
+          <li><img src="logos/lud-dynamics.png?v=a99e9376b3" alt="" width="24" height="24"><a href="https://www.lud.works/me" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">(주)루드다이나믹스</span><span class="i18n-en">Lud Dynamics Inc.</span></a></li>
+          <li><img src="logos/jocoding-ax.svg?v=52db5ba6dd" alt="" width="31" height="22"><a href="https://axhub.ai/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">(주)조코딩에이엑스파트너스</span><span class="i18n-en">Jocoding AX Partners Inc.</span></a></li>
+        </ul>
+      </div>
+      <div class="row row--dated rv">
+        <time>2026.10.31</time>
+        <strong><img class="ico" src="logos/lud-dynamics.png?v=a99e9376b3" alt="" width="26" height="26"><a href="https://www.lud.works/events/the-hackathon-dreamers-2026" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">THE해커톤 : DREAMERS</span><span class="i18n-en">THE Hackathon: DREAMERS</span></a></strong>
+        <p><span class="i18n-ko">코딩 + AI 비즈니스 아이디어 + 불편한 점 해소 대회 <b>1등 우승</b></span><span class="i18n-en">Coding, AI business ideas, and solving everyday problems. <b>Won 1st place.</b></span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2026.06.23 — 2026.10.05</time>
+        <strong><img class="ico" src="icons/bwki.png?v=013542ddd7" alt="" width="26" height="26"><a href="https://www.bw-ki.de/" target="_blank" rel="noopener noreferrer">BWKI</a></strong>
+        <p><span class="i18n-ko">AI 활용 서비스 개발</span><span class="i18n-en">AI-powered service development</span><img class="partners" src="logos/bwki-partners.png?v=434d893089" alt="Empfohlen von: Kultusministerkonferenz. Mitglied bei: Arbeitsgemeinschaft bundesweiter Jugendwettbewerbe." width="500" height="93"></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2026.03 — 2026.11</time>
+        <strong><img class="ico" src="icons/dssi.png?v=0a9646d002" alt="" width="26" height="26"><a href="https://dssi.kr" target="_blank" rel="noopener noreferrer">DSSI DASHBOARD <small><span class="i18n-ko">(구) NOEVA</span><span class="i18n-en">formerly NOEVA</span></small></a></strong>
+        <p><span class="i18n-ko">서울독일학교 정식 출시</span><span class="i18n-en">Officially launched at the German School Seoul</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2026.01 — <span class="i18n-ko">현재</span><span class="i18n-en">Now</span></time>
+        <strong><img class="ico" src="icons/hanflow.png?v=864cee575f" alt="" width="26" height="26"><a href="https://about.hanflow.org/" target="_blank" rel="noopener noreferrer">HANFLOW <small>한플로우</small></a></strong>
+        <p><span class="i18n-ko">단타 매매를 위한 통합 대시보드</span><span class="i18n-en">An integrated dashboard for day trading</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2026.01 — <span class="i18n-ko">현재</span><span class="i18n-en">Now</span></time>
+        <strong><img class="ico" src="icons/hanflow.png?v=864cee575f" alt="" width="26" height="26">HANFLOW <small><span class="i18n-ko">파생</span><span class="i18n-en">DERIVATIVE</span></small></strong>
+        <p><span class="i18n-ko">프로그램 자동매매로 한달 최대 60% 수익 달성</span><span class="i18n-en">Program-driven automated trading, reaching up to a 60% return in a month</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2025.12 — 2026.01</time>
+        <strong><img class="ico" src="icons/koreaci.png?v=d61691abf7" alt="" width="26" height="26"><a href="https://koreaci.co.kr/2026/ko/index.php" target="_blank" rel="noopener noreferrer"><span class="i18n-ko ko">고려신용정보 IT혁신단</span><span class="i18n-en">Koryo Credit Information</span></a></strong>
+        <p><span class="i18n-ko">인턴십</span><span class="i18n-en">IT Innovation Team internship</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2025.09.18</time>
+        <strong><span class="i18n-ko ko">해킹보안전문가 (민간)</span><span class="i18n-en">Hacking Security Specialist</span></strong>
+        <p><span class="i18n-ko">자격증 취득</span><span class="i18n-en">Private certification obtained</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2025.06 — 2025.08</time>
+        <strong><span class="i18n-ko ko">SISV 체험</span><span class="i18n-en">SISV Program</span></strong>
+        <p><span class="i18n-ko">보안 체험 프로그램</span><span class="i18n-en">Hands-on security program</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2025.02</time>
+        <strong><span class="i18n-ko ko">Docker 컨테이너 탈출 실습 랩</span><span class="i18n-en">Docker Escape &amp; Container Breakout Lab</span></strong>
+        <p><span class="i18n-ko">컨테이너 격리 구조와 탈출 조건을 학습하는 실습 환경</span><span class="i18n-en">A lab for studying container isolation and breakout conditions</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2025.01</time>
+        <strong><span class="i18n-ko ko">SUID/SGID 권한 오설정 연구</span><span class="i18n-en">SUID/SGID Misconfiguration Research</span></strong>
+        <p><span class="i18n-ko">권한 오설정의 보안 영향을 분석하고 재현</span><span class="i18n-en">Reproducing the security impact of permission misconfigurations</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2024.12</time>
+        <strong><span class="i18n-ko ko">리눅스 권한 상승 실습 랩</span><span class="i18n-en">Linux Privilege Escalation Lab</span></strong>
+        <p><span class="i18n-ko">권한 상승 기법을 학습하는 실습 환경 구축</span><span class="i18n-en">A structured lab for studying privilege escalation</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2024.11</time>
+        <strong><span class="i18n-ko ko">GraphQL 보안 점검 도구</span><span class="i18n-en">GraphQL Security Testing Toolkit</span></strong>
+        <p><span class="i18n-ko">GraphQL API 보안 점검을 효율화하는 테스트 도구</span><span class="i18n-en">A tool that streamlines security assessment for GraphQL APIs</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2024.10</time>
+        <strong><span class="i18n-ko ko">프로토타입 오염 취약점 연구</span><span class="i18n-en">Prototype Pollution Exploitation Research</span></strong>
+        <p><span class="i18n-ko">JavaScript 프로토타입 오염의 발생 조건과 영향 분석</span><span class="i18n-en">Analyzing the conditions and impact of JavaScript prototype pollution</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2024.09</time>
+        <strong><span class="i18n-ko ko">웹 캐시 포이즈닝 연구 및 PoC</span><span class="i18n-en">Web Cache Poisoning Research &amp; PoC</span></strong>
+        <p><span class="i18n-ko">HTTP 캐시 동작을 분석하고 취약 조건을 재현한 개념 증명</span><span class="i18n-en">A proof of concept on HTTP cache behavior and vulnerable conditions</span></p>
+      </div>
+      <div class="row row--dated rv">
+        <time>2022.04 — 2022.05</time>
+        <strong><img class="ico" src="favicon.png?v=ffc291f3f9" alt="" width="26" height="26"><a href="tools.html"><span class="i18n-ko ko">모의해킹 툴킷</span><span class="i18n-en">PENTEST TOOLKIT</span></a></strong>
+        <p><span class="i18n-ko">파트너와 공동 개발한 교육·연구용 보안 도구입니다.</span><span class="i18n-en">An educational security tool co-developed with a partner.</span></p>
+      </div>
     </div>
   </section>
 
   <!-- ═══ 기술 ═══ -->
-  <section class="stack" id="stack" data-scene="stack" data-theme="light">
-    <div class="stack__word back" aria-hidden="true"><span class="i18n-ko">기술</span><span class="i18n-en">BUILD</span></div>
-    <div class="stack__grid front">
+  <section class="sec" id="stack" data-scene="stack" data-theme="light">
+    <div class="sec-top">
+      <h2 class="title title--blue" style="--t:37vw" aria-label="기술 Stack">BUILD</h2>
+      <p class="sec-label front"><span class="i18n-ko">기술</span><span class="i18n-en">Stack</span></p>
+    </div>
+    <div class="sheet sheet--two front">
       <div class="stack__col rv">
-        <h2><span class="i18n-ko">언어</span><span class="i18n-en">Languages</span></h2>
-        <ul><li>TypeScript</li><li>JavaScript</li><li>Java</li><li>C</li><li>C++</li><li>Python</li><li>Go</li><li>x86 Assembly</li></ul>
+        <h3><span class="i18n-ko">언어</span><span class="i18n-en">Languages</span></h3>
+        <ul><li><img src="icons/lang-typescript.svg?v=7f023e8d1e" alt="" width="28" height="28">TypeScript</li><li><img src="icons/lang-javascript.svg?v=c9be35a7a8" alt="" width="28" height="28">JavaScript</li><li><img src="icons/lang-java.svg?v=31c94bd8f8" alt="" width="28" height="28">Java</li><li><img src="icons/lang-c.svg?v=fde4284070" alt="" width="28" height="28">C</li><li><img src="icons/lang-cplusplus.svg?v=adf33f5026" alt="" width="28" height="28">C++</li><li><img src="icons/lang-python.svg?v=ad9468e1c4" alt="" width="28" height="28">Python</li><li><img src="icons/lang-go.svg?v=36a745fe15" alt="" width="28" height="28">Go</li><li><img src="icons/lang-asm.svg?v=dc5363b591" alt="" width="28" height="28">x86 Assembly</li></ul>
       </div>
-      <div class="stack__col stack__col--r rv">
-        <h2><span class="i18n-ko">웹</span><span class="i18n-en">Web</span></h2>
-        <ul><li>HTML5</li><li>CSS3</li><li>React</li><li>Node.js</li></ul>
+      <div class="stack__col rv">
+        <h3><span class="i18n-ko">웹</span><span class="i18n-en">Web</span></h3>
+        <ul><li><img src="icons/lang-html5.svg?v=dfd65fdd7e" alt="" width="28" height="28">HTML5</li><li><img src="icons/lang-css3.svg?v=f73d87c6b7" alt="" width="28" height="28">CSS3</li><li><img src="icons/lang-react.svg?v=ab9136a1a4" alt="" width="28" height="28">React</li><li><img src="icons/lang-nodejs.svg?v=021851b758" alt="" width="28" height="28">Node.js</li></ul>
       </div>
     </div>
   </section>
 
   <!-- ═══ 목표 ═══ -->
-  <section class="goals" id="goals" data-scene="goals" data-theme="dark">
-    <div class="wrap front">
-      <h2 class="giant"><span class="i18n-ko">목표</span><span class="i18n-en" data-decode>GOALS</span></h2>
-      <div class="rows">
-        <div class="row rv">
-          <span class="row__main">
-            <strong><span class="i18n-ko">AI 사업으로 100억+ 수익</span><span class="i18n-en">₩10B+ FROM MY AI BUSINESS</span></strong>
-            <span><span class="i18n-ko">내 AI 사업으로 100억 원 이상의 수익을 내는 것</span><span class="i18n-en">Earning over 10 billion won from my own AI business</span></span>
-          </span>
-        </div>
-        <div class="row rv">
-          <span class="row__main">
-            <strong><a href="https://www.kitribob.kr/" target="_blank" rel="noopener noreferrer">BoB</a> / <a href="https://whitehatschool.kr/" target="_blank" rel="noopener noreferrer">WHS</a></strong>
-            <span><span class="i18n-ko">차세대 보안리더 양성 프로그램</span><span class="i18n-en">Next-generation security leader programs</span></span>
-          </span>
-        </div>
-        <div class="row rv">
-          <span class="row__main">
-            <strong><a href="https://autoeveritdream.com/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">현대오토에버 화이트햇해킹</span><span class="i18n-en">Hyundai AutoEver White-Hat</span></a></strong>
-            <span><span class="i18n-ko">고교생 대상 화이트햇해킹 양성교육</span><span class="i18n-en">White-hat hacking program for high-school students</span></span>
-          </span>
-        </div>
-        <div class="row rv">
-          <span class="row__main">
-            <strong><a href="https://cce.cstec.kr/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko">CCE 사이버공격방어대회</span><span class="i18n-en">CCE</span></a></strong>
-            <span><span class="i18n-ko">실전형 사이버보안 경진대회</span><span class="i18n-en">Cyber Conflict Exercise, a practical competition</span></span>
-          </span>
-        </div>
-        <div class="row rv">
-          <span class="row__main">
-            <strong><a href="https://www.offsec.com/" target="_blank" rel="noopener noreferrer">OSCP</a> / <a href="https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/" target="_blank" rel="noopener noreferrer">CEH</a></strong>
-            <span><span class="i18n-ko">국제 보안 자격 취득</span><span class="i18n-en">International security certifications</span></span>
-          </span>
-        </div>
+  <section class="sec" id="goals" data-scene="goals" data-theme="dark">
+    <div class="sec-top">
+      <h2 class="title" style="--t:29vw" data-decode>GOALS</h2>
+      <p class="sec-label front"><span class="i18n-ko">목표</span><span class="i18n-en">Next</span></p>
+    </div>
+    <div class="sheet front">
+      <div class="row row--top rv">
+        <strong><span class="i18n-ko ko">AI 사업으로 100억+ 수익</span><span class="i18n-en">₩10B+ FROM MY AI BUSINESS</span></strong>
+        <p><span class="i18n-ko">내 AI 사업으로 100억 원 이상의 수익을 내는 것</span><span class="i18n-en">Earning over 10 billion won from my own AI business</span></p>
+      </div>
+      <div class="row rv">
+        <strong>BoB / WHS</strong>
+        <p><span class="i18n-ko">차세대 보안리더 양성 프로그램</span><span class="i18n-en">Next-generation security leader programs</span></p>
+      </div>
+      <div class="row rv">
+        <strong><img class="ico" src="icons/autoever.png?v=b350f78d1b" alt="" width="26" height="26"><a href="https://autoeveritdream.com/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko ko">현대오토에버 화이트햇해킹</span><span class="i18n-en">Hyundai AutoEver White-Hat</span></a></strong>
+        <p><span class="i18n-ko">고교생 대상 화이트햇해킹 양성교육</span><span class="i18n-en">White-hat hacking program for high-school students</span></p>
+      </div>
+      <div class="row rv">
+        <strong><img class="ico" src="icons/cce.svg?v=3f23c6e642" alt="" width="26" height="26"><a href="https://cce.cstec.kr/" target="_blank" rel="noopener noreferrer"><span class="i18n-ko ko">CCE 사이버공격방어대회</span><span class="i18n-en">CCE</span></a></strong>
+        <p><span class="i18n-ko">실전형 사이버보안 경진대회</span><span class="i18n-en">Cyber Conflict Exercise, a practical competition</span></p>
+      </div>
+      <div class="row rv">
+        <strong><img class="ico" src="icons/offsec.png?v=0365e2ced8" alt="" width="26" height="26"><a href="https://www.offsec.com/" target="_blank" rel="noopener noreferrer">OSCP</a> / <img class="ico" src="icons/ceh.png?v=d6d3921f0a" alt="" width="26" height="26"><a href="https://www.eccouncil.org/train-certify/certified-ethical-hacker-ceh/" target="_blank" rel="noopener noreferrer">CEH</a></strong>
+        <p><span class="i18n-ko">국제 보안 자격 취득</span><span class="i18n-en">International security certifications</span></p>
       </div>
     </div>
   </section>
@@ -308,6 +332,7 @@
     </div>
 
     <p class="legal front"><span class="i18n-ko">© 2026 김은율 · All Rights Reserved</span><span class="i18n-en">© 2026 Eunyul Kim · All Rights Reserved</span></p>
+    <p class="credit front"><span class="i18n-ko">이 디자인은 <a href="https://www.unbelievablycrap.com/" target="_blank" rel="noopener noreferrer">Liubomyr Ulytskyi의 unbelievablycrap.com</a> 디자인을 참고하여 제작되었습니다.</span><span class="i18n-en">This design was made with reference to <a href="https://www.unbelievablycrap.com/" target="_blank" rel="noopener noreferrer">unbelievablycrap.com by Liubomyr Ulytskyi</a>.</span></p>
   </section>
 
 </main>
@@ -318,7 +343,6 @@
   <nav class="bar__nav" aria-label="Primary">
     <a href="#about" data-nav="about"><span class="i18n-ko">소개</span><span class="i18n-en">ABOUT</span></a>
     <a href="#work" data-nav="work"><span class="i18n-ko">프로젝트</span><span class="i18n-en">WORK</span></a>
-    <a href="#record" data-nav="record"><span class="i18n-ko">이력</span><span class="i18n-en">RECORD</span></a>
     <a href="#stack" data-nav="stack"><span class="i18n-ko">기술</span><span class="i18n-en">STACK</span></a>
     <a href="#goals" data-nav="goals"><span class="i18n-ko">목표</span><span class="i18n-en">GOALS</span></a>
     <a href="tools.html"><span class="i18n-ko">도구</span><span class="i18n-en">TOOLS</span></a>
@@ -338,14 +362,13 @@
   <a href="#hero"><span class="i18n-ko">처음</span><span class="i18n-en">INDEX</span></a>
   <a href="#about"><span class="i18n-ko">소개</span><span class="i18n-en">ABOUT</span></a>
   <a href="#work"><span class="i18n-ko">프로젝트</span><span class="i18n-en">WORK</span></a>
-  <a href="#record"><span class="i18n-ko">이력</span><span class="i18n-en">RECORD</span></a>
   <a href="#stack"><span class="i18n-ko">기술</span><span class="i18n-en">STACK</span></a>
   <a href="#goals"><span class="i18n-ko">목표</span><span class="i18n-en">GOALS</span></a>
   <a href="tools.html"><span class="i18n-ko">도구</span><span class="i18n-en">TOOLS</span></a>
   <a href="#contact"><span class="i18n-ko">문의</span><span class="i18n-en">CONTACT</span></a>
 </div>
 
-<script src="script.js?v=90aa3af185"></script>
-<script src="scene.js?v=a9db44cdaf"></script>
+<script src="script.js?v=dade27f01a"></script>
+<script src="scene.js?v=eaaa9b7a6f"></script>
 </body>
 </html>

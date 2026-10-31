@@ -98,11 +98,11 @@ vec4 inkLayer(vec2 fc){
   float asp=R.x/R.y;
   vec2 mp=vec2((M.x*.5+.5)*asp,M.y*.5+.5);
   float md=length(g-mp);
-  float n=fbm(g*1.5+vec2(T*.01,-T*.014));
-  n+=.12*exp(-md*md*16.);
-  float l=abs(fract(n*2.4)-.5);
-  float a=step(l,.05)*step(mod(fc.x,3.),1.)*step(mod(fc.y,3.),1.);
-  a*=INK*smoothstep(.5,.03,fc.y/R.y);
+  float n=fbm(g*2.1+vec2(T*.01,-T*.014));
+  n+=.14*exp(-md*md*16.);
+  float l=abs(fract(n*3.)-.5);
+  float a=step(l,.085)*step(mod(fc.x,2.),1.)*step(mod(fc.y,2.),1.);
+  a*=INK*smoothstep(.72,.08,fc.y/R.y);
   return vec4(INKC*a,a);
 }
 
@@ -149,7 +149,7 @@ void main(){
     float band=exp(-(p.y-by)*(p.y-by)/.016)*BAND;
     float lum=.04+.8*dif*(.35+.65*ao)+.62*rim+band*.85;
     lum*=mod(fc.y,2.)<1.?1.:.74;
-    float r=step(B4(fc+vec2(3.,1.)),lum*.26);
+    float r=step(B4(fc+vec2(3.,1.)),lum*.36);
     float g=step(B4(fc+vec2(1.,2.)),lum*.74);
     float b=step(B4(fc),lum*1.3);
     vec3 dith=vec3(r,g,b)*vec3(.62,.86,1.);
@@ -219,21 +219,19 @@ void main(){
 
   /* Where the camera sits for each section. x: screen shift · y: look height · d: distance */
   const WIDE = {
-    hero:    { x: 0,    y: .92,  d: 2.85, rot: -.42, look: 1,   arm: 1 },
-    about:   { x: 0,    y: 1.46, d: 1.02, rot: 0,    look: 0,   arm: 0 },
-    work:    { x: .95,  y: 1.02, d: 3.05, rot: .7,   look: .7,  arm: 1 },
-    record:  { x: -1.05, y: 1.4, d: 1.5,  rot: -.5,  look: .1,  arm: 0 },
-    stack:   { x: 0,    y: 1.46, d: 1.02, rot: 0,    look: 0,   arm: 0 },
-    goals:   { x: 1.02, y: .92,  d: 2.85, rot: 2.6,  look: .85, arm: 1 },
-    contact: { x: 0,    y: 1.42, d: 1.12, rot: 0,    look: 0,   arm: 0 }
+    hero:    { x: 0, y: .92,  d: 2.85, rot: -.42, look: 1,   arm: 1 },
+    about:   { x: 0, y: 1.46, d: 1.02, rot: 0,    look: 0,   arm: 0 },
+    work:    { x: 0, y: .92,  d: 2.85, rot: .7,   look: .7,  arm: 1 },
+    stack:   { x: 0, y: 1.46, d: 1.02, rot: 0,    look: 0,   arm: 0 },
+    goals:   { x: 0, y: .92,  d: 2.85, rot: 2.6,  look: .85, arm: 1 },
+    contact: { x: 0, y: 1.42, d: 1.12, rot: 0,    look: 0,   arm: 0 }
   };
   const NARROW = {
     hero:    { x: 0, y: .98,  d: 3.3,  rot: -.42, look: 1,   arm: 1 },
     about:   { x: 0, y: 1.46, d: 1.5,  rot: 0,    look: 0,   arm: 0 },
-    work:    { x: 0, y: 1.0,  d: 3.4,  rot: .7,   look: .7,  arm: 1 },
-    record:  { x: 0, y: 1.4,  d: 1.9,  rot: -.5,  look: .1,  arm: 0 },
+    work:    { x: 0, y: .98,  d: 3.3,  rot: .7,   look: .7,  arm: 1 },
     stack:   { x: 0, y: 1.46, d: 1.5,  rot: 0,    look: 0,   arm: 0 },
-    goals:   { x: 0, y: .98,  d: 3.4,  rot: 2.6,  look: .85, arm: 1 },
+    goals:   { x: 0, y: .98,  d: 3.3,  rot: 2.6,  look: .85, arm: 1 },
     contact: { x: 0, y: 1.42, d: 1.6,  rot: 0,    look: 0,   arm: 0 }
   };
 
@@ -291,6 +289,9 @@ void main(){
     return [cy, sy * sp, -sy * cp, 0, cp, sp, sy, -cy * sp, cy * cp];
   }
 
+  const mini = document.getElementById('miniFig');
+  const miniCtx = mini ? mini.getContext('2d') : null;
+
   let frames = 0, last = 0, acc = 0, n = 0, startT = performance.now(), ready = false;
 
   function draw(now) {
@@ -328,6 +329,11 @@ void main(){
     gl.uniformMatrix3fv(U.HEAD, false, headMatrix(pitch, yaw));
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 
+    if (miniCtx && frames % 4 === 0 && scrollY < innerHeight) {
+      const sh = canvas.height * .9, sw = sh * (mini.width / mini.height);
+      miniCtx.clearRect(0, 0, mini.width, mini.height);
+      miniCtx.drawImage(canvas, (canvas.width - sw) / 2, canvas.height * .05, sw, sh, 0, 0, mini.width, mini.height);
+    }
     frames++;
 
     if (!ready) {
