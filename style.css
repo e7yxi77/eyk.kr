@@ -203,6 +203,18 @@ a.row:hover { background: var(--blue); color: #fff; padding-left: 14px; padding-
 .rec__top strong a:hover { color: #fff; }
 a.row:hover .row__main > span, a.row:hover small { color: #fff; }
 
+.row--top .row__main > strong { margin-bottom: 8px; }
+.row--top .row__main > strong a { font-size: 1.5em; }
+.row--top .row__main > strong > a > .i18n-ko { font: 400 1em/1.1 var(--disp-ko); }
+.row--top .row__main > span { color: var(--fg); font-size: clamp(17px, 1.4vw, 21px); line-height: 1.5; font-weight: 500; }
+.row__award { display: table; margin-top: 12px; padding: 4px 9px; background: var(--blue); color: #fff; font-size: 14px; font-weight: 700; line-height: 1.5; }
+.row__note { margin-top: 10px; color: var(--mut); font-size: 14px; line-height: 1.6; }
+.sup { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 10px; font-size: 14px; font-weight: 600; }
+.sup li { display: inline-flex; align-items: center; gap: 8px; }
+.sup img { flex: none; object-fit: contain; filter: brightness(0) invert(1); }
+.sup a { text-decoration: underline; text-underline-offset: .2em; }
+.sup a::after { content: "\2197\FE0E"; margin-left: .2em; font-size: .85em; }
+.sup a:hover { color: var(--acc); }
 .sub-head { margin: clamp(60px, 8vw, 110px) 0 6px; padding: 4px 0; background: var(--panel); font: 400 clamp(26px, 2.6vw, 40px)/1.2 var(--disp-ko); }
 html[data-lang="en"] .sub-head { font: 800 clamp(30px, 3vw, 46px)/1.1 var(--disp); }
 .log { border-top: 1px solid var(--line); }
