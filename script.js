@@ -1,160 +1,16 @@
 /*
-  EYK Portfolio — interaction layer
-  Adapted from TemplateMo 621 Luminary, guarded so every block is optional per page.
+  EYK — interface layer, shared by index.html and tools.html.
+  Every block is guarded so a page only runs what it has.
 */
-
-// ── Smooth scroll for in-page anchors ──
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-  link.addEventListener('click', e => {
-    if (link.id === 'downloadBtn' || link.hasAttribute('download')) return;
-    const href = link.getAttribute('href');
-    if (href === '#') {
-      e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (href.length > 1) {
-      const target = document.querySelector(href);
-      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
-    }
-  });
-});
-
-// ── Reveal on scroll ──
-const reveals = document.querySelectorAll('.reveal');
-if (reveals.length) {
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
-  reveals.forEach(el => io.observe(el));
-}
-
-// ── Animated counters ──
-document.querySelectorAll('.counter').forEach(el => {
-  new IntersectionObserver(([e], obs) => {
-    if (!e.isIntersecting) return;
-    const t = parseFloat(el.dataset.target), d = parseInt(el.dataset.decimals), dur = 1800, s = performance.now();
-    const ease = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-    (function u(n) { const p = Math.min((n - s) / dur, 1); el.textContent = (t * ease(p)).toFixed(d); if (p < 1) requestAnimationFrame(u); })(s);
-    obs.unobserve(el);
-  }, { threshold: 0.5 }).observe(el);
-});
-
-// ── Nav background on scroll ──
-const topNav = document.getElementById('topNav');
-if (topNav) {
-  window.addEventListener('scroll', () => topNav.classList.toggle('scrolled', scrollY > 60), { passive: true });
-}
-
-// ── Hero grid spotlight ──
-const heroGrid = document.querySelector('.hero-grid');
-const heroEl = document.getElementById('hero');
-if (heroGrid && heroEl) {
-  let gx = 0, gy = 0, tx = 0, ty = 0;
-  document.addEventListener('mousemove', e => {
-    const heroRect = heroEl.getBoundingClientRect();
-    const gridRect = heroGrid.getBoundingClientRect();
-    const activeTop = heroRect.top + heroRect.height * 0.3;
-    if (e.clientY >= activeTop && e.clientY <= heroRect.bottom) {
-      tx = e.clientX - gridRect.left;
-      ty = e.clientY - gridRect.top;
-    } else {
-      tx = gridRect.width / 2;
-      ty = gridRect.height * 0.3;
-    }
-  });
-  (function lerpGrid() {
-    gx += (tx - gx) * 0.08;
-    gy += (ty - gy) * 0.08;
-    heroGrid.style.setProperty('--mx', gx + 'px');
-    heroGrid.style.setProperty('--my', gy + 'px');
-    requestAnimationFrame(lerpGrid);
-  })();
-}
-
-// ── Active nav + side panels ──
-const navAnchors = document.querySelectorAll('.nav-links a');
-const sectionEls = document.querySelectorAll('section[id]');
-const leftDots = document.querySelectorAll('.side-panel.left .side-dot');
-const rightDots = document.querySelectorAll('.side-panel.right .side-dot');
-const leftTrack = document.getElementById('leftTrack');
-const rightTrack = document.getElementById('rightTrack');
-const scrollPctEl = document.getElementById('scrollPct');
-
-if (sectionEls.length && (navAnchors.length || leftDots.length)) {
-  function updateNavAndPanels() {
-    const y = scrollY + innerHeight * 0.4;
-    const maxScroll = document.documentElement.scrollHeight - innerHeight;
-    const pct = maxScroll > 0 ? Math.min(scrollY / maxScroll, 1) : 0;
-
-    let id = '', activeIndex = 0;
-    sectionEls.forEach((s, i) => { if (y >= s.offsetTop) { id = s.id; activeIndex = i; } });
-    navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
-
-    const trackPct = (pct * 100).toFixed(0);
-    if (leftTrack) leftTrack.style.height = trackPct + '%';
-    if (rightTrack) rightTrack.style.height = trackPct + '%';
-    if (scrollPctEl) scrollPctEl.textContent = String(trackPct).padStart(2, '0');
-
-    if (leftDots.length) {
-      const leftIdx = Math.min(activeIndex, leftDots.length - 1);
-      leftDots.forEach((d, i) => d.classList.toggle('active', i === leftIdx));
-    }
-    if (rightDots.length) {
-      const rightIdx = Math.min(activeIndex, rightDots.length - 1);
-      rightDots.forEach((d, i) => d.classList.toggle('active', i === rightIdx));
-    }
-  }
-  window.addEventListener('scroll', updateNavAndPanels, { passive: true });
-  updateNavAndPanels();
-}
-
-// ── Mobile menu ──
-const toggle = document.getElementById('navToggle');
-const menu = document.getElementById('mobileMenu');
-if (toggle && menu) {
-  const menuLinks = menu.querySelectorAll('.mobile-menu-link');
-  let menuOpen = false;
-  function openMenu() { menuOpen = true; toggle.classList.add('active'); toggle.setAttribute('aria-expanded', 'true'); menu.classList.add('open'); document.body.classList.add('menu-open'); }
-  function closeMenu() { if (!menuOpen) return; menuOpen = false; toggle.classList.remove('active'); toggle.setAttribute('aria-expanded', 'false'); menu.classList.remove('open'); document.body.classList.remove('menu-open'); }
-  toggle.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
-  menuLinks.forEach(l => l.addEventListener('click', closeMenu));
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-  window.addEventListener('resize', () => { if (innerWidth > 1024) closeMenu(); });
-}
-
-// ── FAQ accordion (optional) ──
-const faqItems = document.querySelectorAll('.faq-item');
-if (faqItems.length) {
-  document.querySelectorAll('.faq-question').forEach(btn => {
-    btn.addEventListener('click', () => btn.parentElement.classList.toggle('open'));
-  });
-}
-
-// ── Terms agreement → download gate (tools detail page) ──
-const agreeCheck = document.getElementById('agreeCheck');
-const downloadBtn = document.getElementById('downloadBtn');
-if (agreeCheck && downloadBtn) {
-  agreeCheck.addEventListener('change', () => {
-    downloadBtn.classList.toggle('enabled', agreeCheck.checked);
-    downloadBtn.setAttribute('aria-disabled', agreeCheck.checked ? 'false' : 'true');
-  });
-  downloadBtn.addEventListener('click', e => {
-    if (!agreeCheck.checked) { e.preventDefault(); return; }
-    // Placeholder guard: until a real release URL is set (href !== '#'), don't jump — just inform.
-    if (downloadBtn.getAttribute('href') === '#') {
-      e.preventDefault();
-      const note = document.querySelector('.download-note');
-      if (note) note.textContent = document.documentElement.getAttribute('data-lang') === 'en'
-        ? 'The download link will be provided soon. Contact: contact@eyk.kr'
-        : '다운로드 링크는 추후 제공될 예정입니다. 문의: contact@eyk.kr';
-    }
-  });
-}
-
-// ── Language switch (KO / EN) ──
 (function () {
+  'use strict';
+
   const root = document.documentElement;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pad3 = v => String(Math.max(0, Math.round(v))).padStart(3, '0');
+
+  // ── Language (KO / EN) ──
   const opts = document.querySelectorAll('.lang-opt');
-  if (!opts.length) return;
   function setLang(l) {
     root.setAttribute('data-lang', l);
     root.setAttribute('lang', l);
@@ -162,6 +18,178 @@ if (agreeCheck && downloadBtn) {
     opts.forEach(o => o.setAttribute('aria-pressed', String(o.dataset.l === l)));
   }
   opts.forEach(o => o.addEventListener('click', () => setLang(o.dataset.l)));
-  const cur = root.getAttribute('data-lang') || 'ko';
-  opts.forEach(o => o.setAttribute('aria-pressed', String(o.dataset.l === cur)));
+  const curLang = root.getAttribute('data-lang') || 'ko';
+  opts.forEach(o => o.setAttribute('aria-pressed', String(o.dataset.l === curLang)));
+
+  // ── Loader ──
+  const loader = document.getElementById('loader');
+  if (loader) {
+    const pct = loader.querySelector('.loader__pct');
+    const bar = loader.querySelector('.loader__bar i');
+    let target = 12, shown = 0, finished = false;
+    const done = () => {
+      if (finished) return;
+      finished = true;
+      target = 100;
+    };
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { target = Math.max(target, 55); });
+    addEventListener('eyk:scene-ready', done);
+    setTimeout(done, reduced ? 200 : 3500);
+    (function tick() {
+      shown += (target - shown) * (reduced ? 1 : .14);
+      if (pct) pct.textContent = pad3(shown);
+      if (bar) bar.style.transform = 'scaleX(' + shown / 100 + ')';
+      if (finished && shown > 99) {
+        loader.classList.add('off');
+        root.classList.remove('is-loading');
+        setTimeout(() => loader.remove(), 700);
+        return;
+      }
+      requestAnimationFrame(tick);
+    })();
+  }
+
+  // ── Seoul clock ──
+  const clocks = document.querySelectorAll('[data-clock]');
+  if (clocks.length) {
+    const fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Seoul', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+    const tick = () => { const s = fmt.format(new Date()); clocks.forEach(c => { c.textContent = s; }); };
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  // ── Pointer readouts + crosshair ──
+  const xEl = document.getElementById('readX');
+  const yEl = document.getElementById('readY');
+  const cross = document.getElementById('cross');
+  const fine = matchMedia('(pointer: fine)').matches;
+  if (fine && cross) cross.hidden = false;
+  addEventListener('pointermove', e => {
+    if (e.pointerType === 'touch') return;
+    if (xEl) xEl.textContent = pad3(e.clientX);
+    if (yEl) yEl.textContent = pad3(e.clientY);
+    if (cross) {
+      cross.classList.add('live');
+      cross.style.transform = 'translate(' + e.clientX + 'px,' + e.clientY + 'px)';
+      cross.classList.toggle('hot', !!e.target.closest('a,button,label,input'));
+      cross.dataset.xy = pad3(e.clientX) + ' / ' + pad3(e.clientY);
+    }
+  }, { passive: true });
+
+  // ── Scroll progress + parallax ──
+  const pctEl = document.getElementById('scrollPct');
+  const fill = document.getElementById('scrollFill');
+  const drift = [...document.querySelectorAll('[data-drift]')];
+  let ticking = false;
+  function onScroll() {
+    ticking = false;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, scrollY / max) : 0;
+    if (pctEl) pctEl.textContent = pad3(p * 100);
+    if (fill) fill.style.transform = 'scaleX(' + p + ')';
+    if (reduced) return;
+    drift.forEach(el => {
+      const box = el.parentElement.getBoundingClientRect();
+      const local = (innerHeight - box.top) / (innerHeight + box.height);
+      const v = parseFloat(el.dataset.drift);
+      el.style.transform = 'translate3d(' + (local - .5) * v * innerWidth * .01 + 'px,0,0)';
+    });
+  }
+  addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  addEventListener('resize', onScroll, { passive: true });
+  onScroll();
+
+  // ── Reveal ──
+  const reveals = document.querySelectorAll('.rv');
+  if (reveals.length) {
+    if (reduced || !('IntersectionObserver' in window)) {
+      reveals.forEach(el => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver(es => {
+        es.forEach(e => {
+          if (!e.isIntersecting) return;
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        });
+      }, { threshold: .08, rootMargin: '0px 0px -6% 0px' });
+      reveals.forEach(el => io.observe(el));
+    }
+  }
+
+  // ── Latin display words decode into place ──
+  const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789/#+';
+  function decode(el) {
+    const text = el.dataset.text;
+    const start = performance.now(), dur = 620;
+    (function step(now) {
+      const p = Math.min(1, (now - start) / dur);
+      const keep = Math.floor(p * text.length);
+      let out = '';
+      for (let i = 0; i < text.length; i++) {
+        out += i < keep || text[i] === ' ' ? text[i] : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      }
+      el.textContent = out;
+      if (p < 1) requestAnimationFrame(step);
+    })(start);
+  }
+  if (!reduced && 'IntersectionObserver' in window) {
+    const words = document.querySelectorAll('[data-decode]');
+    const dio = new IntersectionObserver(es => {
+      es.forEach(e => {
+        if (!e.isIntersecting) return;
+        decode(e.target);
+        dio.unobserve(e.target);
+      });
+    }, { threshold: .4 });
+    words.forEach(el => { el.dataset.text = el.textContent; dio.observe(el); });
+  }
+
+  // ── The disc in the footer panel tilts with the pointer ──
+  const disc = document.getElementById('disc');
+  if (disc && fine && !reduced) {
+    let dx = 0, cur = 0;
+    addEventListener('pointermove', e => { dx = (e.clientX / innerWidth - .5) * 7; }, { passive: true });
+    (function spin() {
+      cur += (dx - cur) * .06;
+      disc.style.transform = 'rotate(' + (-3 + cur) + 'deg)';
+      requestAnimationFrame(spin);
+    })();
+  }
+
+  // ── Mobile menu ──
+  const toggle = document.getElementById('navToggle');
+  const menu = document.getElementById('mobileMenu');
+  if (toggle && menu) {
+    const setMenu = open => {
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.classList.toggle('open', open);
+      document.body.classList.toggle('menu-open', open);
+    };
+    toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+    addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+    addEventListener('resize', () => { if (innerWidth > 900) setMenu(false); });
+  }
+
+  // ── Terms agreement → download gate (tools page) ──
+  const agreeCheck = document.getElementById('agreeCheck');
+  const downloadBtn = document.getElementById('downloadBtn');
+  if (agreeCheck && downloadBtn) {
+    agreeCheck.addEventListener('change', () => {
+      downloadBtn.classList.toggle('enabled', agreeCheck.checked);
+      downloadBtn.setAttribute('aria-disabled', agreeCheck.checked ? 'false' : 'true');
+    });
+    downloadBtn.addEventListener('click', e => {
+      if (!agreeCheck.checked) { e.preventDefault(); return; }
+      if (downloadBtn.getAttribute('href') === '#') {
+        e.preventDefault();
+        const note = document.querySelector('.download-note');
+        if (note) note.textContent = root.getAttribute('data-lang') === 'en'
+          ? 'The download link will be provided soon. Contact: contact@eyk.kr'
+          : '다운로드 링크는 추후 제공될 예정입니다. 문의: contact@eyk.kr';
+      }
+    });
+  }
 })();
