@@ -175,9 +175,9 @@ html[data-lang="en"] .menu a { font: 800 clamp(42px, 12vw, 64px)/1 var(--disp); 
 .sup { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; font-size: 13.5px; font-weight: 600; }
 .sup li { display: inline-flex; align-items: center; gap: 8px; }
 .sup img { flex: none; object-fit: contain; filter: brightness(0) invert(1); }
-.sup a { text-decoration: underline; text-underline-offset: .2em; }
-.sup a::after { content: "\2197\FE0E"; margin-left: .2em; font-size: .85em; }
-.sup a:hover { color: var(--acc); }
+.sup a, .row__note a { text-decoration: underline; text-underline-offset: .2em; }
+.sup a::after, .row__note a::after { content: "\2197\FE0E"; margin-left: .2em; font-size: .85em; }
+.sup a:hover, .row__note a:hover { color: var(--acc); }
 
 
 /* ── 처음 ───────────────────────────────────── */
