@@ -157,21 +157,6 @@
     })();
   }
 
-  // ── iPhone Duo: float the bar beside the page on the unfolded inner screen ──
-  // Safari reports a plain iPhone with no fold signal, so the short side tells them apart:
-  // other iPhones stop at 440, the Duo's folded screen and Split View stay under 400.
-  if (/iPhone/.test(navigator.userAgent)) {
-    let settle;
-    const fitRail = () => {
-      const on = Math.min(innerWidth, innerHeight) >= 480;
-      if (on === root.classList.contains('duo-rail')) return;
-      root.classList.toggle('duo-rail', on);
-      dispatchEvent(new Event('resize'));
-    };
-    fitRail();
-    addEventListener('resize', () => { clearTimeout(settle); settle = setTimeout(fitRail, 150); }, { passive: true });
-  }
-
   // ── Mobile menu ──
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('mobileMenu');
@@ -184,7 +169,7 @@
     toggle.addEventListener('click', () => setMenu(toggle.getAttribute('aria-expanded') !== 'true'));
     menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
     addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
-    addEventListener('resize', () => { if (innerWidth > 900 || root.classList.contains('duo-rail')) setMenu(false); });
+    addEventListener('resize', () => { if (innerWidth > 900) setMenu(false); });
   }
 
   // ── Terms agreement → download gate (tools page) ──

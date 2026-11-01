@@ -383,41 +383,6 @@ html[data-lang="en"] .terms-heading { font: 800 clamp(32px, 3.4vw, 48px)/1.1 var
   .tool-meta { grid-template-columns: 1fr 1fr; }
 }
 
-/* ── 아이폰 듀오 펼친 화면: 바를 왼쪽에 띄운다(duo-rail 은 script.js 가 붙인다) ── */
-html.duo-rail {
-  --bar-h: 0px;
-  --rail-w: 84px;
-  --rail-x: calc(env(safe-area-inset-left) + 10px);
-}
-html.duo-rail body { padding: 0 env(safe-area-inset-right) 0 calc(var(--rail-x) + var(--rail-w)); }
-html.duo-rail #scene { transform: translateX(calc((var(--rail-x) + var(--rail-w)) / 2)); }
-html.duo-rail .bar {
-  top: 0; right: auto; bottom: 0; left: var(--rail-x);
-  flex-direction: column; gap: 6px;
-  width: var(--rail-w); height: fit-content; max-height: calc(100dvh - 20px);
-  margin: auto 0; padding: 10px 6px;
-  overflow-y: auto;
-  box-shadow: 0 8px 28px rgba(0,0,0,.35);
-}
-html.duo-rail .bar__brand { display: flex; align-items: center; min-height: 40px; }
-html.duo-rail .bar__nav { display: flex; flex-direction: column; gap: 0; width: 100%; }
-html.duo-rail .bar__nav a { display: flex; align-items: center; justify-content: center; min-height: 40px; }
-html.duo-rail .bar__menu, html.duo-rail .bar__clock, html.duo-rail .menu { display: none; }
-html.duo-rail .bar__right { flex-direction: column; gap: 6px; width: 100%; margin-left: 0; }
-html.duo-rail .lang-opt { min-width: 30px; min-height: 40px; }
-html.duo-rail .bar__cta { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 40px; padding: 0; }
-/* 큰 글자는 화면 폭 기준이라 바가 차지한 만큼 줄인다 */
-html.duo-rail .hero { min-height: 0; }
-html.duo-rail .hero__name { font-size: 14.6vw; }
-html.duo-rail .title { font-size: min(calc(var(--t) * .86), 66vh); }
-html.duo-rail .contact__big { font-size: 12.2vw; }
-html.duo-rail .contact__big .i18n-ko { font-size: 9vw; }
-@media (max-width: 900px) {
-  html.duo-rail .hero__name { font-size: 28.4vw; }
-  html.duo-rail .contact__big { font-size: 15.9vw; }
-  html.duo-rail .contact__big .i18n-ko { font-size: 10.6vw; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
