@@ -178,6 +178,15 @@ html[data-lang="en"] .menu a { font: 800 clamp(42px, 12vw, 64px)/1 var(--disp); 
 .sup a, .row__note a { text-decoration: underline; text-underline-offset: .2em; }
 .sup a::after, .row__note a::after { content: "\2197\FE0E"; margin-left: .2em; font-size: .85em; }
 .sup a:hover, .row__note a:hover { color: var(--acc); }
+.credits { display: grid; gap: 12px; margin: 14px 0 0; font-size: 13.5px; }
+.credits > div { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 10px; align-items: start; }
+.credits dt { padding-top: 2px; color: var(--mut); font-size: 12.5px; }
+.credits dd { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin: 0; }
+.credits a { display: inline-flex; align-items: center; gap: 6px; padding-bottom: 3px; border-bottom: 1px solid currentColor; font-weight: 600; }
+.credits a::after { content: "\2197\FE0E"; font-size: .85em; }
+.credits a:hover { color: var(--acc); }
+.credits img { display: block; flex: none; width: auto; height: 18px; }
+.credits img.is-sm { height: 14px; }
 
 
 /* ── 처음 ───────────────────────────────────── */
