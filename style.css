@@ -187,6 +187,8 @@ html[data-lang="en"] .menu a { font: 800 clamp(42px, 12vw, 64px)/1 var(--disp); 
 .credits a:hover { color: var(--acc); }
 .credits img { display: block; flex: none; width: auto; height: 18px; }
 .credits img.is-sm { height: 14px; }
+.credits dd.is-list { display: grid; gap: 8px; }
+.credits__item { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
 
 
 /* ── 처음 ───────────────────────────────────── */
