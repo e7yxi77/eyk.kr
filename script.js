@@ -157,6 +157,28 @@
     })();
   }
 
+  // ── Copy buttons in the footer (e-mail, XMR address) ──
+  document.querySelectorAll('[data-copy]').forEach(btn => {
+    let t = 0;
+    btn.addEventListener('click', () => {
+      const text = btn.getAttribute('data-copy');
+      const done = () => {
+        btn.classList.add('is-done');
+        clearTimeout(t);
+        t = setTimeout(() => btn.classList.remove('is-done'), 1800);
+      };
+      const fallback = () => {
+        const ta = document.createElement('textarea');
+        ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { if (document.execCommand('copy')) done(); } catch (e) {}
+        ta.remove();
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+      else fallback();
+    });
+  });
+
   // ── Mobile menu ──
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('mobileMenu');
